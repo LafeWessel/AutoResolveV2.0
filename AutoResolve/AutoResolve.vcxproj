@@ -84,8 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -147,15 +146,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AutoResolve.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="DataCapture.txt" />
     <Text Include="equipment.txt" />
+    <Text Include="IODescr.txt" />
     <Text Include="units.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BattleData.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="battleType.cpp" />
+    <ClCompile Include="defenses.cpp" />
+    <ClCompile Include="equipmentType.cpp" />
+    <ClCompile Include="faction.cpp" />
+    <ClCompile Include="intermediateOrDisplacedSource.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="monsterType.cpp" />
+    <ClCompile Include="outcome.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="unitType.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="battleType.h" />
+    <ClInclude Include="defenses.h" />
+    <ClInclude Include="equipmentType.h" />
+    <ClInclude Include="faction.h" />
+    <ClInclude Include="monsterType.h" />
+    <ClInclude Include="outcome.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="unitType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

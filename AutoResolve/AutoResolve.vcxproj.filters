@@ -13,18 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AutoResolve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Filter Include="Source Files\Enumerations">
+      <UniqueIdentifier>{4c12b5cc-6d54-4637-82c6-13614a7407b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enumerations">
+      <UniqueIdentifier>{45f5f70e-e951-416e-8479-76c00600e4f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Battles">
+      <UniqueIdentifier>{83c1ec27-c42d-4ed7-b337-a0da535f3311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Battles">
+      <UniqueIdentifier>{eb96905a-1109-44eb-a28f-493e986f4e0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DataCapture.txt" />
     <Text Include="equipment.txt" />
     <Text Include="units.txt" />
+    <Text Include="IODescr.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BattleData.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="intermediateOrDisplacedSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unitType.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="outcome.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="monsterType.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="faction.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="equipmentType.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="defenses.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="battleType.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="battleType.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="defenses.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="equipmentType.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="faction.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="monsterType.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="outcome.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="unitType.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,30 @@
+/*General Notes
+*
+* -In almost all constructors, the variables passed in have an 'I' following their name. This indicates that they are 'Input' variables.
+*
+* -Most, if not all, <<ostream operators for the enum classes use hard-coded output values.
+*
+Order of variables in Equipment file:
+1. Type: A(Armor), W(Weapon), T(Trinket), B(Banner), F(Follower) (string/char)
+2. Name (string)
+3. Effect(s) (string)
+4. Coin Value (int)
+5. Index Value (int)
+6. Autoresolve Bonus (int)
+7. Range (int)
+
+The 'Corpse Thief' Follower equipment has 1 as it's autoresolve bonus to help calculate bonuses when finding treasure at the end of battles.
+
+
+Order of Variables in Units file:
+1. Faction: 1,2,3, or 4, follows the enum class defined below (int)
+2. Name (string)
+3. Type: Melee(1), Cavalry(2) or Ranged(3) (int)
+4. Autoresolve Bonus (int)
+5. Soldiers in each unit(int)
+All variables are comma-separated, so there must be no extraneous commas.
+*
+*
+*Equipment and Units files must be put in the same directory as the .exe that is generated when the project is built.
+*This seems to be a bit temperamental, so I have them copied into 5 separate areas of the program to ensure it works
+*/
