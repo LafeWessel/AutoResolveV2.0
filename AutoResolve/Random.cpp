@@ -1,7 +1,6 @@
 #include "Random.h"
 /*
-Returns a random number between 0 and range
-TODO determine if inclusive
+Returns a random number between 0 and range bound-inclusive
 */
 const int Random::randomNumber(int range)
 {
@@ -18,8 +17,7 @@ const int Random::randomNumber(int range)
 }
 
 /*
-Returns a random number between min and max
-TODO determine if inclusive
+Returns a random number between min and max bound-inclusive
 */
 const int Random::randomNumber(int min, int max) {
 	typedef std::chrono::high_resolution_clock myclock;

@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="battleType.cpp" />
     <ClCompile Include="defenses.cpp" />
+    <ClCompile Include="EnumerationConversions.cpp" />
     <ClCompile Include="equipmentType.cpp" />
     <ClCompile Include="faction.cpp" />
     <ClCompile Include="intermediateOrDisplacedSource.cpp" />
@@ -165,16 +166,19 @@
     <ClCompile Include="outcome.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="unitType.cpp" />
+    <ClCompile Include="ValueAssurance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="battleType.h" />
     <ClInclude Include="defenses.h" />
+    <ClInclude Include="EnumerationConversions.h" />
     <ClInclude Include="equipmentType.h" />
     <ClInclude Include="faction.h" />
     <ClInclude Include="monsterType.h" />
     <ClInclude Include="outcome.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="unitType.h" />
+    <ClInclude Include="ValueAssurance.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

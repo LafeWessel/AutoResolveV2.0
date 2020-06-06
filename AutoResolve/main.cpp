@@ -19,6 +19,8 @@
 #include <chrono>
 #include <random>
 
+#include "Random.h"
+
 /*
 #include "Battle.h"
 #include "CSVRow.h"
@@ -45,23 +47,31 @@
 #include "BattleData.h"
 */
 
-using namespace std;
-
 /*
-TODO Section:
-
 TODO-Make a way for the tests to use solely randomized values
+
 TODO-Make a way for all the data in a battle, including results, cas, etc. to be captured in an array/vector
-TODO-Make sure that casualties are actually assigned for MonsterBattle
+
+TODO-Make sure that casualties are actually assigned in MonsterBattle
+
 TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
+
 TODO-Implement a Gaussian distribution for random results for BattleRandoms calculations, centering distribution at 5 (?)
+
 TODO-Change win-loss ratio in tests to be % wins
+
 TODO-add const where appropriate in function signatures
+
 TODO-Create an auto-balancing feature to determine what is an equal distribution of power -> AI
+
 TODO-Can use a model to determine what contributes most to success?
+
 TODO-Can make a db of results from numerous battles then analyze it with R or python
+
 TODO-Add Randoms class, implement functions as static so they can be called without instantiating Random object
+
 TODO-Learn and implement Qt GUI
+
 */
 
 
@@ -72,6 +82,8 @@ TODO-Learn and implement Qt GUI
 int main()
 {
 	bool cont = true;
+
+	/*
 
 	//Initialize BattleData.csv if it hasn't already been
 	string fileName = "BattleData.csv";
@@ -166,6 +178,8 @@ int main()
 		}
 	}
 	
+
+	*/
 
 	return 0;
 }
