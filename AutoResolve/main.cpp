@@ -66,9 +66,7 @@ TODO-Create an auto-balancing feature to determine what is an equal distribution
 
 TODO-Can use a model to determine what contributes most to success?
 
-TODO-Can make a db of results from numerous battles then analyze it with R or python
-
-TODO-Add Randoms class, implement functions as static so they can be called without instantiating Random object
+TODO-Make a db of results from numerous battles then analyze it with R or python
 
 TODO-Learn and implement Qt GUI
 
@@ -76,12 +74,21 @@ TODO-Learn and implement Qt GUI
 
 
 
-
+#include "Equipment.h"
 
 //Called on program start
 int main()
 {
 	bool cont = true;
+	Equipment eq = new Equipment();
+	eq.setDebug(false);
+	eq.setName("Test Name");
+	eq.setABonus(5);
+	eq.setCValue(200);
+	eq.setEffect("Test Effect");
+	eq.setRange(3);
+	eq.setEqType(equipmentType::dragon);
+	cout << eq.printData();
 
 	/*
 

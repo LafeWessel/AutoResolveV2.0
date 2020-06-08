@@ -9,6 +9,8 @@
 #include "../AutoResolve/EnumerationConversions.cpp"
 #include "../AutoResolve/ValueAssurance.h"
 #include "../AutoResolve/ValueAssurance.cpp"
+#include "../AutoResolve/Equipment.h"
+#include "../AutoResolve/Equipment.cpp"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -162,5 +164,78 @@ namespace UnitTests
 		}
 
 
+	};
+
+
+	//Tests the Equipment Class
+	TEST_CLASS(EquipmentTests) {
+
+		//Check accessors and mutators
+		//Test get/setName
+		TEST_METHOD(getSetNameTest) {
+			Equipment eq = new Equipment();
+			eq.setName("Test");
+			Assert::AreEqual((string)"Test", eq.getName());
+
+		}
+		//Test get/setABonus
+		TEST_METHOD(getSetAutoBonusTest) {
+			Equipment eq = new Equipment();
+			eq.setABonus(5);
+			Assert::AreEqual(5, eq.getABonus());
+
+		}
+		//Test get/setRange
+		TEST_METHOD(getSetRangeTest) {
+			Equipment eq = new Equipment();
+			eq.setRange(2);
+			Assert::AreEqual(2,eq.getRange());
+
+		}
+		//Test get/setEqType
+		TEST_METHOD(getSetEquipmentTypeTest) {
+			Equipment eq = new Equipment();
+			eq.setEqType(equipmentType::armor);
+			Assert::AreEqual((int)equipmentType::armor,(int)eq.getEqType());
+
+		}
+		//Test get/setEffect
+		TEST_METHOD(getSetEffectTest) {
+			Equipment eq = new Equipment();
+			eq.setEffect("Test");
+			Assert::AreEqual((string)"Test",eq.getEffect());
+
+		}
+		//Test get/setCValue
+		TEST_METHOD(getSetCoinValueTest) {
+			Equipment eq = new Equipment();
+			eq.setCValue(100);
+			Assert::AreEqual(100,eq.getCValue());
+
+		}
+		//Test get/setDebug
+		TEST_METHOD(getSetDebugTest) {
+			Equipment eq = new Equipment();
+			eq.setDebug(true);
+			Assert::AreEqual(true,eq.getDebug());
+
+		}
+
+		//Check output functions
+		TEST_METHOD(printDataTest) {
+			Equipment eq = new Equipment();
+			eq.setDebug(false);
+			eq.setName("Test Name");
+			eq.setABonus(5);
+			eq.setCValue(200);
+			eq.setEffect("Test Effect");
+			eq.setRange(3);
+			eq.setEqType(equipmentType::dragon);
+
+			string expected = "Equipment printData called\nEquipment name : Test Name\nEquipment autoresolve bonus : 5\nEquipment index : 0\nEquipment range: 3\nEquipment equipType: 6\nEquipment effect: Test Effect\nEquipment coin value: 200\n";
+
+
+			Assert::AreEqual(expected, eq.printData());
+		}
 	};
 }

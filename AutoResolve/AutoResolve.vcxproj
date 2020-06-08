@@ -158,6 +158,7 @@
     <ClCompile Include="battleType.cpp" />
     <ClCompile Include="defenses.cpp" />
     <ClCompile Include="EnumerationConversions.cpp" />
+    <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="equipmentType.cpp" />
     <ClCompile Include="faction.cpp" />
     <ClCompile Include="intermediateOrDisplacedSource.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="battleType.h" />
     <ClInclude Include="defenses.h" />
     <ClInclude Include="EnumerationConversions.h" />
+    <ClInclude Include="Equipment.h" />
     <ClInclude Include="equipmentType.h" />
     <ClInclude Include="faction.h" />
     <ClInclude Include="monsterType.h" />
