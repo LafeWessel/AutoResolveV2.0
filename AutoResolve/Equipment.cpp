@@ -43,6 +43,6 @@ Equipment::Equipment(string nameI, int autoBonusI, int numberI, int rangeI, equi
 const string Equipment::printData()
 {
 	return "Equipment printData called\nEquipment name: " + name + "\nEquipment autoresolve bonus: "+ to_string(autoBonus)+
-		"\nEquipment index: " + to_string(index) + "\nEquipment range: " + to_string(range) + "\nEquipment equipType: "+ to_string((int)EquipType) + "\nEquipment effect: " +
+		"\nEquipment index: " + to_string(index) + "\nEquipment range: " + to_string(range) + "\nEquipment equipType: "+ EnumerationConversions::to_string(EquipType) + "\nEquipment effect: " +
 		effect + "\nEquipment coin value: "+ to_string(coinValue) + "\n";
 }
