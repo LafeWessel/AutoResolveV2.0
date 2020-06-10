@@ -146,16 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="DataCapture.txt" />
-    <Text Include="equipment.txt" />
-    <Text Include="IODescr.txt" />
-    <Text Include="units.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="BattleData.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="battleType.cpp" />
+    <ClCompile Include="CSVDataReader.cpp" />
+    <ClCompile Include="CSVRow.cpp" />
     <ClCompile Include="defenses.cpp" />
     <ClCompile Include="EnumerationConversions.cpp" />
     <ClCompile Include="Equipment.cpp" />
@@ -163,24 +156,51 @@
     <ClCompile Include="faction.cpp" />
     <ClCompile Include="intermediateOrDisplacedSource.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="monsterType.cpp" />
     <ClCompile Include="outcome.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Treasure.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="unitType.cpp" />
     <ClCompile Include="ValueAssurance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="battleType.h" />
+    <ClInclude Include="CSVDataReader.h" />
+    <ClInclude Include="CSVRow.h" />
     <ClInclude Include="defenses.h" />
     <ClInclude Include="EnumerationConversions.h" />
     <ClInclude Include="Equipment.h" />
     <ClInclude Include="equipmentType.h" />
     <ClInclude Include="faction.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="monsterType.h" />
     <ClInclude Include="outcome.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Treasure.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="unitType.h" />
     <ClInclude Include="ValueAssurance.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BattleData.csv">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DataCapture.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </Text>
+    <Text Include="equipment.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </Text>
+    <Text Include="IODescr.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </Text>
+    <Text Include="units.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

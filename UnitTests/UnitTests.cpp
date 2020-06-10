@@ -11,14 +11,24 @@
 #include "../AutoResolve/ValueAssurance.cpp"
 #include "../AutoResolve/Equipment.h"
 #include "../AutoResolve/Equipment.cpp"
+#include "../AutoResolve/Unit.h"
+#include "../AutoResolve/Unit.cpp"
 
+#include "../AutoResolve/Monster.h"
+#include "../AutoResolve/Monster.cpp"
+#include "../AutoResolve/Treasure.h"
+#include "../AutoResolve/Treasure.cpp"
+#include "../AutoResolve/CSVRow.h"
+#include "../AutoResolve/CSVRow.cpp"
+#include "../AutoResolve/CSVDataReader.h"
+#include "../AutoResolve/CSVDataReader.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
 {
 	//Unit tests for the Random class
-	TEST_CLASS(RandomTest)
+	TEST_CLASS(RandomTests)
 	{
 	public:
 		
@@ -45,8 +55,8 @@ namespace UnitTests
 
 	};
 
-	//Tests for the EnumerationConversions class
-	TEST_CLASS(EnumerationConversionsTest) {
+	//Unit tests for the EnumerationConversions class
+	TEST_CLASS(EnumerationConversionsTests) {
 
 		//intToFaction Unit Tests
 		//Tests to ensure that the correct output is returned when passing 1
@@ -190,15 +200,170 @@ namespace UnitTests
 		TEST_METHOD(outcomeToStringValiantDefeat) {
 			Assert::AreEqual((string)"Valiant Defeat", EnumerationConversions::to_string(outcome::Valiant_Defeat));
 		}
-		//Tests to ensure that the correct output is returned when passing CrushingDefeat
+		//Tests to ensure that the correct output is returned when passing Crushing Defeat
 		TEST_METHOD(outcomeToStringCrushingDefeat) {
 			Assert::AreEqual((string)"Crushing Defeat", EnumerationConversions::to_string(outcome::Crushing_Defeat));
 		}
 
+		//to_string(faction) tests
+		//Tests to ensure that the correct output is returned when passing Rebel
+		TEST_METHOD(outcomeToStringRebel) {
+			Assert::AreEqual((string)"Rebel", EnumerationConversions::to_string(faction::rebel));
+		}
+		//Tests to ensure that the correct output is returned when passing Beladimir
+		TEST_METHOD(outcomeToStringBeladimir) {
+			Assert::AreEqual((string)"Beladimir", EnumerationConversions::to_string(faction::beladimir));
+		}
+		//Tests to ensure that the correct output is returned when passing Lerastir
+		TEST_METHOD(outcomeToStringLerastir) {
+			Assert::AreEqual((string)"Lerastir", EnumerationConversions::to_string(faction::lerastir));
+		}
+		//Tests to ensure that the correct output is returned when passing Menoriad
+		TEST_METHOD(outcomeToStringMenoriad) {
+			Assert::AreEqual((string)"Menoriad", EnumerationConversions::to_string(faction::menoriad));
+		}
+
+		//to_string(monsterType) tests
+		//Tests to ensure that the correct output is returned when passing Minotaur
+		TEST_METHOD(outcomeToStringMinotaur) {
+			Assert::AreEqual((string)"Minotaur", EnumerationConversions::to_string(monsterType::Minotaur));
+		}
+		//Tests to ensure that the correct output is returned when passing Hobgoblin
+		TEST_METHOD(outcomeToStringHobgoblin) {
+			Assert::AreEqual((string)"Hobgoblin", EnumerationConversions::to_string(monsterType::Hobgoblin));
+		}
+		//Tests to ensure that the correct output is returned when passing Troll
+		TEST_METHOD(outcomeToStringTroll) {
+			Assert::AreEqual((string)"Troll", EnumerationConversions::to_string(monsterType::Troll));
+		}
+		//Tests to ensure that the correct output is returned when passing Demon
+		TEST_METHOD(outcomeToStringDemon) {
+			Assert::AreEqual((string)"Demon", EnumerationConversions::to_string(monsterType::Demon));
+		}
+		//Tests to ensure that the correct output is returned when passing Dragon
+		TEST_METHOD(outcomeToStringDragon) {
+			Assert::AreEqual((string)"Dragon", EnumerationConversions::to_string(monsterType::Dragon));
+		}
+		//Tests to ensure that the correct output is returned when passing Empty
+		TEST_METHOD(outcomeToStringEmpty) {
+			Assert::AreEqual((string)"Empty", EnumerationConversions::to_string(monsterType::Empty));
+		}
+
+		//to_string(defenses) tests
+		//Tests to ensure that the correct output is returned when passing None
+		TEST_METHOD(outcomeToStringNone) {
+			Assert::AreEqual((string)"None", EnumerationConversions::to_string(defenses::None));
+		}
+		//Tests to ensure that the correct output is returned when passing Wooden Wall
+		TEST_METHOD(outcomeToStringWoodenWall) {
+			Assert::AreEqual((string)"Wooden Wall", EnumerationConversions::to_string(defenses::Wooden_Wall));
+		}
+		//Tests to ensure that the correct output is returned when passing Wooden Wall w/ Moat
+		TEST_METHOD(outcomeToStringWoodenWallWMoat) {
+			Assert::AreEqual((string)"Wooden Wall w/ Moat", EnumerationConversions::to_string(defenses::Wooden_Wall_W_Moat));
+		}
+		//Tests to ensure that the correct output is returned when passing Stone Wall
+		TEST_METHOD(outcomeToStringStoneWall) {
+			Assert::AreEqual((string)"Stone Wall", EnumerationConversions::to_string(defenses::Stone_Wall));
+		}
+		//Tests to ensure that the correct output is returned when passing Stone Wall w/ Moat
+		TEST_METHOD(outcomeToStringStoneWallWMoat) {
+			Assert::AreEqual((string)"Stone Wall w/ Moat", EnumerationConversions::to_string(defenses::Stone_Wall_W_Moat));
+		}
+
+		//to_string(battleType) tests
+		//Tests to ensure that the correct output is returned when passing Normal
+		TEST_METHOD(outcomeToStringNormal) {
+			Assert::AreEqual((string)"Normal", EnumerationConversions::to_string(battleType::Normal));
+		}
+		//Tests to ensure that the correct output is returned when passing Siege
+		TEST_METHOD(outcomeToStringSiege) {
+			Assert::AreEqual((string)"Siege", EnumerationConversions::to_string(battleType::Siege));
+		}
+		//Tests to ensure that the correct output is returned when passing Raid
+		TEST_METHOD(outcomeToStringRaid) {
+			Assert::AreEqual((string)"Raid", EnumerationConversions::to_string(battleType::Raid));
+		}
+		//Tests to ensure that the correct output is returned when passing Naval
+		TEST_METHOD(outcomeToStringNaval) {
+			Assert::AreEqual((string)"Naval", EnumerationConversions::to_string(battleType::Naval));
+		}
+		//Tests to ensure that the correct output is returned when passing Monster
+		TEST_METHOD(outcomeToStringMonster) {
+			Assert::AreEqual((string)"Monster", EnumerationConversions::to_string(battleType::Monster));
+		}
+
+		//to_string(unitType) tests
+		//Tests to ensure that the correct output is returned when passing Melee
+		TEST_METHOD(outcomeToStringMelee) {
+			Assert::AreEqual((string)"Melee", EnumerationConversions::to_string(unitType::Melee));
+		}
+		//Tests to ensure that the correct output is returned when passing Cavalry
+		TEST_METHOD(outcomeToStringCavalry) {
+			Assert::AreEqual((string)"Cavalry", EnumerationConversions::to_string(unitType::Cavalry));
+		}
+		//Tests to ensure that the correct output is returned when passing Ranged
+		TEST_METHOD(outcomeToStringRanged) {
+			Assert::AreEqual((string)"Ranged", EnumerationConversions::to_string(unitType::Ranged));
+		}
+
+		//intToUnitType Unit Tests
+		//Tests to ensure that the correct output is returned when passing 1
+		TEST_METHOD(TestIntToUnitTypeOne) {
+			Assert::AreEqual((int)unitType::Melee, (int)EnumerationConversions::intToUnitType(1));
+		}
+		//Tests to ensure that the correct output is returned when passing 2
+		TEST_METHOD(TestIntToUnitTypeTwo) {
+			Assert::AreEqual((int)unitType::Cavalry, (int)EnumerationConversions::intToUnitType(2));
+		}
+		//Tests to ensure that the correct output is returned when passing 3
+		TEST_METHOD(TestIntToUnitTypeThree) {
+			Assert::AreEqual((int)unitType::Ranged, (int)EnumerationConversions::intToUnitType(3));
+		}
+		//Tests to ensure that the correct output is returned when passing invalid value
+		TEST_METHOD(TestIntToUnitTypeInvalidValue) {
+			Assert::AreEqual((int)unitType::Melee, (int)EnumerationConversions::intToUnitType(4));
+		}
+
+		//stringToEquipType Unit Tests
+		//Tests to ensure that the correct output is returned when passing "Null"
+		TEST_METHOD(TestIntToEquipTypeNull) {
+			Assert::AreEqual((int)equipmentType::null, (int)EnumerationConversions::stringToEquipType("Null"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Armor"
+		TEST_METHOD(TestIntToUnitEquipArmor) {
+			Assert::AreEqual((int)equipmentType::armor, (int)EnumerationConversions::stringToEquipType("Armor"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Weapon"
+		TEST_METHOD(TestIntToUnitEquipWeapon) {
+			Assert::AreEqual((int)equipmentType::weapon, (int)EnumerationConversions::stringToEquipType("Weapon"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Trinket"
+		TEST_METHOD(TestIntToUnitEquipTrinket) {
+			Assert::AreEqual((int)equipmentType::trinket, (int)EnumerationConversions::stringToEquipType("Trinket"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Banner"
+		TEST_METHOD(TestIntToEquipTypeBanner) {
+			Assert::AreEqual((int)equipmentType::banner, (int)EnumerationConversions::stringToEquipType("Banner"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Dragon"
+		TEST_METHOD(TestIntToEquipTypeDragon) {
+			Assert::AreEqual((int)equipmentType::dragon, (int)EnumerationConversions::stringToEquipType("Dragon"));
+		}
+		//Tests to ensure that the correct output is returned when passing "Follower"
+		TEST_METHOD(TestIntToEquipTypeFollower) {
+			Assert::AreEqual((int)equipmentType::follower, (int)EnumerationConversions::stringToEquipType("Follower"));
+		}
+		//Tests to ensure that the correct output is returned when passing invalid value
+		TEST_METHOD(TestIntToEquipTypeInvalidValue) {
+			Assert::AreEqual((int)equipmentType::null, (int)EnumerationConversions::stringToEquipType("Test invalid"));
+		}
+
+
 	};
 
 
-	//Tests the Value Assurance Class
+	//Unit tests the Value Assurance Class
 	TEST_CLASS(ValueAssuranceTests) {
 
 		//inputCheck Unit Tests
@@ -227,7 +392,7 @@ namespace UnitTests
 	};
 
 
-	//Tests the Equipment Class
+	//Unit tests for the Equipment Class
 	TEST_CLASS(EquipmentTests) {
 
 		//Check accessors and mutators
@@ -292,10 +457,105 @@ namespace UnitTests
 			eq.setRange(3);
 			eq.setEqType(equipmentType::dragon);
 
-			string expected = "Equipment printData called\nEquipment name: Test Name\nEquipment autoresolve bonus: 5\nEquipment index: 0\nEquipment range: 3\nEquipment equipType: 6\nEquipment effect: Test Effect\nEquipment coin value: 200\n";
+			string expected = "Equipment printData called\nEquipment name: Test Name\nEquipment autoresolve bonus: 5\nEquipment index: 0\nEquipment range: 3\nEquipment equipType: Dragon\nEquipment effect: Test Effect\nEquipment coin value: 200\n";
 
 
 			Assert::AreEqual(expected, eq.printData());
 		}
+	};
+
+	//Unit tests for the Unit class
+	TEST_CLASS(UnitClassTests) {
+
+		//Check accessors and mutators
+		//Test get/setName
+		TEST_METHOD(getSetName) {
+			Unit u = new Unit();
+			u.setName("Test Name");
+			Assert::AreEqual((string)"Test Name", u.getName());
+		}
+
+		//Test get/setARBonus
+		TEST_METHOD(getSetARBonus) {
+			Unit u = new Unit();
+			u.setARBonus(5);
+			Assert::AreEqual(5, u.getARBonus());
+		}
+
+		//Test get/setSoldiersPerUnit
+		TEST_METHOD(getSetSoldiersPerUnit) {
+			Unit u = new Unit();
+			u.setSoldiersPerUnit(4);
+			Assert::AreEqual(4, u.getSoldiersPerUnit());
+		}
+
+		//Test get/setCurrentSoldiers
+		TEST_METHOD(getSetCurrentSoldiers) {
+			Unit u = new Unit();
+			u.setCurrentSoldiers(4);
+			Assert::AreEqual(4, u.getCurrentSoldiers());
+		}
+
+		//Test get/setFaction
+		TEST_METHOD(getSetFaction) {
+			Unit u = new Unit();
+			u.setFaction(faction::beladimir);
+			Assert::AreEqual((int)faction::beladimir,(int)u.getFaction());
+		}
+
+		//Test get/setUnitType
+		TEST_METHOD(getSetUnitType) {
+			Unit u = new Unit();
+			u.setUnitType(unitType::Cavalry);
+			Assert::AreEqual((int)unitType::Cavalry,(int)u.getUnitType());
+		}
+
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			Unit u = new Unit();
+			u.setDebug(true);
+			Assert::AreEqual(true,u.getDebug());
+		}
+
+		//Test output functions
+		TEST_METHOD(printData) {
+			Unit u = new Unit();
+			u.setName("Test Name");
+			u.setARBonus(4);
+			u.setSoldiersPerUnit(5);
+			u.setCurrentSoldiers(6);
+			u.setFaction(faction::beladimir);
+			u.setUnitType(unitType::Cavalry);
+			u.setDebug(true);
+			string expected = "Unit printData called\nUnit name: Test Name\nUnit autoresolve bonus: 4\nUnit soldiersPerUnit: 5\nUnit currentSoldiers: 6\nUnit faction: Beladimir\nUnit unitType: Cavalry\n";
+		}
+
+	};
+
+	//Unit tests for Monster class
+	TEST_CLASS(MonsterTests) {
+
+	};
+
+	//Unit tests for Treasure class
+	TEST_CLASS(TreasureTests) {
+
+	};
+
+	//Unit tests for CSVRow class
+	TEST_CLASS(CSVRowTests) {
+
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			CSVRow c{};
+			c.setDebug(true);
+			Assert::AreEqual(true, c.getDebug());
+
+		}
+	};
+
+	//Unit tests for CSVDataReader class
+	TEST_CLASS(CSVDataReaderTests) {
+
 	};
 }

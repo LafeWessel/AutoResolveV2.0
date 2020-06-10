@@ -153,3 +153,179 @@ const string EnumerationConversions::to_string(outcome o) {
 	}
 	return "";
 }
+
+/*
+Returns a string that corresponds to the faction passed based on its name
+*/
+const string EnumerationConversions::to_string(faction f) {
+	switch ((int)f)
+	{
+	case(1):
+		return "Rebel";
+		break;
+	case(2):
+		return "Beladimir";
+		break;
+	case(3):
+		return "Lerastir";
+		break;
+	case(4):
+		return "Menoriad";
+		break;
+	default:
+		cerr << " No valid outcome chosen " << endl;
+	}
+	return "";
+}
+
+/*
+Returns a string that corresponds to the outcome passed based on its name
+*/
+const string EnumerationConversions::to_string(monsterType m) {
+	switch ((int)m)
+	{
+	case(1):
+		return "Minotaur";
+		break;
+	case(2):
+		return "Hobgoblin";
+		break;
+	case(3):
+		return "Troll";
+		break;
+	case(4):
+		return "Giant";
+		break;
+	case(5):
+		return "Demon";
+		break;
+	case(6):
+		return "Dragon";
+		break;
+	case(7):
+		return "Empty";
+		break;
+	default:
+		cerr << " No valid outcome chosen " << endl;
+	}
+	return "";
+}
+
+/*
+Returns a string that corresponds to the defenses passed based on its name
+*/
+const string EnumerationConversions::to_string(defenses d) {
+	switch ((int)d)
+	{
+	case(1):
+		return "None";
+		break;
+	case(2):
+		return "Wooden Wall";
+		break;
+	case(3):
+		return "Wooden Wall w/ Moat";
+		break;
+	case(4):
+		return "Stone Wall";
+		break;
+	case(5):
+		return "Stone Wall w/ Moat";
+		break;
+	default:
+		cerr << " No valid outcome chosen " << endl;
+	}
+	return "";
+}
+
+/*
+Returns a string that corresponds to the battleType passed based on its name
+*/
+const string EnumerationConversions::to_string(battleType b) {
+	switch ((int)b)
+	{
+	case(1):
+		return "Normal";
+		break;
+	case(2):
+		return "Siege";
+		break;
+	case(3):
+		return "Raid";
+		break;
+	case(4):
+		return "Naval";
+		break;
+	case(5):
+		return "Monster";
+		break;
+	default:
+		cerr << " No valid outcome chosen " << endl;
+	}
+	return "";
+}
+
+/*
+Returns a string that corresponds to the unitType passed based on its name
+*/
+const string EnumerationConversions::to_string(unitType u) {
+	switch ((int)u)
+	{
+	case(1):
+		return "Melee";
+		break;
+	case(2):
+		return "Cavalry";
+		break;
+	case(3):
+		return "Ranged";
+		break;
+	default:
+		cerr << " No valid outcome chosen " << endl;
+	}
+	return "";
+}
+
+
+/*
+Returns the unitType that corresponds to the int passed
+*/
+const unitType EnumerationConversions::intToUnitType(int unitType)
+{
+	switch (unitType)
+	{
+	case 1:
+		return unitType::Melee;
+		break;
+	case 2:
+		return unitType::Cavalry;
+		break;
+	case 3:
+		return unitType::Ranged;
+		break;
+	default:
+		cerr << "invalid integer input." << endl;
+	}
+	return unitType::Melee;
+}
+
+/*
+Returns an equipmentType that corresponds to the string passed
+*/
+const equipmentType EnumerationConversions::stringToEquipType(string nameI)
+{
+	vector<string> names = { "Null","Armor","Weapon","Trinket","Banner","Dragon","Follower" };
+	vector<equipmentType> types = { equipmentType::null,equipmentType::armor,equipmentType::weapon,
+		equipmentType::trinket,equipmentType::banner,equipmentType::dragon,equipmentType::follower };
+
+	for (int i = 0; i < names.size(); i++) //Tests the input string against a list of the equipmentTypes
+	{
+		if (nameI == names[i])
+		{
+			return types[i];
+		}
+	}
+	cerr << "no equipmentType was discernable from " << nameI << endl;
+	return equipmentType::null;
+
+}
