@@ -14,8 +14,9 @@ class Random
 private:
 
 public:
-	static const int randomNumber(int range);
-	static const int randomNumber(int min, int max);
+	static int randomNumber(const int range);
+	static int randomNumber(const int min, const int max);
+	static int randomNumberArray(const int range);
 
 
 };

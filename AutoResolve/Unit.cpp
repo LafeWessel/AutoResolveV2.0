@@ -15,7 +15,7 @@ Unit::Unit()
 	debug = false;
 }
 
-Unit::Unit(bool debugI) {
+Unit::Unit(const bool debugI) {
 	name = "No Name";
 	autoResBonus = 1;
 	soldiersPerUnit = 1;
@@ -25,7 +25,8 @@ Unit::Unit(bool debugI) {
 	this->setDebug(debugI);
 }
 
-Unit::Unit(string nameI, int autoResBonusI, int soldiersPerUnitI, int currentSoldiersI, faction factI, unitType typeI)
+Unit::Unit(const string nameI, const int autoResBonusI, const int soldiersPerUnitI, const int currentSoldiersI,
+	const faction factI, const unitType typeI)
 {
 	name = nameI;
 	autoResBonus = autoResBonusI;
@@ -36,12 +37,12 @@ Unit::Unit(string nameI, int autoResBonusI, int soldiersPerUnitI, int currentSol
 	debug = false;
 }
 
-const string Unit::printData()
+ string Unit::to_string()const
 {
 	return "Unit printData called\nUnit name: " + name +
-		"\nUnit autoresolve bonus: " + to_string(autoResBonus) +
-		"\nUnit soldiersPerUnit: " + to_string(soldiersPerUnit) +
-		"\nUnit currentSoldiers: " + to_string(currentSoldiers) +
+		"\nUnit autoresolve bonus: " + std::to_string(autoResBonus) +
+		"\nUnit soldiersPerUnit: " + std::to_string(soldiersPerUnit) +
+		"\nUnit currentSoldiers: " + std::to_string(currentSoldiers) +
 		"\nUnit faction: " + EnumerationConversions::to_string(fact) +
 		"\nUnit unitType: " + EnumerationConversions::to_string(type) +"\n";
 }

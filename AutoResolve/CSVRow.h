@@ -28,8 +28,8 @@ public:
 	void readNextRow(istream& str);
 	//friend istream& operator>>(istream& str, CSVRow& data);
 
-	void setDebug(bool debugI) { debug = debugI; };
-	const bool getDebug() { return debug; };
+	void setDebug(const bool debugI) { debug = debugI; };
+	bool getDebug() const { return debug; };
 };
 
 istream& operator>>(istream& str, CSVRow& data);

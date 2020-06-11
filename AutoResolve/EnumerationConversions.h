@@ -26,20 +26,20 @@ private:
 
 
 public:
-	const static faction intToFaction(int faction);
-	const static monsterType intToMonsterType(int monsterType);
-	const static unitType intToUnitType(int unitType);
+	 static faction intToFaction(int faction);
+	 static monsterType intToMonsterType(int monsterType);
+	 static unitType intToUnitType(int unitType);
 
-	const static string outputIntAsOutcome(int outcome);
+	 static string outputIntAsOutcome(int outcome);
 
-	const static string to_string(equipmentType e);
-	const static string to_string(outcome o);
-	const static string to_string(faction f);
-	const static string to_string(monsterType m);
-	const static string to_string(defenses d);
-	const static string to_string(battleType b);
-	const static string to_string(unitType u);
+	 static string to_string(const equipmentType e);
+	 static string to_string(const outcome o);
+	 static string to_string(const faction f);
+	 static string to_string(const monsterType m);
+	 static string to_string(const defenses d);
+	 static string to_string(const battleType b);
+	 static string to_string(const unitType u);
 	
-	const static equipmentType stringToEquipType(string nameI);
+	 static equipmentType stringToEquipType(const string nameI);
 };
 

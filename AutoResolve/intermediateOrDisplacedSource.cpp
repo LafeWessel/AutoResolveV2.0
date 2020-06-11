@@ -1,14 +1,5 @@
 
-
-
 /*
-
-
-
-
-
-
-
 
 //This outputs the results from a vector of battle results and also some statistics about them
 void predictionOutput(vector<int> rawResults)

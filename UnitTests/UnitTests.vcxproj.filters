@@ -19,4 +19,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AutoResolve\BattleData.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\AutoResolve\DataCapture.txt" />
+    <Text Include="..\AutoResolve\equipment.txt" />
+    <Text Include="..\AutoResolve\units.txt" />
+  </ItemGroup>
 </Project>

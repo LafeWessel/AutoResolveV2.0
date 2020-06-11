@@ -20,7 +20,7 @@ private:
 	Treasure *treasure;
 	monsterType type;
 	int coinReward;
-	int autoResValue; //*10 + 10
+	int autoResValue; //(int)type*10 + 10
 	bool debug;
 
 public:

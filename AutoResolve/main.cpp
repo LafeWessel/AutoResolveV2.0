@@ -21,6 +21,7 @@
 
 #include "Random.h"
 
+
 /*
 #include "Battle.h"
 #include "CSVRow.h"
@@ -74,22 +75,19 @@ TODO-Learn and implement Qt GUI
 
 
 
+#include "Treasure.h"
 #include "Equipment.h"
 
 //Called on program start
 int main()
 {
 	bool cont = true;
-	Equipment eq = new Equipment();
-	eq.setDebug(false);
-	eq.setName("Test Name");
-	eq.setABonus(5);
-	eq.setCValue(200);
-	eq.setEffect("Test Effect");
-	eq.setRange(3);
-	eq.setEqType(equipmentType::dragon);
-	cout << eq.printData();
-
+	Treasure t{true};
+	t.initialize();
+	t.printData();
+	cout << "Armor size: " << t.getArmorVector().size() << endl << "Banner size: " << t.getBannerVector().size() << endl
+		<< "Weapon size: " << t.getWeaponVector().size() << endl << "Trinket size: " << t.getTrinketVector().size() << endl
+		<< "Dragon size: " << t.getDragonVector().size() << endl << "Follower size: " << t.getFollowerVector().size() << endl;
 	/*
 
 	//Initialize BattleData.csv if it hasn't already been

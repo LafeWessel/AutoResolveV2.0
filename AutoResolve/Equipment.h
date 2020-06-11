@@ -28,58 +28,59 @@ private:
 public:
 	~Equipment();
 	Equipment();
-	Equipment(bool debugI);
-	Equipment(string nameI, int autoBonusI, int numberI, int rangeI, equipmentType EquipTypeI, string effectI, int coinValueI);
+	Equipment(const bool debugI);
+	Equipment(const string nameI, const int autoBonusI, const int numberI, const int rangeI, 
+		const equipmentType EquipTypeI, const string effectI, const int coinValueI);
 	
 
-	const string getName() { 
+	 string getName() const{ 
 		if (debug) { cout << "equipment name gotten: " << name << endl; }
 		return name; };
-	const int getABonus() { 
+	 int getABonus() const{ 
 		if (debug) { cout << "equipment autoresolve bonus gotten: " << autoBonus << endl; }
 		return autoBonus; };
-	const int getRange() { 
+	 int getRange() const{ 
 		if (debug) { cout << "equipment range gotten: " << range << endl; }
 		return range; };
-	const equipmentType getEqType() { 
+	 equipmentType getEqType() const{ 
 		if (debug) { cout << "equipment type gotten: " << EnumerationConversions::to_string(EquipType) << endl; }
 		return EquipType; };
-	const string getEffect() { 
+	 string getEffect() const{ 
 		if (debug) { cout << "equipment effect gotten: " << effect << endl; }
 		return effect; };
-	const int getCValue() { 
+	 int getCValue() const{ 
 		if (debug) { cout << "equipment coin value gotten: " << coinValue << endl; }
 		return coinValue; };
-	const int getIndex() {
+	 int getIndex() const{
 		if (debug) { cout << "equipment index gotten: " << index << endl; }
 		return index;
 	};
 
 
-	void setName(string nameI) { 
+	void setName(const string nameI) { 
 		if (debug) { cout << "equipment name set to: " << nameI << endl; }
 		name = nameI; };
-	void setABonus(int autoBonusI) { 
+	void setABonus(const int autoBonusI) { 
 		if (debug) { cout << "equipment autoresolve bonus set to: " << autoBonusI << endl; }
 		autoBonus = autoBonusI; };
-	void setRange(int rangeI) { 
+	void setRange(const int rangeI) { 
 		if (debug) { cout << "equipment range set to: " << rangeI << endl; }
 		range = rangeI; };
-	void setEqType(equipmentType equipTypeI) { 
+	void setEqType(const equipmentType equipTypeI) { 
 		if (debug) { cout << "equipment type set to: " << EnumerationConversions::to_string(equipTypeI) << endl; }
 		EquipType = equipTypeI; };
-	void setEffect(string effectI) { 
+	void setEffect(const string effectI) { 
 		if (debug) { cout << "equipment effect set to: " << effectI << endl; }
 		effect = effectI; };
-	void setCValue(int CValI) { 
+	void setCValue(const int CValI) { 
 		if (debug) { cout << "equipment coin value set to: " << CValI << endl; }
 		coinValue = CValI; };
 
-	const bool getDebug() { return debug; };
-	void setDebug(bool debugI) {
+	 bool getDebug() const{ return debug; };
+	void setDebug(const bool debugI) {
 		if (debugI) { cout << "equipment setDebug called" << endl; }
 		debug = debugI;
 	};
-	const string printData();
+	 string to_string()const;
 };
 

@@ -1,29 +1,10 @@
 #include "Treasure.h"
 
-
-int Treasure::randomNumberTreasure(int range) //Returns a random number between 0 and the given range-1
-{
-	if (debug) { cout << range << " passed into random" << endl; }
-	typedef std::chrono::high_resolution_clock myclock;
-	std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-	unsigned int random = 0;
-	if (range == 0)
-	{
-		if (debug) { cout << "Random range = 0" << endl; }
-		return 0;
-	}
-
-	uniform_int_distribution<int> dRange(0, (abs(range)-1));
-	random = dRange(generator);
-	if (debug) { cout << "Random returning: " << random << endl; }
-	return random;
-}
-
 Treasure::~Treasure()
 {
 }
 
-Treasure::Treasure() //void initializer
+Treasure::Treasure()
 {
 	armor = {};
 	weapon = {};
@@ -32,6 +13,7 @@ Treasure::Treasure() //void initializer
 	follower = {};
 	dragon = {};
 	debug = false;
+	equipmentFilePath = "equipment.txt";
 }
 
 Treasure::Treasure(bool debugI) {
@@ -42,9 +24,9 @@ Treasure::Treasure(bool debugI) {
 	follower = {};
 	dragon = {};
 	this->setDebug(debugI);
+	equipmentFilePath = "equipment.txt";
 }
 
-//initializer
 Treasure::Treasure(vector<Equipment> armorI, vector<Equipment> weaponI, vector<Equipment> trinketI,
 	vector<Equipment> bannerI, vector<Equipment> followerI, vector<Equipment> dragonI, bool debugI)
 {
@@ -55,64 +37,86 @@ Treasure::Treasure(vector<Equipment> armorI, vector<Equipment> weaponI, vector<E
 	follower = followerI;
 	dragon = dragonI;
 	debug = debugI;
+	equipmentFilePath = "equipment.txt";
 }
 
-Equipment Treasure::findArmor()
+/*
+Returns a random Armor
+*/
+ Equipment Treasure::findArmor()const
 {
 	if (debug) { cout << "armor size: " << banner.size() << endl; }
-	int selection = randomNumberTreasure(armor.size());
+	int selection = Random::randomNumberArray(armor.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return armor[selection];
 }
 
-Equipment Treasure::findBanner()
+/*
+Returns a random Banner
+*/
+ Equipment Treasure::findBanner()const
 {
 	if (debug) { cout << "banner size: " << banner.size() << endl; }
-	int selection = randomNumberTreasure(banner.size());
+	int selection = Random::randomNumberArray(banner.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return banner[selection];
 }
 
-Equipment Treasure::findFollower()
+/*
+Returns a random Follower
+*/
+ Equipment Treasure::findFollower()const
 {
 	if (debug) { cout << "follower size: " << follower.size() << endl; }
-	int selection = randomNumberTreasure(follower.size());
+	int selection = Random::randomNumberArray(follower.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return follower[selection];
 }
 
-Equipment Treasure::findDragonEq()
+/*
+Returns a random Dragon equipment
+*/
+ Equipment Treasure::findDragonEq()const
 {
 	if (debug) { cout << "dragon size: " << dragon.size() << endl; }
-	int selection = randomNumberTreasure(dragon.size());
+	int selection = Random::randomNumberArray(dragon.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return dragon[selection];
 }
 
-Equipment Treasure::findTrinket()
+/*
+Returns a random Trinket
+*/
+ Equipment Treasure::findTrinket()const
 {
 	if (debug) { cout << "trinket size: " << trinket.size() << endl; }
-	int selection = randomNumberTreasure(trinket.size());
+	int selection = Random::randomNumberArray(trinket.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return trinket[selection];
 }
 
-Equipment Treasure::findWeapon()
+/*
+Returns a random Weapon
+*/
+ Equipment Treasure::findWeapon()const
 {
 	if (debug) { cout << "weapon size: " << weapon.size() << endl; }
-	int selection = randomNumberTreasure(weapon.size());
+	int selection = Random::randomNumberArray(weapon.size());
 	if (debug) { cout << "selection: " << selection << endl; }
 	return weapon[selection];
 }
 
-void Treasure::initializeTreasure()
+/*
+Initializes CSVDataReader class and reads in equipment before sorting it
+*/
+void Treasure::initialize()
 {
 	if (debug) { cout << "initializeTreasure() called." << endl; }
 
 	CSVDataReader reader(debug);
 	if (debug) { cout << "CSVDataReader initialized" << endl; }
 
-	vector<Equipment> allEquipment = reader.readEquipment();
+	vector<Equipment> allEquipment = reader.readEquipment(equipmentFilePath);
 	if (debug) { cout << "All equipment read" << endl; }
 
 	sortEquipment(allEquipment);
@@ -120,48 +124,54 @@ void Treasure::initializeTreasure()
 	return;
 }
 
-Equipment Treasure::findTreasure(int bonus) //Used to determine battle loot results
+/*
+Returns an Equipment object if a random int in range 1-8 + bonus is >= 5 
+*/
+ Equipment Treasure::findTreasure(const int bonus)const
 {
 	if (debug) { cout << " findTreasure() called" << endl; }
-	int total = randomNumberTreasure(8) + bonus+1;
+	int total = Random::randomNumber(1,8) + bonus;
 	if (debug) { cout << "random + bonus = " << total << endl; }
 	if ( total >= 5)
 	{
-		switch (randomNumberTreasure(5)+1)
+		switch (Random::randomNumber(1,5))
 		{
 		case(1):
 			if (debug) { cout << " findArmor() returned" << endl; }
-			return findArmor();
+			return this->findArmor();
 			break;
 		case(2):
 			if (debug) { cout << " findWeapon() returned" << endl; }
-			return findWeapon();
+			return this->findWeapon();
 			break;
 		case(3):
 			if (debug) { cout << " findTrinket() returned" << endl; }
-			return findTrinket();
+			return this->findTrinket();
 			break;
 		case(4):
 			if (debug) { cout << " findBanner() returned" << endl; }
-			return findBanner();
+			return this->findBanner();
 			break;
 		case(5):
 			if (debug) { cout << " findFollower() returned" << endl; }
-			return findFollower();
+			return this->findFollower();
 			break;
 		default:
 			cerr << "No type selected" << endl;
-			return noTreasure();
+			return this->noTreasure();
 		}
 	}
 	else
 	{
 		if (debug) { cout << " noTreasure() returned" << endl; }
-		return noTreasure();
+		return this->noTreasure();
 	}
 	if (debug) { cout << " findTreasure() finished" << endl; }
 }
 
+/*
+Sorts equipment in passed vector into appropriate equipment type vectors
+*/
 void Treasure::sortEquipment(vector<Equipment>& toSort)
 {
 	if (debug) { cout << "sortEquipment called" << endl; }
@@ -236,16 +246,22 @@ void Treasure::setDebug(bool debugI) {
 	if (debug) { cout << "treasure setDebug finished, total" << endl; }
 }
 
-void Treasure::printEquipmentVector(vector<Equipment>& equipVector, string name)
+/*
+Prints all the equipment in a vector of equipment
+*/
+ void Treasure::printEquipmentVector(const vector<Equipment>& equipVector, const string name) const
 {
 	for (int i = 0; i < equipVector.size(); i++)
 	{
 		cout << "Treasure " << name << " vector at " << i << ":" << endl;
-		equipVector[i].printData();
+		cout << equipVector[i].to_string() << endl;
 	}
 }
 
-void Treasure::printData()
+/*
+Prints the equipments in the Treasure class
+*/
+ void Treasure::printData()const
 {
 	cout << "Treasure printData called" << endl;
 	printEquipmentVector(armor, "armor");

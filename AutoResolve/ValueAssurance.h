@@ -12,6 +12,6 @@ class ValueAssurance
 private:
 
 public:
-	static int inputCheck(int toCheck, int max, int min);
+	static int inputCheck(int toCheck, const int max, const int min);
 };
 

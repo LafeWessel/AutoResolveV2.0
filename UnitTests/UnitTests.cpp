@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-
 #include "CppUnitTest.h"
 #include "../AutoResolve/Random.h"
 #include "../AutoResolve/Random.cpp"
@@ -13,7 +12,6 @@
 #include "../AutoResolve/Equipment.cpp"
 #include "../AutoResolve/Unit.h"
 #include "../AutoResolve/Unit.cpp"
-
 #include "../AutoResolve/Monster.h"
 #include "../AutoResolve/Monster.cpp"
 #include "../AutoResolve/Treasure.h"
@@ -447,7 +445,7 @@ namespace UnitTests
 		}
 
 		//Check output functions
-		TEST_METHOD(printData) {
+		TEST_METHOD(toString) {
 			Equipment eq = new Equipment();
 			eq.setDebug(false);
 			eq.setName("Test Name");
@@ -460,7 +458,7 @@ namespace UnitTests
 			string expected = "Equipment printData called\nEquipment name: Test Name\nEquipment autoresolve bonus: 5\nEquipment index: 0\nEquipment range: 3\nEquipment equipType: Dragon\nEquipment effect: Test Effect\nEquipment coin value: 200\n";
 
 
-			Assert::AreEqual(expected, eq.printData());
+			Assert::AreEqual(expected, eq.to_string());
 		}
 	};
 
@@ -518,7 +516,7 @@ namespace UnitTests
 		}
 
 		//Test output functions
-		TEST_METHOD(printData) {
+		TEST_METHOD(toString) {
 			Unit u = new Unit();
 			u.setName("Test Name");
 			u.setARBonus(4);
@@ -528,18 +526,196 @@ namespace UnitTests
 			u.setUnitType(unitType::Cavalry);
 			u.setDebug(true);
 			string expected = "Unit printData called\nUnit name: Test Name\nUnit autoresolve bonus: 4\nUnit soldiersPerUnit: 5\nUnit currentSoldiers: 6\nUnit faction: Beladimir\nUnit unitType: Cavalry\n";
+			Assert::AreEqual(expected, u.to_string());
 		}
-
-	};
-
-	//Unit tests for Monster class
-	TEST_CLASS(MonsterTests) {
 
 	};
 
 	//Unit tests for Treasure class
 	TEST_CLASS(TreasureTests) {
 
+		//Test accessors and mutators
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			Treasure t = new Treasure();
+			t.setDebug(true);
+			Assert::AreEqual(true, t.getDebug());
+		}
+		TEST_METHOD(getSetFilePath) {
+			Treasure t = new Treasure();
+			t.setFilePath("Test Path");
+			Assert::AreEqual((string)"Test Path", t.getFilePath());
+		}
+		//Test find/setArmorVector
+		TEST_METHOD(findSetArmorVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setArmorVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findArmor().getName());
+		}
+		//Test find/setWeaponVector
+		TEST_METHOD(findSetWeaponVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setWeaponVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findWeapon().getName());
+		}
+		//Test find/setTrinketVector
+		TEST_METHOD(findSetTrinketVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setTrinketVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findTrinket().getName());
+		}
+		//Test find/setBannerVector
+		TEST_METHOD(findSetBannerVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setBannerVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findBanner().getName());
+		}
+		//Test find/setFollowerVector
+		TEST_METHOD(findSetFollowerVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setFollowerVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findFollower().getName());
+		}
+		//Test find/setDragonVector
+		TEST_METHOD(findSetDragonVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			t.setDragonVector(ev);
+			Assert::AreEqual((string)"Test Name", t.findDragonEq().getName());
+		}
+		//Test get/setArmorVector
+		TEST_METHOD(getSetArmorVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setArmorVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getArmorVector()[0].getName());
+		}
+		//Test get/setWeaponVector
+		TEST_METHOD(getSetWeaponVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setWeaponVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getWeaponVector()[0].getName());
+		}
+		//Test get/setTrinketVector
+		TEST_METHOD(getSetTrinketVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setTrinketVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getTrinketVector()[0].getName());
+		}
+		//Test get/setBannerVector
+		TEST_METHOD(getSetBannerVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setBannerVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getBannerVector()[0].getName());
+		}
+		//Test get/setFollowerVector
+		TEST_METHOD(getSetFollowerVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setFollowerVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getFollowerVector()[0].getName());
+		}
+		//Test get/setDragonVector
+		TEST_METHOD(getSetDragonVector) {
+			Treasure t = new Treasure();
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e };
+			t.setDragonVector(ev);
+			Assert::AreEqual((string)"Test Name", t.getDragonVector()[0].getName());
+		}
+
+		//Test find functions
+		//Test noTreasure
+		TEST_METHOD(noTreasure) {
+			Treasure t = new Treasure();
+			Assert::AreEqual((string)"No Treasure", t.noTreasure().getName());
+		}
+		//Test findTreasure
+		TEST_METHOD(findTreasureSucceed) {
+			
+			Equipment e{};
+			e.setName("Test Name");
+			vector<Equipment> ev = { e,e };
+			Treasure t{ ev, ev, ev, ev, ev, ev, false };
+			string name = t.findTreasure(5).getName();
+			Assert::AreEqual((string)"Test Name",name);
+		}
+
+		//Test initialize
+		//Test armor vector initialization
+		TEST_METHOD(initializeArmor) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			bool correctLength = false;
+			Assert::AreEqual(9, (int)t.getArmorVector().size());
+		}
+		//Test weapon vector initialization
+		TEST_METHOD(initializeWeapon) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			Assert::AreEqual(9, (int)t.getWeaponVector().size());
+		}
+		//Test trinket vector initialization
+		TEST_METHOD(initializeTrinket) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			Assert::AreEqual(9, (int)t.getTrinketVector().size());
+		}
+		//Test banner vector initialization
+		TEST_METHOD(initializeBanner) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			Assert::AreEqual(9, (int)t.getBannerVector().size());
+		}
+		//Test follower vector initialization
+		TEST_METHOD(initializeFollower) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			Assert::AreEqual(8, (int)t.getFollowerVector().size());
+		}
+		//Test dragon vector initialization
+		TEST_METHOD(initializeDragon) {
+			Treasure t{ true };
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			Assert::AreEqual(4, (int)t.getDragonVector().size());
+		}
 	};
 
 	//Unit tests for CSVRow class
@@ -556,6 +732,13 @@ namespace UnitTests
 
 	//Unit tests for CSVDataReader class
 	TEST_CLASS(CSVDataReaderTests) {
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			CSVDataReader c{};
+			c.setDebug(true);
+			Assert::AreEqual(true, c.getDebug());
 
+		}
 	};
+
 }

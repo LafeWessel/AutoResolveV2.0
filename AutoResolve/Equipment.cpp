@@ -16,7 +16,7 @@ Equipment::Equipment() //void initializer
 	debug = false;
 }
 
-Equipment::Equipment(bool debugI)
+Equipment::Equipment(const bool debugI)
 {
 	name = "";
 	autoBonus = 0;
@@ -28,7 +28,8 @@ Equipment::Equipment(bool debugI)
 	this->setDebug(debugI);
 }
 
-Equipment::Equipment(string nameI, int autoBonusI, int numberI, int rangeI, equipmentType EquipTypeI, string effectI, int coinValueI) //initializer
+Equipment::Equipment(const string nameI, const int autoBonusI, const int numberI, const int rangeI,
+	const equipmentType EquipTypeI, const string effectI, const int coinValueI) //initializer
 {
 	name = nameI;
 	autoBonus = autoBonusI;
@@ -40,9 +41,9 @@ Equipment::Equipment(string nameI, int autoBonusI, int numberI, int rangeI, equi
 	debug = false;
 }
 
-const string Equipment::printData()
+ string Equipment::to_string() const
 {
-	return "Equipment printData called\nEquipment name: " + name + "\nEquipment autoresolve bonus: "+ to_string(autoBonus)+
-		"\nEquipment index: " + to_string(index) + "\nEquipment range: " + to_string(range) + "\nEquipment equipType: "+ EnumerationConversions::to_string(EquipType) + "\nEquipment effect: " +
-		effect + "\nEquipment coin value: "+ to_string(coinValue) + "\n";
+	return "Equipment printData called\nEquipment name: " + name + "\nEquipment autoresolve bonus: "+ std::to_string(autoBonus)+
+		"\nEquipment index: " + std::to_string(index) + "\nEquipment range: " + std::to_string(range) + "\nEquipment equipType: "+ EnumerationConversions::to_string(EquipType) + "\nEquipment effect: " +
+		effect + "\nEquipment coin value: "+ std::to_string(coinValue) + "\n";
 }

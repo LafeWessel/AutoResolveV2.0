@@ -1,7 +1,7 @@
 #include "ValueAssurance.h"
 
 //Checks integer input between 2 given bounds and clamps them
-int ValueAssurance::inputCheck(int toCheck, int max, int min) 
+int ValueAssurance::inputCheck(int toCheck, const int max, const int min) 
 {
 
 	if (toCheck < min)//Check against lowest possible value

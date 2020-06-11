@@ -165,6 +165,14 @@
       <Project>{57bd77ab-c0be-430c-bbff-5d57960da6d8}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AutoResolve\BattleData.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\AutoResolve\DataCapture.txt" />
+    <Text Include="..\AutoResolve\equipment.txt" />
+    <Text Include="..\AutoResolve\units.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

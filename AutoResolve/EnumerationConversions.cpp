@@ -3,7 +3,7 @@
 /*
 Returns the faction corresponding to the integer passed
 */
-const faction EnumerationConversions::intToFaction(int faction) {
+ faction EnumerationConversions::intToFaction(const int faction){
 
 	switch (faction) {
 		case 1:
@@ -27,7 +27,7 @@ const faction EnumerationConversions::intToFaction(int faction) {
 /*
 Returns the monsterType corresponding to the integer passed
 */
-const monsterType EnumerationConversions::intToMonsterType(int monsterType) {
+ monsterType EnumerationConversions::intToMonsterType(const int monsterType){
 	switch (monsterType) {
 		case 1:
 			return monsterType::Minotaur;
@@ -57,8 +57,7 @@ const monsterType EnumerationConversions::intToMonsterType(int monsterType) {
 Outputs an integer as its corresponding outcome enum class name.
 TODO replace references to this with to_string(outcome)
 */
-const string EnumerationConversions::outputIntAsOutcome(int outcome) 
-{
+ string EnumerationConversions::outputIntAsOutcome(const int outcome){
 	switch (outcome)
 	{
 	case(1):
@@ -91,7 +90,7 @@ const string EnumerationConversions::outputIntAsOutcome(int outcome)
 /*
 Returns a string that corresponds to the equipmentType passed based on its name
 */
-const string EnumerationConversions::to_string(equipmentType e) {
+ string EnumerationConversions::to_string(const equipmentType e){
 	switch ((int)e)
 	{
 	case(1):
@@ -124,7 +123,7 @@ const string EnumerationConversions::to_string(equipmentType e) {
 /*
 Returns a string that corresponds to the outcome passed based on its name
 */
-const string EnumerationConversions::to_string(outcome o) {
+ string EnumerationConversions::to_string(const outcome o){
 	switch ((int)o)
 	{
 	case(1):
@@ -157,7 +156,7 @@ const string EnumerationConversions::to_string(outcome o) {
 /*
 Returns a string that corresponds to the faction passed based on its name
 */
-const string EnumerationConversions::to_string(faction f) {
+ string EnumerationConversions::to_string(const faction f){
 	switch ((int)f)
 	{
 	case(1):
@@ -181,7 +180,7 @@ const string EnumerationConversions::to_string(faction f) {
 /*
 Returns a string that corresponds to the outcome passed based on its name
 */
-const string EnumerationConversions::to_string(monsterType m) {
+ string EnumerationConversions::to_string(const monsterType m){
 	switch ((int)m)
 	{
 	case(1):
@@ -214,7 +213,7 @@ const string EnumerationConversions::to_string(monsterType m) {
 /*
 Returns a string that corresponds to the defenses passed based on its name
 */
-const string EnumerationConversions::to_string(defenses d) {
+ string EnumerationConversions::to_string(const defenses d) {
 	switch ((int)d)
 	{
 	case(1):
@@ -241,7 +240,7 @@ const string EnumerationConversions::to_string(defenses d) {
 /*
 Returns a string that corresponds to the battleType passed based on its name
 */
-const string EnumerationConversions::to_string(battleType b) {
+ string EnumerationConversions::to_string(const battleType b){
 	switch ((int)b)
 	{
 	case(1):
@@ -268,7 +267,7 @@ const string EnumerationConversions::to_string(battleType b) {
 /*
 Returns a string that corresponds to the unitType passed based on its name
 */
-const string EnumerationConversions::to_string(unitType u) {
+ string EnumerationConversions::to_string(const unitType u){
 	switch ((int)u)
 	{
 	case(1):
@@ -290,8 +289,7 @@ const string EnumerationConversions::to_string(unitType u) {
 /*
 Returns the unitType that corresponds to the int passed
 */
-const unitType EnumerationConversions::intToUnitType(int unitType)
-{
+ unitType EnumerationConversions::intToUnitType(const int unitType){
 	switch (unitType)
 	{
 	case 1:
@@ -312,8 +310,7 @@ const unitType EnumerationConversions::intToUnitType(int unitType)
 /*
 Returns an equipmentType that corresponds to the string passed
 */
-const equipmentType EnumerationConversions::stringToEquipType(string nameI)
-{
+ equipmentType EnumerationConversions::stringToEquipType(const string nameI){
 	vector<string> names = { "Null","Armor","Weapon","Trinket","Banner","Dragon","Follower" };
 	vector<equipmentType> types = { equipmentType::null,equipmentType::armor,equipmentType::weapon,
 		equipmentType::trinket,equipmentType::banner,equipmentType::dragon,equipmentType::follower };

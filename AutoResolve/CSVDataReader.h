@@ -22,10 +22,10 @@ public:
 	CSVDataReader(bool debugI);
 	~CSVDataReader();	
 	
-	vector<Equipment> readEquipment();
-	vector<Unit> readUnits(faction& fact);
+	vector<Equipment> readEquipment(const string path);
+	vector<Unit> readUnits(const faction& fact, const string path);
 
-	const void setDebug(bool debugI) { debug = debugI; };
-	bool getDebug() { return debug; };
+	void setDebug(const bool debugI) { debug = debugI; };
+	bool getDebug() const { return debug; };
 };
 

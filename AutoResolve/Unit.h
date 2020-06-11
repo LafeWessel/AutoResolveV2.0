@@ -20,48 +20,49 @@ private:
 public:
 	~Unit();
 	Unit();
-	Unit(bool debugI);
-	Unit(string nameI, int autoResBonusI, int soldiersPerUnitI, int currentSoldiersI, faction factI, unitType typeI);
+	Unit(const bool debugI);
+	Unit(const string nameI, const int autoResBonusI, const int soldiersPerUnitI, const int currentSoldiersI,
+		const faction factI, const unitType typeI);
 
-	const string getName() { 
+	 string getName() const{ 
 		if (debug) { cout << "unit name gotten: " << name << endl; }
 		return name;};
-	const int getARBonus() { 
+	 int getARBonus() const{ 
 		if (debug) { cout << "unit autoresolve bonus gotten: " << autoResBonus << endl; }
 		return autoResBonus * (currentSoldiers/soldiersPerUnit); };
-	const int getSoldiersPerUnit() { 
+	 int getSoldiersPerUnit() const{ 
 		if (debug) { cout << "unit number of soldiers per unit gotten: " << soldiersPerUnit << endl; }
 		return soldiersPerUnit;};
-	const int getCurrentSoldiers() {
+	 int getCurrentSoldiers() const{
 		if (debug) { cout << "unit current soldiers gotten: " << currentSoldiers << endl; }
 		return currentSoldiers;};
-	const faction getFaction() {
+	 faction getFaction() const{
 		if (debug) { cout << "unit faction gotten: " << (int)fact << endl; }
 		return fact; };
-	const unitType getUnitType() {
+	 unitType getUnitType() const{
 		if (debug) { cout << "unit type gotten: " << (int)type << endl; }
 		return type;};
 
-	void setName(string nameI) { 
+	void setName(const string nameI) { 
 		if (debug) { cout << "unit name set to: "<< nameI << endl; }
 		name = nameI;};
-	void setARBonus(int ARBonusI) { 
+	void setARBonus(const int ARBonusI) { 
 		if (debug) { cout << "unit autoresolve bonus set to: " << ARBonusI << endl; }
 		autoResBonus = ARBonusI;};
-	void setCurrentSoldiers(int currentSoldiersI) {
+	void setCurrentSoldiers(const int currentSoldiersI) {
 		if (debug) { cout << "unit current soldiers set to: " << currentSoldiersI << endl; }
 		currentSoldiers = currentSoldiersI;};
-	void setSoldiersPerUnit(int soldiersPerUI) { 
+	void setSoldiersPerUnit(const int soldiersPerUI) { 
 		if (debug) { cout << "unit soldiers per unit set to: " << soldiersPerUI << endl; }
 		soldiersPerUnit = soldiersPerUI;};
-	void setFaction(faction factI) { 
+	void setFaction(const faction factI) { 
 		if (debug) { cout << "unit faction set to: " << (int)factI << endl; }
 		fact = factI;};
-	void setUnitType(unitType typeI) {
+	void setUnitType(const unitType typeI) {
 		if (debug) { cout << "unit type set to: " << (int)typeI << endl; }
 		type = typeI; };
 
-	void setDebug(bool debugI) { debug = debugI; };
-	const bool getDebug() { return debug; };
-	const string printData();
+	void setDebug(const bool debugI) { debug = debugI; };
+	 bool getDebug() const{ return debug; };
+	 string to_string()const;
 };

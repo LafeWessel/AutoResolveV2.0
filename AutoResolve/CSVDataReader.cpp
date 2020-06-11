@@ -5,7 +5,7 @@ CSVDataReader::CSVDataReader()
 	debug = false;
 }
 
-CSVDataReader::CSVDataReader(bool debugI)
+CSVDataReader::CSVDataReader(const bool debugI)
 {
 	debug = debugI;
 }
@@ -23,32 +23,19 @@ CSVDataReader::~CSVDataReader()
 //6. Autoresolve Bonus(int)
 //7. Range(int)
 
-vector<Equipment> CSVDataReader::readEquipment()
+vector<Equipment> CSVDataReader::readEquipment(const string path)
 {
 	if (debug) { cout << "readEquipment() called." << endl; }
 
 	vector<Equipment> readEquip{};
 	if (debug) { cout << "empty equipment vector initialized" << endl; }
 
-	ifstream file("equipment.txt");
-	//file.open("equipment");
-	if (debug) { cout << "equipment.txt tried" << endl; }
+	ifstream file(path);
+	if (debug) { cout << path <<" tried" << endl; }
 	if (!file)
 	{
-		//file.open("equipment.csv");
-		ifstream file("equipment.csv");
-		if (debug) { cout << "equipment.csv tried" << endl; }
-	}
-	else if(!file)
-	{
-		//file.open("equipment.txt");
-		ifstream file("equipment");
-		if (debug) { cout << "equipment tried" << endl; }
-	}
-	else if (!file)
-	{
-		cerr << "equipment file not found" << endl;
-		throw invalid_argument("Equipment file not found.");
+		cerr << path << " file not found" << endl;
+		throw invalid_argument(path + " file not found.");
 	}
 	CSVRow row;
 	row.setDebug(debug);
@@ -94,29 +81,16 @@ vector<Equipment> CSVDataReader::readEquipment()
 //4. Autoresolve Bonus(int)
 //5. Soldiers in each unit(int)
 //All variables are comma - separated, so there must be no extraneous commas.
-vector<Unit> CSVDataReader::readUnits(faction& fact)
+vector<Unit> CSVDataReader::readUnits(const faction& fact, const string path)
 {
 	if (debug) { cout << "Faction selected: " << EnumerationConversions::to_string(fact) << endl; }
 
-	ifstream file ("units.txt");
-	//file.open("units");
-	if (debug) { cout << "units tried.txt" << endl; }
+	ifstream file (path);
+	if (debug) { cout << path << " tried" << endl; }
 	if (!file)
 	{
-		//file.open("units.csv");
-		ifstream file ("units.csv");
-		if (debug) { cout << "units.csv tried" << endl; }
-	}
-	else if (!file)
-	{
-		//file.open("units.txt");
-		ifstream file ("units");
-		if (debug) { cout << "units tried" << endl; }
-	}
-	else if (!file)
-	{
-		cerr << "units file not found." << endl;
-		throw invalid_argument("Units file not found.");
+		cerr << path <<" file not found." << endl;
+		throw invalid_argument(path + " file not found.");
 	}
 	vector<Unit> readUnits{};
 	CSVRow row;
