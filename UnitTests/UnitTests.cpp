@@ -20,6 +20,13 @@
 #include "../AutoResolve/CSVRow.cpp"
 #include "../AutoResolve/CSVDataReader.h"
 #include "../AutoResolve/CSVDataReader.cpp"
+#include "../AutoResolve/battleType.h"
+#include "../AutoResolve/defenses.h"
+#include "../AutoResolve/equipmentType.h"
+#include "../AutoResolve/faction.h"
+#include "../AutoResolve/monsterType.h"
+#include "../AutoResolve/outcome.h"
+#include "../AutoResolve/unitType.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -359,7 +366,6 @@ namespace UnitTests
 
 
 	};
-
 
 	//Unit tests the Value Assurance Class
 	TEST_CLASS(ValueAssuranceTests) {
@@ -741,4 +747,139 @@ namespace UnitTests
 		}
 	};
 
+	//Unit tests for Monster class
+	TEST_CLASS(MonsterTests) {
+
+		//Test accessors and mutators
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			Monster m{};
+			m.setDebug(true);
+			Assert::AreEqual(true, m.getDebug());
+		}
+		//Test get/setMonsterType
+		TEST_METHOD(getSetMonsterType) {
+			Monster m{};
+			m.setMonsterType(monsterType::Dragon);
+			Assert::AreEqual((int)monsterType::Dragon, (int)m.getMonsterType());
+		}
+		//Test getCoinReward
+		TEST_METHOD(getCoinReward) {
+			Monster m{};
+			m.setMonsterType(monsterType::Dragon);
+			Assert::AreEqual(1400, m.getCoinReward());
+		}
+		//Test getARValue
+		TEST_METHOD(getARValue) {
+			Monster m{};
+			m.setMonsterType(monsterType::Dragon);
+			Assert::AreEqual(70, m.getARValue());
+		}
+
+		//Test getEquipRewards
+		//Test for Minotaur
+		TEST_METHOD(getEquipRewardsMinotaur) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Minotaur, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((int)equipmentType::weapon, (int)e[0].getEqType());
+		}
+		//Test for Hobgoblin
+		TEST_METHOD(getEquipRewardsHobgoblinWeapon) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Hobgoblin, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((int)equipmentType::weapon, (int)e[0].getEqType());
+		}
+		TEST_METHOD(getEquipRewardsHobgoblinArmor) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Hobgoblin, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((int)equipmentType::armor,(int)e[1].getEqType());
+		}
+		//Test for Troll
+		TEST_METHOD(getEquipRewardsTrollWeapon) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Troll, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((int)equipmentType::weapon,(int)e[0].getEqType());
+		}
+		TEST_METHOD(getEquipRewardsTrollTrinket) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Troll, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((int)equipmentType::trinket, (int)e[1].getEqType());
+		}
+		//Test for Giant
+		TEST_METHOD(getEquipRewardsGiantWeapon) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Giant, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::IsTrue(equipmentType::weapon == e[0].getEqType());
+		}
+		TEST_METHOD(getEquipRewardsGiantTrinket) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Giant, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::IsTrue(equipmentType::trinket == e[1].getEqType());
+		}
+		TEST_METHOD(getEquipRewardsGiantArmor) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Giant, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::IsTrue(equipmentType::armor == e[2].getEqType());
+		}
+		//Test for Demon
+		TEST_METHOD(getEquipRewardsDemonArmor) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Demon, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::IsTrue(equipmentType::armor == e[0].getEqType());
+		}
+		TEST_METHOD(getEquipRewardsDemonBanner) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Demon, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::IsTrue(equipmentType::banner == e[1].getEqType());
+		}
+		//Test for Empty
+		TEST_METHOD(getEquipRewardsEmpty) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{ monsterType::Empty, t };
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((string)"", e[0].getName());
+		}
+		//Test for Invalid
+		TEST_METHOD(getEquipRewardsInvalid) {
+			Treasure t{};
+			t.setFilePath("../AutoResolve/equipment.txt");
+			t.initialize();
+			Monster m{};
+			m.setTreasure(t);
+			vector<Equipment> e = m.getEquipRewards();
+			Assert::AreEqual((string)"", e[0].getName());
+		}
+	};
 }

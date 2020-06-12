@@ -81,7 +81,7 @@ vector<Equipment> CSVDataReader::readEquipment(const string path)
 //4. Autoresolve Bonus(int)
 //5. Soldiers in each unit(int)
 //All variables are comma - separated, so there must be no extraneous commas.
-vector<Unit> CSVDataReader::readUnits(const faction& fact, const string path)
+vector<Unit> CSVDataReader::readUnits(const faction fact, const string path)
 {
 	if (debug) { cout << "Faction selected: " << EnumerationConversions::to_string(fact) << endl; }
 

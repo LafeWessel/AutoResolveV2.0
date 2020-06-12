@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-using namespace std;
+
 class Monster //is used in monster battles
 {
 private:
@@ -26,36 +26,38 @@ private:
 public:
 	~Monster();
 	Monster();
-	Monster(bool debugI);
-	Monster(monsterType typeI, Treasure& treasureI);
+	Monster(const bool debugI);
+	Monster(const monsterType typeI, Treasure& treasureI);
 
-	int getCoinReward() { 
+	int getCoinReward() const{ 
 		if (debug) { cout << "monster coin reward gotten: " << coinReward << endl; }
 		return coinReward; };
-	int getARValue() { 
+	int getARValue() const{ 
 		if (debug) { cout << "monster autoresolve value gotten: " << autoResValue << endl; }
 		return autoResValue; };
-	monsterType getMonsterType() { 
+	monsterType getMonsterType() const{ 
 		if (debug) { cout << "monster monster type gotten: " << (int)type << endl; }
 		return type; };
 
-	void setMonsterType(monsterType monTypeI) { 
+	void setMonsterType(const monsterType monTypeI) { 
 		if (debug) { cout << "monster monster type set to: " << (int)monTypeI << endl; }
 		type = monTypeI; 
 		if (debug) { cout << "calling setValuesFromMonsterType" << endl; }
 		setValuesFromMonsterType();}; 
 	void setTreasure(Treasure& treasureI) {
 		treasure = &treasureI;
-		treasure->setDebug(treasureI.getDebug());};
+		treasure->setDebug(debug);};
 
-	bool getDebug() { return debug; }
-	void setDebug(bool debugI) {
+	bool getDebug() const{ return debug; }
+	void setDebug(const bool debugI) {
 		if (debugI) { cout << "monster setDebug called" << endl; }
 		debug = debugI;
-		treasure->setDebug(debug);
+		if (treasure) {
+			treasure->setDebug(debug);
+		}
 	};
-	void printData();
+	void printData() const;
 
 	void setValuesFromMonsterType();
-	vector<Equipment> getEquipRewards(); //This gets the rewards associated with the type of Monster
+	vector<Equipment> getEquipRewards() const; //This gets the rewards associated with the type of Monster
 };

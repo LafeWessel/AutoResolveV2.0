@@ -23,7 +23,7 @@ public:
 	~CSVDataReader();	
 	
 	vector<Equipment> readEquipment(const string path);
-	vector<Unit> readUnits(const faction& fact, const string path);
+	vector<Unit> readUnits(const faction fact, const string path);
 
 	void setDebug(const bool debugI) { debug = debugI; };
 	bool getDebug() const { return debug; };
