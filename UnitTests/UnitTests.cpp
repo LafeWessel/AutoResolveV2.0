@@ -27,12 +27,20 @@
 #include "../AutoResolve/monsterType.h"
 #include "../AutoResolve/outcome.h"
 #include "../AutoResolve/unitType.h"
+#include "../AutoResolve/General.h"
+#include "../AutoResolve/General.cpp"
+#include "../AutoResolve/TownStats.h"
+#include "../AutoResolve/TownStats.cpp"
+#include "../AutoResolve/Roster.h"
+#include "../AutoResolve/Roster.cpp"
+#include "../AutoResolve/Player.h"
+#include "../AutoResolve/Player.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
 {
-	//Unit tests for the Random class
+	//Unit tests for Random class
 	TEST_CLASS(RandomTests)
 	{
 	public:
@@ -60,7 +68,7 @@ namespace UnitTests
 
 	};
 
-	//Unit tests for the EnumerationConversions class
+	//Unit tests for EnumerationConversions class
 	TEST_CLASS(EnumerationConversionsTests) {
 
 		//intToFaction Unit Tests
@@ -367,7 +375,7 @@ namespace UnitTests
 
 	};
 
-	//Unit tests the Value Assurance Class
+	//Unit tests for Value Assurance Class
 	TEST_CLASS(ValueAssuranceTests) {
 
 		//inputCheck Unit Tests
@@ -394,7 +402,6 @@ namespace UnitTests
 
 
 	};
-
 
 	//Unit tests for the Equipment Class
 	TEST_CLASS(EquipmentTests) {
@@ -882,4 +889,357 @@ namespace UnitTests
 			Assert::AreEqual((string)"", e[0].getName());
 		}
 	};
+
+	//Unit tests for General class
+	TEST_CLASS(GeneralTests) {
+		
+		//Test accessors and mutators
+		//Test get/setRank
+		TEST_METHOD(getSetRank) {
+			General g{};
+			g.setRank(5);
+			Assert::AreEqual(5, g.getRank());
+		}
+		//Test get/setArmor
+		TEST_METHOD(getSetArmor) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setArmor(e);
+			Assert::AreEqual(3, g.getArmor().getABonus());
+		}
+		//Test get/setWeapon
+		TEST_METHOD(getSetWeapon) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setWeapon(e);
+			Assert::AreEqual(3, g.getWeapon().getABonus());
+		}
+		//Test get/setTrinket
+		TEST_METHOD(getSetTrinket) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setTrinket(e);
+			Assert::AreEqual(3, g.getTrinket().getABonus());
+		}
+		//Test get/setBanner
+		TEST_METHOD(getSetBanner) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setBanner(e);
+			Assert::AreEqual(3, g.getBanner().getABonus());
+		}
+		//Test get/setFollower
+		TEST_METHOD(getSetFollower) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setFollower(e);
+			Assert::AreEqual(3, g.getFollower().getABonus());
+		}
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			General g{};
+			g.setDebug(true);
+			Assert::AreEqual(true, g.getDebug());
+		}
+		//Test getARBonus
+		TEST_METHOD(getARBonus) {
+			General g{};
+			Assert::AreEqual(0, g.getARBonus());
+		}
+		//Test updateARBonus
+		//Test updateARBonus in setArmor
+		TEST_METHOD(updateARBonusArmor) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setArmor(e);
+			Assert::AreEqual(3, g.getARBonus());
+		}
+		//Test updateARBonus in setWeapon
+		TEST_METHOD(updateARBonusWeapon) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setWeapon(e);
+			Assert::AreEqual(3, g.getARBonus());
+		}
+		//Test updateARBonus in setTrinket
+		TEST_METHOD(updateARBonusTrinket) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setTrinket(e);
+			Assert::AreEqual(3, g.getARBonus());
+		}
+		//Test updateARBonus in setBanner
+		TEST_METHOD(updateARBonusBanner) {
+			General g{};
+			Equipment e{};
+			e.setABonus(3);
+			g.setBanner(e);
+			Assert::AreEqual(3, g.getARBonus());
+		}
+		//Test updateARBonus in constructor
+		TEST_METHOD(updateARBonusConstructor) {
+			Equipment e{};
+			e.setABonus(1);
+			General g{ 1,e,e,e,e,e };
+			Assert::AreEqual(4, g.getARBonus());
+		}
+	};
+
+	//Unit tests for TownStats class
+	TEST_CLASS(TownStatsTests) {
+
+		//Test accessors and mutators
+		//Test get/setSupplies
+		TEST_METHOD(getSetSupplies) {
+			TownStats t{};
+			t.setSupplies(5);
+			Assert::AreEqual(5, t.getSupplies());
+		}
+		//Test get/setDefenses
+		TEST_METHOD(getSetDefenses) {
+			TownStats t{};
+			t.setDefenses(defenses::Stone_Wall);
+			Assert::AreEqual((int)defenses::Stone_Wall, (int)t.getDefenses());
+		}
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			TownStats t{};
+			t.setDebug(true);
+			Assert::AreEqual(true, t.getDebug());
+		}
+		//Test updateStats
+		TEST_METHOD(updateStats) {
+			TownStats t{ defenses::Stone_Wall };
+			Assert::AreEqual(8, t.getSupplies());
+		}
+	};
+
+	//Unit tests for Roster class
+	TEST_CLASS(RosterTests) {
+		//Test accessors/mutators
+		//Test get/setFaction
+		TEST_METHOD(getSetFaction) {
+			Roster r{};
+			r.setFaction(faction::lerastir);
+			Assert::AreEqual((int)faction::lerastir, (int)r.getFaction());
+		}
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			Roster r{};
+			r.setDebug(true);
+			Assert::AreEqual(true, r.getDebug());
+		}
+		//Test get/setFilePath
+		TEST_METHOD(getSetFilePath) {
+			Roster r{};
+			r.setFilePath("Test Path");
+			Assert::AreEqual((string)"Test Path", r.getFilePath());
+		}
+		//Test get/setUnits
+		TEST_METHOD(getSetUnits) {
+			Roster r{};
+			Unit u{};
+			u.setName("Test Unit");
+			vector<Unit> v = { u,u,u };
+			r.setUnits(v);
+			Assert::AreEqual(3, (int)r.getUnits().size());
+		}
+		//Test getNumberOfUnits
+		TEST_METHOD(getNumberOfUnits) {
+			Roster r{};
+			Unit u{};
+			u.setName("Test Unit");
+			vector<Unit> v = { u,u,u };
+			r.setUnits(v);
+			Assert::AreEqual(3, (int)r.getNumberOfUnits());
+		}
+		//Test getUnitAtIndex
+		TEST_METHOD(getUnitAtIndex) {
+			Roster r{};
+			Unit u{};
+			u.setName("Test Unit");
+			vector<Unit> v = { u,u,u };
+			u.setName("Test Name");
+			v.push_back(u);
+			r.setUnits(v);
+			Assert::AreEqual((string)"Test Name", r.getUnitAtIndex(3).getName());
+
+		}
+		//Test getUnitsOfType
+		TEST_METHOD(getUnitsOfType) {
+			Roster r{};
+			Unit u{};
+			u.setUnitType(unitType::Melee);
+			vector<Unit> v = { u,u,u };
+			u.setUnitType(unitType::Cavalry);
+			v.push_back(u);
+			r.setUnits(v);
+			Assert::AreEqual(1, (int)r.getUnitsOfType(unitType::Cavalry).size());
+		}
+
+		//Test buildRoster
+		//Test Rebel reading
+		TEST_METHOD(buildRosterRebel) {
+			Roster r{};
+			r.setFilePath("../AutoResolve/units.txt");
+			r.setFaction(faction::rebel);
+			r.buildRoster();
+			Assert::AreEqual(9, r.getNumberOfUnits());
+		}
+		//Test Lerastir reading
+		TEST_METHOD(buildRosterLerastir) {
+			Roster r{};
+			r.setFilePath("../AutoResolve/units.txt");
+			r.setFaction(faction::lerastir);
+			r.buildRoster();
+			Assert::AreEqual(10, r.getNumberOfUnits());
+		}
+		//Test Beladimir reading
+		TEST_METHOD(buildRosterBeladimir) {
+			Roster r{};
+			r.setFilePath("../AutoResolve/units.txt");
+			r.setFaction(faction::beladimir);
+			r.buildRoster();
+			Assert::AreEqual(9, r.getNumberOfUnits());
+		}
+		//Test Menoriad reading
+		TEST_METHOD(buildRosterMenoriad) {
+			Roster r{};
+			r.setFilePath("../AutoResolve/units.txt");
+			r.setFaction(faction::menoriad);
+			r.buildRoster();
+			Assert::AreEqual(10, r.getNumberOfUnits());
+		}
+	};
+
+	//Unit tests for Player class
+	TEST_CLASS(PlayerTests) {
+		//Test accessors/mutators
+		//Test get/setDebug
+		TEST_METHOD(getSetDebug) {
+			Player p{};
+			p.setDebug(true);
+			Assert::AreEqual(true, p.getDebug());
+		}
+		//Test get/setGeneral
+		TEST_METHOD(getSetGeneral) {
+			Player p{};
+			General g{};
+			g.setRank(5);
+			p.setGeneral(g);
+			Assert::AreEqual(5, p.getGeneral().getRank());
+		}
+		//Test get/setAdvCombatDeck
+		TEST_METHOD(getSetAdvCombatDeck) {
+			Player p{};
+			p.setAdvCombatDeck(true);
+			Assert::AreEqual(true, p.getAdvComDeck());
+		}
+		//Test get/setReinforcements
+		TEST_METHOD(getSetReinforcements) {
+			Player p{};
+			p.setReinforcements(4);
+			Assert::AreEqual(4, p.getReinforcements());
+		}
+		//Test get/setFaction
+		TEST_METHOD(getSetFaction) {
+			Player p{};
+			p.setFaction(faction::lerastir);
+			Assert::AreEqual((int)faction::lerastir, (int)p.getFaction());
+		}
+		//Test getMelee
+		TEST_METHOD(getMelee) {
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			u.setUnitType(unitType::Melee);
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(12, p.getTotalSoldiers());
+		}
+		//Test getRanged
+		TEST_METHOD(getRanged) {
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			u.setUnitType(unitType::Ranged);
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(12, p.getTotalSoldiers());
+		}
+		//Test getCavalry
+		TEST_METHOD(getCavalry) {
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			u.setUnitType(unitType::Cavalry);
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(12, p.getTotalSoldiers());
+		}
+		//Test get/setPlayerUnits
+		TEST_METHOD(getSetPlayerUnits) {
+			Player p{};
+			Unit u{};
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(3, (int)p.getPlayerUnits().size());
+		}
+		//Test getUnitAtIndex
+		TEST_METHOD(getUnitAtIndex) {
+			Player p{};
+			Unit u{};
+			u.setName("None");
+			vector<Unit> v{ u,u,u };
+			u.setName("Test Name");
+			v.push_back(u);
+			p.setPlayerUnits(v);
+			Assert::AreEqual((string)"Test Name",p.getUnitAtIndex(3).getName());
+		}
+		//Test getNumberOfUnits
+		TEST_METHOD(getNumberOfUnits) {
+			Player p{};
+			Unit u{};
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(3, p.getNumberOfUnits());
+		}
+		//Test getTotalSoldiers
+		TEST_METHOD(getTotalSoldiers) {
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u };
+			p.setPlayerUnits(v);
+			Assert::AreEqual(12, p.getTotalSoldiers());
+		}
+
+
+	};
+
+	//Unit tests for BattleData class ***MUST IMPORT FIRST***
+
+	//Unit tests for Battle class ***MUST IMPORT FIRST***
+
+	//Unit tests for Normal Battle class ***MUST IMPORT FIRST***
+
+	//Unit tests for Naval Battle class ***MUST IMPORT FIRST***
+
+	//Unit tests for Siege Battle class ***MUST IMPORT FIRST***
+
+	//Unit tests for Raid Battle class ***MUST IMPORT FIRST***
+
+	//Unit tests for Monster Battle class ***MUST IMPORT FIRST***
 }
