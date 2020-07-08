@@ -71,7 +71,10 @@ TODO-Make a db of results from numerous battles then analyze it with R or python
 
 TODO-Learn and implement Qt GUI
 
-TODO-Change BattleData to use vector<string> instead of vector<int> for holding data
+TODO-make enum for general state
+	-make EnumConv for general state
+	-make unit test for general state enum
+	-make BattleData unit tests for general state
 
 */
 

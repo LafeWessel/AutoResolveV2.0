@@ -17,6 +17,7 @@ public:
 	static int randomNumber(const int range);
 	static int randomNumber(const int min, const int max);
 	static int randomNumberArray(const int range);
+	static int randomNumberGroup(const int iterations, const int min, const int max);
 
 
 };

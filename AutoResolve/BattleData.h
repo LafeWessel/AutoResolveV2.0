@@ -10,22 +10,30 @@
 #include "Player.h"
 #include "Roster.h"
 #include "Unit.h"
+#include "EnumerationConversions.h"
+#include "ValueAssurance.h"
+
+using std::string;
+
 
 class BattleData
 {
 
 private:
 	
-	vector<int> data;
+	vector<string> data;
 	bool debug;
+	vector<string> unitNames;
+	string unitFilePath;
 
-	vector<string> getUnitNames() const;
+	void getUnitNames();
 	void setAttackerUnitTotals(const vector<Unit> u);
 	void setDefenderUnitTotals(const vector<Unit> u);
 
 public:
 	BattleData();
 	BattleData(const bool debugI);
+	BattleData(const string unitFilePath);
 
 	void setBattleType(const battleType type);
 	void setAttacker(const Player& p);
@@ -53,6 +61,10 @@ public:
 	void setDefenderEnd(const Player& p);
 
 	void printData() const;
-	void writeToFile(const string fileName);
+	void writeToFile(const string fileName) const;
+
+	bool getDebug() const { return debug; };
+	void setDebug(const bool debug) { this->debug = debug; };
+	string getDataAtIndex(const int index) const;
 };
 
