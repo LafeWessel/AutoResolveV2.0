@@ -10,6 +10,7 @@
 #include "battleType.h"
 #include "defenses.h"
 #include "unitType.h"
+#include "generalState.h"
 
 using std::vector;
 using std::string;
@@ -39,6 +40,7 @@ public:
 	 static string to_string(const defenses d);
 	 static string to_string(const battleType b);
 	 static string to_string(const unitType u);
+	 static string to_string(const generalState g);
 	
 	 static equipmentType stringToEquipType(const string nameI);
 };

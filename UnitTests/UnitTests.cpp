@@ -374,7 +374,19 @@ namespace UnitTests
 			Assert::AreEqual((int)equipmentType::null, (int)EnumerationConversions::stringToEquipType("Test invalid"));
 		}
 
-
+		//to_string generalState tests
+		//Test when passing Unharmed
+		TEST_METHOD(toStringGeneralStateUnharmed) {
+			Assert::AreEqual((string)"Unharmed", EnumerationConversions::to_string(generalState::Unharmed));
+		}
+		//Test when passing Wounded
+		TEST_METHOD(toStringGeneralStateWounded) {
+			Assert::AreEqual((string)"Wounded", EnumerationConversions::to_string(generalState::Wounded));
+		}
+		//Test when passing Slain
+		TEST_METHOD(toStringGeneralStateSlain) {
+			Assert::AreEqual((string)"Slain", EnumerationConversions::to_string(generalState::Slain));
+		}
 	};
 
 	//Unit tests for Value Assurance Class
@@ -1609,61 +1621,256 @@ namespace UnitTests
 			Assert::AreEqual((string)"5", b.getDataAtIndex(6));
 		}
 		//Test setOutcome
-
+		TEST_METHOD(setOutcome) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setOutcome(outcome::Decisive_Victory);
+			Assert::AreEqual(EnumerationConversions::to_string(outcome::Decisive_Victory), b.getDataAtIndex(4));
+		}
 		//Test setAttackerWon
-
+		TEST_METHOD(setAttackerWon) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setAttackerWon(true);
+			Assert::AreEqual((string)"1", b.getDataAtIndex(5));
+		}
 		//Test setAttackerCasualties unit
-		
+		TEST_METHOD(setAttackerCasualtiesUnit) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			vector<int> v = { 0,5 };
+			b.setAttackerCasualties(v);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(66));
+		}
 		//Test setAttackerCasualties soldier
-
+		TEST_METHOD(setAttackerCasualtiesSoldier) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			vector<int> v = { 5,0 };
+			b.setAttackerCasualties(v); 
+			Assert::AreEqual((string)"5", b.getDataAtIndex(67));
+		}
 		//Test setDefenderCasualties unit
-
+		TEST_METHOD(setDefenderCasualtiesUnit) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			vector<int> v = { 0,5 };
+			b.setDefenderCasualties(v);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(134));
+		}
 		//Test setDefenderCasualties soldier
-
+		TEST_METHOD(setDefenderCasualtiesSoldier) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			vector<int> v = { 5,0 };
+			b.setDefenderCasualties(v);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(135));
+		}
 		//Test setAttackerTreasureRec
-
+		TEST_METHOD(setAttackerTreasureRec) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setAttackerTreasureRec(true);
+			Assert::AreEqual((string)"1", b.getDataAtIndex(69));
+		}
 		//Test setDefenderTreasureRec
-
+		TEST_METHOD(setDefenderTreasureRec) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setDefenderTreasureRec(true);
+			Assert::AreEqual((string)"1", b.getDataAtIndex(137));
+		}
 		//Test setAttackerShips
-
+		TEST_METHOD(setAttackerShips) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setAttackerShips(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(71));
+		}
 		//Test setDefenderShips
-
+		TEST_METHOD(setDefenderShips) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setDefenderShips(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(139));
+		}
 		//Test setAttackerUpgrades
-
+		TEST_METHOD(setAttackerUpgrades) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setAttackerUpgrades(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(65));
+		}
 		//Test setDefenderUpgrades
-
+		TEST_METHOD(setDefenderUpgrades) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setDefenderUpgrades(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(133));
+		}
 		//Test setRams
-
+		TEST_METHOD(setRams) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setRams(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(72));
+		}
 		//Test setSiegeTowers
-
+		TEST_METHOD(setSiegeTowers) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setSiegeTowers(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(73));
+		}
 		//Test setCatapults
-
+		TEST_METHOD(setCatapults) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setCatapults(5);
+			Assert::AreEqual((string)"5", b.getDataAtIndex(74));
+		}
 		//Test setTownStats
-
+		TEST_METHOD(setTownStats) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			TownStats t{};
+			t.setDefenses(defenses::Stone_Wall_W_Moat);
+			b.setTownStats(t);
+			Assert::AreEqual(EnumerationConversions::to_string(defenses::Stone_Wall_W_Moat), b.getDataAtIndex(140));
+		}
 		//Test setAttackerEnd unit bonus
-
+		TEST_METHOD(setAttackerEndUnitBonus) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setAttackerEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(20));
+		}
 		//Test setAttackerEnd melee
-
+		TEST_METHOD(setAttackerEndMelee) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Melee);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setAttackerEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(21));
+		}
 		//Test setAttackerEnd ranged
-
+		TEST_METHOD(setAttackerEndRanged) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Ranged);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setAttackerEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(22));
+		}
 		//Test setAttackerEnd cavalry
-
+		TEST_METHOD(setAttackerEndCavalry) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Cavalry);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setAttackerEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(23));
+		}
 		//Test setAttackerEnd total soldiers
-
+		TEST_METHOD(setAttackerEndTotalSoldiers) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setAttackerEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(24));
+		}
 		//Test setDefenderEnd unit bonus
-
+		TEST_METHOD(setDefenderEndUnitBonus) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setDefenderEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(88));
+		}
 		//Test setDefenderEnd melee
-
+		TEST_METHOD(setDefenderEndMelee) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Melee);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setDefenderEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(89));
+		}
 		//Test setDefenderEnd ranged
-
+		TEST_METHOD(setDefenderEndRanged) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Ranged);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setDefenderEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(90));
+		}
 		//Test setDefenderEnd cavalry
-
+		TEST_METHOD(setDefenderEndCavalry) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setARBonus(4);
+			u.setUnitType(unitType::Cavalry);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setDefenderEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(91));
+		}
 		//Test setDefenderEnd total soldiers
-
+		TEST_METHOD(setDefenderEndTotalSoldiers) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			Player p{};
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v = { u,u,u,u };
+			p.setPlayerUnits(v);
+			b.setDefenderEnd(p);
+			Assert::AreEqual((string)"16", b.getDataAtIndex(92));
+		}
 	};
 
 	//Unit tests for Battle class ***MUST IMPORT FIRST***
+	TEST_CLASS(BattleTests) {
+		//Test accessors/mutators
+		//Test get/setAttacker
 
+		//Test get/setDefender
+
+		//Test get/setOutcome
+
+		//Test get/setBattleType
+
+		//Test get/setDebug
+
+		//Test get/setOutput
+
+		//Test get/setFileOut
+
+		//Test get/setFileName
+
+		//Test treasureResults attacker positive, defender positive
+
+		//Test treasureResults attacker positive, defender negative
+
+		//Test treasureResults attacker negative, defender positive
+
+		//Test treasureResults attacker negative, defender negative
+
+		
+	};
 	//Unit tests for Normal Battle class ***MUST IMPORT FIRST***
 
 	//Unit tests for Naval Battle class ***MUST IMPORT FIRST***

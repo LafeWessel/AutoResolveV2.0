@@ -51,30 +51,21 @@
 /*
 TODO-Make a way for the tests to use solely randomized values
 
-TODO-Make a way for all the data in a battle, including results, cas, etc. to be captured in an array/vector
+TODO-implement BattleData class
 
 TODO-Make sure that casualties are actually assigned in MonsterBattle
 
 TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
 
-TODO-Implement a Gaussian distribution for random results for BattleRandoms calculations, centering distribution at 5 (?)
-
 TODO-Change win-loss ratio in tests to be % wins
-
-TODO-add const where appropriate in function signatures
 
 TODO-Create an auto-balancing feature to determine what is an equal distribution of power -> AI
 
 TODO-Can use a model to determine what contributes most to success?
 
-TODO-Make a db of results from numerous battles then analyze it with R or python
+TODO-Make a db of results from numerous battles then analyze it with python
 
 TODO-Learn and implement Qt GUI
-
-TODO-make enum for general state
-	-make EnumConv for general state
-	-make unit test for general state enum
-	-make BattleData unit tests for general state
 
 */
 
@@ -87,12 +78,6 @@ TODO-make enum for general state
 int main()
 {
 	bool cont = true;
-	Treasure t{true};
-	t.initialize();
-	t.printData();
-	cout << "Armor size: " << t.getArmorVector().size() << endl << "Banner size: " << t.getBannerVector().size() << endl
-		<< "Weapon size: " << t.getWeaponVector().size() << endl << "Trinket size: " << t.getTrinketVector().size() << endl
-		<< "Dragon size: " << t.getDragonVector().size() << endl << "Follower size: " << t.getFollowerVector().size() << endl;
 	/*
 
 	//Initialize BattleData.csv if it hasn't already been

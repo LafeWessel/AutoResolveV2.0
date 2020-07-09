@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Battle.cpp" />
     <ClCompile Include="BattleData.cpp" />
     <ClCompile Include="battleType.cpp" />
     <ClCompile Include="CSVDataReader.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="equipmentType.cpp" />
     <ClCompile Include="faction.cpp" />
     <ClCompile Include="General.cpp" />
+    <ClCompile Include="generalState.cpp" />
     <ClCompile Include="intermediateOrDisplacedSource.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -171,6 +173,7 @@
     <ClCompile Include="ValueAssurance.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Battle.h" />
     <ClInclude Include="BattleData.h" />
     <ClInclude Include="battleType.h" />
     <ClInclude Include="CSVDataReader.h" />
@@ -181,6 +184,7 @@
     <ClInclude Include="equipmentType.h" />
     <ClInclude Include="faction.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="generalState.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="monsterType.h" />
     <ClInclude Include="outcome.h" />

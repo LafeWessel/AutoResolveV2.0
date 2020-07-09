@@ -285,6 +285,26 @@ Returns a string that corresponds to the unitType passed based on its name
 	return "";
 }
 
+ /*
+ Returns a string that corresponds to the generalState passed based on its name
+ */
+ string EnumerationConversions::to_string(const generalState g) {
+	 switch ((int)g) {
+	 case(1):
+		 return "Unharmed";
+		 break;
+	 case(2):
+		 return "Wounded";
+		 break;
+	 case(3):
+		 return "Slain";
+		 break;
+	 default:
+		 cerr << " No valid generalState chosen" << endl;
+	 }
+	 return "";
+ }
+
 
 /*
 Returns the unitType that corresponds to the int passed

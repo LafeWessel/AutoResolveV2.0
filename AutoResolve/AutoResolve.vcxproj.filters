@@ -96,6 +96,12 @@
     <ClCompile Include="BattleData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="generalState.cpp">
+      <Filter>Source Files\Enumerations</Filter>
+    </ClCompile>
+    <ClCompile Include="Battle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Random.h">
@@ -160,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="BattleData.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="generalState.h">
+      <Filter>Header Files\Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="Battle.h">
+      <Filter>Header Files\Battles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

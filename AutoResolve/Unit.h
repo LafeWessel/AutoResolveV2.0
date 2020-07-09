@@ -2,6 +2,7 @@
 #include "faction.h"
 #include "unitType.h"
 #include "EnumerationConversions.h"
+#include "ValueAssurance.h"
 #include <algorithm>
 #include <cmath>
 #include <string>
@@ -51,6 +52,7 @@ public:
 		autoResBonus = ARBonusI;};
 	void setCurrentSoldiers(const int currentSoldiersI) {
 		if (debug) { cout << "unit current soldiers set to: " << currentSoldiersI << endl; }
+		ValueAssurance::inputCheck(currentSoldiersI, soldiersPerUnit, 0);
 		currentSoldiers = currentSoldiersI;};
 	void setSoldiersPerUnit(const int soldiersPerUI) { 
 		if (debug) { cout << "unit soldiers per unit set to: " << soldiersPerUI << endl; }
