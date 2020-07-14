@@ -83,13 +83,14 @@ vector<Equipment> CSVDataReader::readEquipment(const string path)
 //All variables are comma - separated, so there must be no extraneous commas.
 vector<Unit> CSVDataReader::readUnits(const faction fact, const string path)
 {
+		
 	if (debug) { cout << "Faction selected: " << EnumerationConversions::to_string(fact) << endl; }
 
 	ifstream file (path);
 	if (debug) { cout << path << " tried" << endl; }
 	if (!file)
 	{
-		cerr << path <<" file not found." << endl;
+		cerr << path << " file not found." << endl;
 		throw invalid_argument(path + " file not found.");
 	}
 	vector<Unit> readUnits{};
@@ -138,5 +139,7 @@ vector<Unit> CSVDataReader::readUnits(const faction fact, const string path)
 		}
 	}
 	return readUnits;
+
+
 }
 

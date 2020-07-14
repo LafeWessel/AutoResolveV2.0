@@ -9,56 +9,48 @@ Battle::Battle()
 {
 	attacker = Player();
 	defender = Player();
+	foundByAttacker = Equipment();
+	foundByDefender = Equipment();
 	treasure = &Treasure();
 	result = outcome::Draw;
 	output = true;
 	debug = false;
 	fileOut = false;
 	fileName = "";
-	data = BattleData();
+	data = BattleData((string)"units.txt");
 }
 
 Battle::Battle(const bool debugI)
 {
 	attacker = Player();
 	defender = Player();
+	foundByAttacker = Equipment();
+	foundByDefender = Equipment();
 	treasure = &Treasure();
 	result = outcome::Draw;
 	output = true;
 	this->setDebug(debugI);
 	fileOut = false;
 	fileName = "";
-	data = BattleData();
+	data = BattleData((string)"units.txt");
 }
 
-Battle::Battle(const Player attackerI, const Player defenderI)
+Battle::Battle(const string unitFile)
 {
-	attacker = attackerI;
-	defender = defenderI;
+	attacker = Player();
+	defender = Player();
+	foundByAttacker = Equipment();
+	foundByDefender = Equipment();
 	treasure = &Treasure();
 	result = outcome::Draw;
 	output = true;
 	debug = false;
 	fileOut = false;
 	fileName = "";
-	data = BattleData();
+	data  = new BattleData{ (string)unitFile };
 }
 
-Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOutI, const string fileNameI)
-{
-	attacker = attackerI;
-	defender = defenderI;
-	treasure = &Treasure();
-	result = outcome::Draw;
-	output = true;
-	debug = false;
-	fileOut = fileOutI;
-	fileName = fileNameI;
-	data = BattleData();
-}
-
-
- void Battle::treasureResults() const
+ void Battle::treasureResults()
 {
 	if (debug) { cout << "treasureResults called" << endl; }
 	if (debug) { cout << "treasureResults for attacker" << endl; }
@@ -67,15 +59,15 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 
 	if (debug) { cout << "attacker bonus is: " << bonus << endl; }
 	//Looks for equipment and outputs what is returned
-	Equipment foundAtt = treasure->findTreasure(bonus);
-	if (debug) { cout << foundAtt.getName() << " returned from findTreasure" << endl; }
+	foundByAttacker = treasure->findTreasure(bonus);
+	if (debug) { cout << foundByAttacker.getName() << " returned from findTreasure" << endl; }
 	if (output)
 	{
-		cout << foundAtt.getName() << " was found by the attacking army." << endl;
+		cout << foundByAttacker.getName() << " was found by the attacking army." << endl;
 		//This outputs the stats of the equipment if it isn't the empty equipment
-		if (foundAtt.getName() != treasure->noTreasure().getName())
+		if (foundByAttacker.getName() != treasure->noTreasure().getName())
 		{
-			cout << foundAtt.to_string() << endl;
+			cout << foundByAttacker.to_string() << endl;
 		}
 	}
 
@@ -84,15 +76,15 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 	bonus = defender.getGeneral().getFollower().getABonus();
 
 	if (debug) { cout << "defender bonus is: " << bonus << endl; }
-	Equipment foundDef = treasure->findTreasure(bonus);
-	if (debug) { cout << foundDef.getName() << " returned from findTreasure" << endl; }
+	foundByDefender = treasure->findTreasure(bonus);
+	if (debug) { cout << foundByDefender.getName() << " returned from findTreasure" << endl; }
 	if (output)
 	{
-		cout << foundDef.getName() << " was found by the defending army." << endl;
+		cout << foundByDefender.getName() << " was found by the defending army." << endl;
 		//This outputs the stats of the equipment if it isn't the empty equipment
-		if (foundDef.getName() != treasure->noTreasure().getName())
+		if (foundByDefender.getName() != treasure->noTreasure().getName())
 		{
-			cout << foundDef.to_string() << endl;
+			cout << foundByDefender.to_string() << endl;
 		}
 	}
 	if (debug) { cout << "Battle::treasureResults finished" << endl; }
@@ -103,24 +95,11 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 //[x][0] = # of soldiers that are casualties
 //[x][1] = # of units completely destroyed
 //[x][2] = # of Upgrades received
-//[x][3] = state of general's health
- void Battle::assignCasualties(vector<int>& casualties, int playerType) {
-
-	 Player player = {};
-	 //Determines which player to work on
-	 if (playerType == 0) {
-		 player = attacker;
-	 }
-	 else if (playerType == 1) {
-		 player = defender;
-	 }
-	 else {
-		 throw invalid_argument("Invalid playerType passed");
-	 }
+ void Battle::assignCasualties(vector<int>& casualties, Player& p) {
 
 	 //Assigns casualties
 	 vector<Unit> playerUnits = {};
-	 playerUnits = player.getPlayerUnits();
+	 playerUnits = p.getPlayerUnits();
 	 if (debug) { cout << "number of player units: " << playerUnits.size() << endl; }
 
 	 int assignedSoldierCasualties = 0;
@@ -129,52 +108,43 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 	 int cas = 0;
 
 	 if (debug) { cout << "Battle assigning casualties" << endl; }
-	 while (assignedSoldierCasualties < casualties[0])
-	 {
+	 while (assignedSoldierCasualties < casualties[0]){
 		 if (debug) { cout << "Casualties to assign: " << casualties[0] - assignedSoldierCasualties << endl; }
 		 //This makes the iterator skip units that have already lost all their soldiers.
-		 while ( i < playerUnits.size()-1 && playerUnits[i].getCurrentSoldiers() == 0 )
-		 {
+		 while ( i < playerUnits.size()-1 && playerUnits[i].getCurrentSoldiers() == 0 ){
 			 i++;
 		 }
 
 		 //Determines the amount of soldiers lost
 		 //If the unit casualties is maxed out, it makes sure that the unit loses 1 less than it's total number of soldiers at max; 
 		 //0 if there is 1 soldier only
-		 if (assignedUnitCasualties >= casualties[1])
-		 {
-			 if (playerUnits[i].getCurrentSoldiers() == 1)
-			 {
+		 if (assignedUnitCasualties >= casualties[1]){
+			 if (playerUnits[i].getCurrentSoldiers() == 1){
 				 cas = 0;
 			 }
-			 else
-			 {
+			 else{
 				 cas = Random::randomNumberArray(playerUnits[i].getCurrentSoldiers());
 			 }
 		 }
-		 else
-		 {
+		 else{
 			 cas = Random::randomNumberArray(playerUnits[i].getCurrentSoldiers());
 		 }
 
 		 //Subtracts the casualties from the amount of soldiers in the unit and declares if they have fully perished
 		 playerUnits[i].setCurrentSoldiers(playerUnits[i].getCurrentSoldiers() - cas);
 
-		 if (playerUnits[i].getCurrentSoldiers() == 0)
-		 {
+		 if (playerUnits[i].getCurrentSoldiers() == 0){
 			 if (debug) { cout << assignedSoldierCasualties << " " << playerUnits[i].getName() << " completely destroyed." << endl; }
 			 assignedUnitCasualties++;
 		 }
-		 else
-		 {
+		 else{
 			 if (debug) { cout << assignedSoldierCasualties + cas << " " << playerUnits[i].getName() << " lost " << cas << " soldiers." << endl; }
 		 }
 		 assignedSoldierCasualties += cas;
 		 i++;
 
 		 //Wraps the index so it doesn't go off the end 
-		 if (i > playerUnits.size() - 1)
-		 {
+		 if (i > playerUnits.size() - 1){
 			 i = 0;
 			 if (debug) { cout << "Wrapped attacker casualty assignment loop" << endl; }
 			 bool soldiersAboveOne = false;
@@ -199,22 +169,13 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 
 	 //Reassigns attacker's unit vector
 	 vector<Unit> attackerUnitsAfterCasualties = {};
-	 for (int i = 0; i < playerUnits.size(); i++)
-	 {
-		 if (playerUnits[i].getCurrentSoldiers() > 0)
-		 {
+	 for (int i = 0; i < playerUnits.size(); i++){
+		 if (playerUnits[i].getCurrentSoldiers() > 0){
 			 attackerUnitsAfterCasualties.push_back(playerUnits[i]);
 		 }
 	 }
-	 player.setPlayerUnits(attackerUnitsAfterCasualties);
+	 p.setPlayerUnits(attackerUnitsAfterCasualties);
 
-	 //Reassigns attacker or defender to player
-	 if (playerType == 0) {
-		 attacker = player;
-	 }
-	 else if (playerType == 1) {
-		 defender = player;
-	 }
  }
 
 //totalCasualties vector values
@@ -223,8 +184,7 @@ Battle::Battle(const Player attackerI, const Player defenderI, const bool fileOu
 //[x][0] = # of soldiers that are casualties
 //[x][1] = # of units completely destroyed
 //[x][2] = # of Upgrades received
-//[x][3] = state of general's health
-void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-end output
+void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-end console output
 {
 	if (debug) { cout << "battleOutput called, calling treasureResults" << endl; }
 	treasureResults();
@@ -238,10 +198,10 @@ void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-en
 	{
 		cout << "Attacker Soldier Casualties: " << totalCasualties[0][0] << endl;
 		cout << "Attacker Unit Casualties: " << totalCasualties[0][2] << endl;
-		cout << "Attacker General is " << EnumerationConversions::to_string(static_cast<generalState>(totalCasualties[0][3])) << endl;
+		cout << "Attacker General is " << EnumerationConversions::to_string(attacker.getGeneral().getState()) << endl;
 		cout << "Defender Soldier Casualties: " << totalCasualties[0][0] << endl;
 		cout << "Defender Upgrades: " << totalCasualties[0][2] << endl;
-		cout << "Defender General is " << EnumerationConversions::to_string(static_cast<generalState>(totalCasualties[1][3])) << endl;
+		cout << "Defender General is " << EnumerationConversions::to_string(defender.getGeneral().getState()) << endl;
 	}
 
 	if (debug) { cout << "Battle::battleOutput finished" << endl; }
@@ -254,7 +214,7 @@ float Battle::battleCalculate() //contains the base calculations needed for batt
 	if (debug) { cout << "battleCalculate called" << endl; }
 	//Comparing these at the end will determine victory/draw/defeat in relation to the attacker
 	//The defTotal is subtracted from the attTotal, thus a positive result is a victory for the attacker,
-	//and the opposite for a negative result
+	//and the opposite from a negative result
 	float attTotal = 0;
 	float defTotal = 0;
 	//Adds units + portions of reinforcements
@@ -302,8 +262,6 @@ void Battle::CalculateCas(vector<vector<int>>& totalCasualties)
 	int attSoldierCasualties = 0;
 	int defSoldierCasualties = 0;
 
-	int attGenWound = 0;
-	int defGenWound = 0;
 	int attSoldierTotal = 0;
 	int defSoldierTotal = 0;
 	//Totals the amount of soldiers in the armies
@@ -325,15 +283,15 @@ void Battle::CalculateCas(vector<vector<int>>& totalCasualties)
 	int defUpgr = attSoldierCasualties / 6;
 	if (debug) { cout << "defender upgrade total: " << defUpgr << " Battle::CalculateCas" << endl; }
 
-	//Calculates the amount of units that are destroyed
-	int attUnitCasualties = (attSoldierCasualties / 7) - 1;
-	if (attUnitCasualties < 0)
+	//Calculates the max amount of units that are destroyed
+	int attUnitCasualties = abs((attSoldierCasualties / 7) - 1);
+	if (attUnitCasualties <= 0)
 	{
 		attUnitCasualties = 0;
 	}
 	if (debug) { cout << "attacker unit casualty total: " << attUnitCasualties << " Battle::CalculateCas" << endl; }
-	int defUnitCasualties = (defSoldierCasualties / 7) - 1;
-	if (defUnitCasualties < 0)
+	int defUnitCasualties = abs((defSoldierCasualties / 7) - 1);
+	if (defUnitCasualties <= 0)
 	{
 		defUnitCasualties = 0;
 	}
@@ -342,35 +300,35 @@ void Battle::CalculateCas(vector<vector<int>>& totalCasualties)
 	//Determines whether or not either of the generals are wounded/killed
 	if (Random::randomNumber(10) < 2)
 	{
-		attGenWound = 1;
-		if (debug) { cout << "attacker General state set to 1(Wounded) Battle::CalculateCas" << endl; }
+		attacker.getGeneral().setState(generalState::Wounded);
+		if (debug) { cout << "attacker General state set to Wounded Battle::CalculateCas" << endl; }
 		if (Random::randomNumber(10) < 2)
 		{
-			attGenWound = 2;
-			if (debug) { cout << "attacker General state set to 2(Slain) Battle::CalculateCas" << endl; }
+			attacker.getGeneral().setState(generalState::Slain);
+			if (debug) { cout << "attacker General state set to Slain Battle::CalculateCas" << endl; }
 		}
 	}
 	else { if (debug) { cout << "attacker General unharmed" << endl; } }
 	if (Random::randomNumber(10) < 2)
 	{
-		defGenWound = 1;
-		if (debug) { cout << "defender General state set to 1(Wounded) Battle::CalculateCas" << endl; }
+		defender.getGeneral().setState(generalState::Wounded);
+		if (debug) { cout << "defender General state set to Wounded Battle::CalculateCas" << endl; }
 		if (Random::randomNumber(10) < 2)
 		{
-			defGenWound = 2;
-			if (debug) { cout << "defender General state set to 2(Slain) Battle::CalculateCas" << endl; }
+			defender.getGeneral().setState(generalState::Slain);
+			if (debug) { cout << "defender General state set to Slain Battle::CalculateCas" << endl; }
 		}
 	}
 	else { if (debug) { cout << "defender General unharmed" << endl; } }
 	//Creates the vectors that contain the casualty data
-	vector<int> attackerCasVec{ attSoldierCasualties, attUnitCasualties, attUpgr, attGenWound };
+	vector<int> attackerCasVec{ attSoldierCasualties, attUnitCasualties, attUpgr };
 	if (debug) { cout << "Attacker Casualty vector initialized Battle::CalculateCas" << endl; }
-	vector<int> defenderCasVec{ defSoldierCasualties, defUnitCasualties, defUpgr, defGenWound };
+	vector<int> defenderCasVec{ defSoldierCasualties, defUnitCasualties, defUpgr };
 	if (debug) { cout << "Defender Casualty vector initialized Battle::CalculateCas" << endl; }
 
 	if (debug) { cout << "Moving on to casualty assignment Battle::CalculateCas" << endl; }
-	assignCasualties(attackerCasVec, 0);
-	assignCasualties(defenderCasVec, 1);
+	assignCasualties(attackerCasVec, defender);
+	assignCasualties(defenderCasVec, attacker);
 
 	totalCasualties = { attackerCasVec,defenderCasVec };
 }
@@ -383,7 +341,7 @@ void Battle::printData() const
 	cout << "Battle defender: " << endl;
 	defender.printData();
 	cout << "Battle result: " << EnumerationConversions::to_string(result) << endl;
-	if (treasure) { cout << "Battle Treasure pointer != NULL" << endl; }
+	if (treasure->isInitialized()) { cout << "Battle Treasure Initialized" << endl; }
 }
 
 

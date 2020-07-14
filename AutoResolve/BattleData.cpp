@@ -7,7 +7,6 @@ BattleData::BattleData()
 	fill(data.begin(), data.end(), "None");
 	debug = false;
 	unitFilePath = "units.txt";
-	getUnitNames();
 }
 
 BattleData::BattleData(const bool debugI)
@@ -17,17 +16,15 @@ BattleData::BattleData(const bool debugI)
 	fill(data.begin(), data.end(),"None");
 	debug = debugI;
 	unitFilePath = "units.txt";
-	getUnitNames();
 }
 
-BattleData::BattleData(const string unitFilePath)
+BattleData::BattleData( const string unitFilePathI)
 {
 	//Makes sure the data array is the correct size/length
 	data.resize(141);
 	fill(data.begin(), data.end(), "None");
 	debug = false;
-	this->unitFilePath = unitFilePath;
-	getUnitNames();
+	unitFilePath = unitFilePathI;
 }
 
 //Sets type of battle
@@ -87,13 +84,13 @@ void BattleData::setDefenderRandoms(const int rand) {
 }
 
 //Sets general state after battle
-void BattleData::setAttackerGeneralState(const int state) {
-	data[68] = to_string(state);
+void BattleData::setAttackerGeneralState(const generalState state) {
+	data[68] = EnumerationConversions::to_string(state);
 }
 
 //Sets general state after battle
-void BattleData::setDefenderGeneralState(const int state) {
-	data[136] = to_string(state);
+void BattleData::setDefenderGeneralState(const generalState state) {
+	data[136] = EnumerationConversions::to_string(state);
 }
 
 //Sets number of supplies
@@ -259,6 +256,7 @@ void BattleData::getUnitNames()  {
 
 //Sets the total number of each kind of unit in the output array for the attacker
 void BattleData::setAttackerUnitTotals(vector<Unit> u) {
+	getUnitNames();
 	vector<int> totalUnits;
 	totalUnits.resize(unitNames.size());
 	fill(totalUnits.begin(), totalUnits.end(), 0);
@@ -280,6 +278,7 @@ void BattleData::setAttackerUnitTotals(vector<Unit> u) {
 
 //Sets the total number of each kind of unit in the output array for the defender
 void BattleData::setDefenderUnitTotals(vector<Unit> u) {
+	getUnitNames();
 	vector<int> totalUnits;
 	totalUnits.resize(unitNames.size());
 	fill(totalUnits.begin(), totalUnits.end(), 0);

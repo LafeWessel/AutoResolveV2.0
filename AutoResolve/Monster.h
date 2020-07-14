@@ -30,19 +30,14 @@ public:
 	Monster(const monsterType typeI, Treasure& treasureI);
 
 	int getCoinReward() const{ 
-		if (debug) { cout << "monster coin reward gotten: " << coinReward << endl; }
 		return coinReward; };
 	int getARValue() const{ 
-		if (debug) { cout << "monster autoresolve value gotten: " << autoResValue << endl; }
 		return autoResValue; };
 	monsterType getMonsterType() const{ 
-		if (debug) { cout << "monster monster type gotten: " << (int)type << endl; }
 		return type; };
 
 	void setMonsterType(const monsterType monTypeI) { 
-		if (debug) { cout << "monster monster type set to: " << (int)monTypeI << endl; }
 		type = monTypeI; 
-		if (debug) { cout << "calling setValuesFromMonsterType" << endl; }
 		setValuesFromMonsterType();}; 
 	void setTreasure(Treasure& treasureI) {
 		treasure = &treasureI;
@@ -50,7 +45,6 @@ public:
 
 	bool getDebug() const{ return debug; }
 	void setDebug(const bool debugI) {
-		if (debugI) { cout << "monster setDebug called" << endl; }
 		debug = debugI;
 		if (treasure) {
 			treasure->setDebug(debug);

@@ -2,6 +2,7 @@
 #include "outcome.h"
 #include "Player.h"
 #include "Treasure.h"
+#include "Equipment.h"
 #include "battleType.h"
 #include "BattleData.h"
 #include "EnumerationConversions.h"
@@ -32,6 +33,8 @@ public:
 	outcome result;
 	battleType type;
 	string fileName;
+	Equipment foundByAttacker;
+	Equipment foundByDefender;
 
 	bool output;
 	bool debug;
@@ -41,8 +44,7 @@ public:
 	~Battle();
 	Battle();
 	Battle(const bool debugI);
-	Battle(const Player attackerI, const Player defenderI);
-	Battle(const Player attackerI, const Player defenderI, const bool fileOutI, const string fileNameI);
+	Battle(const string unitFile);
 
 	//int randomNumberBattle(int range);
 	//int calculateBattleRandoms(int randomRolls, int randomRange);
@@ -58,6 +60,8 @@ public:
 	bool getDebug()const { return debug; };
 	bool getFileOutBool()const { return fileOut; };
 	string getFileName() const { return fileName; };
+	Equipment getFoundByAttacker() const { return foundByAttacker; };
+	Equipment getFoundByDefender() const { return foundByDefender; };
 
 	void setAttacker(const Player attackerI) { attacker = attackerI;
 		attacker.setDebug(debug); };
@@ -70,8 +74,10 @@ public:
 	void setFileOut(const bool fileOutI) { fileOut = fileOutI; };
 	void setFileName(const string fileName) { this->fileName = fileName; };
 	void setDebug(const bool debugI) { if (debugI) { cout << "battle setDebug called" << endl; }
-		debug = debugI; 
-		treasure->setDebug(debug);
+		debug = debugI;
+		if (treasure->isInitialized()) {
+			treasure->setDebug(debug);
+		}
 		attacker.setDebug(debug);
 		defender.setDebug(debug);
 	};
@@ -82,10 +88,10 @@ public:
 
 	void printData() const;
 
-	void treasureResults() const; //Determines whether or not loot is found at the end of a battle.
+	void treasureResults(); //Determines whether or not loot is found at the end of a battle.
 	void CalculateCas(vector<vector<int>>& totalCasualties); //Determines the amount of casualties at the end of a battle
-	void assignCasualties(vector<int>& casualties, int playerType); //assigns casualties to a player
-	void battleOutput(vector<vector<int>>& totalCasualties); //Output at battle, normally supplemented by other output in inherited classes
+	void assignCasualties(vector<int>& casualties, Player& p); //assigns casualties to a player
+	void battleOutput(vector<vector<int>>& totalCasualties); //Output at end of battle, normally supplemented by other output in inherited classes
 	float battleCalculate(); //Calculates the battle, is almost always supplemented by other calculations in inherited classes
 };
 

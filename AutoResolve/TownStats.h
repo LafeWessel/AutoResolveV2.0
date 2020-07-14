@@ -22,22 +22,18 @@ public:
 	void updateStats();
 
 	int getSupplies() const {
-		if (debug) { cout << "town stats supplies gotten: " << supplies << endl; }
 		return supplies;
 	};
 	defenses getDefenses() const {
-		if (debug) { cout << "town stats defenses gotten: " << (int)townDefense << endl; }
 		return townDefense;
 	};
 
 
 	void setSupplies(const int suppliesI) {
-		if (debug) { cout << "town stats supplies set to: " << suppliesI << endl; }
 		supplies = suppliesI;
 	};
 	void setDefenses(const defenses defenseI) {
 		townDefense = defenseI;
-		if (debug) { cout << "town stats defenses set to: " << EnumerationConversions::to_string(defenseI) << endl; }
 		updateStats();
 	}
 

@@ -22,6 +22,7 @@ private:
 	vector<Equipment> follower;
 	vector<Equipment> dragon;
 	bool debug;
+	bool initialized;
 	string equipmentFilePath;
 
 	void sortEquipment(vector<Equipment>& toSort);
@@ -101,6 +102,7 @@ public:
 		}
 	};
 
+	bool isInitialized() const { return initialized; };
 	bool getDebug() const{ return debug; }
 	void setDebug(const bool debugI);
 	string getFilePath() const { return equipmentFilePath; };

@@ -40,8 +40,8 @@ public:
 	void setDefender(const Player& p);
 	void setAttackerRandoms(const int rand);
 	void setDefenderRandoms(const int rand);
-	void setAttackerGeneralState(const int state);
-	void setDefenderGeneralState(const int state);
+	void setAttackerGeneralState(const generalState state);
+	void setDefenderGeneralState(const generalState state);
 	void setSupplies(const int supp);
 	void setOutcome(const outcome o);
 	void setAttackerWon(const bool won);

@@ -1,6 +1,7 @@
 #pragma once
 #include "Equipment.h"
 #include "faction.h"
+#include "generalState.h"
 #include <algorithm>
 #include <cmath>
 
@@ -23,6 +24,7 @@ private:
 	Equipment trinket;
 	Equipment banner;
 	Equipment follower;
+	generalState currentState;
 	bool debug;
 
 public:
@@ -34,56 +36,47 @@ public:
 	void updateARBonus();
 
 	int getRank() const{ 
-		if (debug) { cout << "general rank gotten: " << rank << endl; }
 		return rank;};
 	int getARBonus() const{ 
-		if (debug) { cout << "general autoResolveBonus gotten: " << AutoResEqBonus << endl; }
 		return AutoResEqBonus; };
 	Equipment getArmor() const{ 
-		if (debug) { cout << "general armor gotten: " << armor.getName() << endl; }
 		return armor; };
 	Equipment getWeapon() const{ 
-		if (debug) { cout << "general weapon gotten: " << weapon.getName() << endl; }
 		return weapon; };
 	Equipment getTrinket() const{ 
-		if (debug) { cout << "general trinket gotten: " << trinket.getName() << endl; }
 		return trinket; };
 	Equipment getBanner() const{ 
-		if (debug) { cout << "general banner gotten: " << banner.getName() << endl; }
 		return banner; };
 	Equipment getFollower() const{ 
-		if (debug) { cout << "general follower gotten: " << follower.getName() << endl; }
 		return follower; };
+	generalState getState() const {
+		return currentState; };
 
 	void setRank(int rankI) { 
-		if (debug) { cout << "general rank set to: " << rankI << endl; }
 		rank = rankI; 
 	};
 	void setArmor(const Equipment equipI) { 
-		if (debug) { cout << "general armor set to: " << equipI.getName() << endl; }
 		armor = equipI;
 		armor.setDebug(debug);
 		updateARBonus();};
 	void setWeapon(const Equipment equipI) { 
-		if (debug) { cout << "general weapon set to: " << equipI.getName() << endl; }
 		weapon = equipI; 
 		weapon.setDebug(debug);
 		updateARBonus();};
 	void setTrinket(const Equipment equipI) { 
-		if (debug) { cout << "general trinket set to: " << equipI.getName() << endl; }
 		trinket = equipI;
 		trinket.setDebug(debug);
 		updateARBonus();};
 	void setBanner(const Equipment equipI) { 
-		if (debug) { cout << "general banner set to: " << equipI.getName() << endl; }
 		banner = equipI; 
 		banner.setDebug(debug);
 		updateARBonus();};
 	void setFollower(const Equipment equipI) { 
-		if (debug) { cout << "general follower set to: " << equipI.getName() << endl; }
 		follower = equipI;
 		follower.setDebug(debug);
 		updateARBonus();};
+	void setState(const generalState state) {
+		currentState = state; };
 
 	bool getDebug() const { return debug; };
 	void setDebug(const bool debugI) {

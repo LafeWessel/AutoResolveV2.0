@@ -37,6 +37,8 @@
 #include "../AutoResolve/Player.cpp"
 #include "../AutoResolve/BattleData.h"
 #include "../AutoResolve/BattleData.cpp"
+#include "../AutoResolve/Battle.h"
+#include "../AutoResolve/Battle.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -954,6 +956,12 @@ namespace UnitTests
 			g.setFollower(e);
 			Assert::AreEqual(3, g.getFollower().getABonus());
 		}
+		//Test get/setState
+		TEST_METHOD(getSetState) {
+			General g{};
+			g.setState(generalState::Wounded);
+			Assert::AreEqual((int)generalState::Wounded, (int)g.getState());
+		}
 		//Test get/setDebug
 		TEST_METHOD(getSetDebug) {
 			General g{};
@@ -1611,9 +1619,17 @@ namespace UnitTests
 			Assert::AreEqual(to_string(r), b.getDataAtIndex(2));
 		}
 		//Test setAttackerGeneralState
-
+		TEST_METHOD(setAttGenState) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setAttackerGeneralState(generalState::Slain);
+			Assert::AreEqual(EnumerationConversions::to_string(generalState::Slain),b.getDataAtIndex(68));
+		}
 		//Test setDefenderGeneralState
-
+		TEST_METHOD(setDefGenState) {
+			BattleData b{ (string)"../AutoResolve/units.txt" };
+			b.setDefenderGeneralState(generalState::Slain);
+			Assert::AreEqual(EnumerationConversions::to_string(generalState::Slain), b.getDataAtIndex(136));
+		}
 		//Test setSupplies
 		TEST_METHOD(setSupplies) {
 			BattleData b{ (string)"../AutoResolve/units.txt" };
@@ -1846,30 +1862,161 @@ namespace UnitTests
 	TEST_CLASS(BattleTests) {
 		//Test accessors/mutators
 		//Test get/setAttacker
-
+		TEST_METHOD(getSetAttacker) {
+			Player p{};
+			p.setAdvCombatDeck(true);
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setAttacker(p);
+			Assert::AreEqual(true, b.getAttacker().getAdvComDeck());
+		}
 		//Test get/setDefender
-
+		TEST_METHOD(getSetDefender) {
+			Player p{};
+			p.setAdvCombatDeck(true);
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setDefender(p);
+			Assert::AreEqual(true, b.getDefender().getAdvComDeck());
+		}
 		//Test get/setOutcome
-
+		TEST_METHOD(getSetOutcome) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setOutcome(outcome::Decisive_Victory);
+			Assert::AreEqual((int)outcome::Decisive_Victory, (int)b.getOutcome());
+		}
 		//Test get/setBattleType
-
+		TEST_METHOD(getSetBattleType) {
+			Battle b = new Battle( (string)"../AutoResolve/units.txt" );
+			b.setBattleType(battleType::Monster);
+			Assert::AreEqual((int)battleType::Monster, (int)b.getBattleType());
+		}
 		//Test get/setDebug
-
+		TEST_METHOD(getSetDebug) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setDebug(true);
+			Assert::AreEqual(true, b.getDebug());
+		}
 		//Test get/setOutput
-
+		TEST_METHOD(getSetOutput) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setOutput(false);
+			Assert::AreEqual(false, b.getOutput());
+		}
 		//Test get/setFileOut
-
+		TEST_METHOD(getSetFileOut) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setFileOut(true);
+			Assert::AreEqual(true, b.getFileOutBool());
+		}
 		//Test get/setFileName
-
+		TEST_METHOD(getSetFileName) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.setFileName("Test Name");
+			Assert::AreEqual((string)"Test Name", b.getFileName());
+		}
 		//Test treasureResults attacker positive, defender positive
+		TEST_METHOD(treasureResultsAttPosDefPos) {
+			Equipment e{};
+			e.setABonus(8);
+			General g{};
+			g.setFollower(e);
+			Player p{};
+			p.setGeneral(g);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.setAttacker(p);
+			e.setABonus(8);
+			g.setFollower(e);
+			p.setGeneral(g);
+			b.setDefender(p);
+			Treasure t{};
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			b.setTreasure(t);
+			b.treasureResults();
+			bool att = (b.getFoundByAttacker().getName() != "No Treasure");
+			bool def = (b.getFoundByDefender().getName() != "No Treasure");
+			Assert::IsTrue(att && def);
 
+		}
 		//Test treasureResults attacker positive, defender negative
+		TEST_METHOD(treasureResultsAttPosDefNeg) {
+			Equipment e{};
+			e.setABonus(8);
+			General g{};
+			g.setFollower(e);
+			Player p{};
+			p.setGeneral(g);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.setAttacker(p);
+			e.setABonus(-8);
+			g.setFollower(e);
+			p.setGeneral(g);
+			b.setDefender(p);
+			Treasure t{};
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			b.setTreasure(t);
+			b.treasureResults();
+			bool att = (b.getFoundByAttacker().getName() != "No Treasure");
+			bool def = (b.getFoundByDefender().getName() == "No Treasure");
+			Assert::IsTrue(att && def);
 
+		}
 		//Test treasureResults attacker negative, defender positive
+		TEST_METHOD(treasureResultsAttNegDefPos) {
+			Equipment e{};
+			e.setABonus(-8);
+			General g{};
+			g.setFollower(e);
+			Player p{};
+			p.setGeneral(g);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.setAttacker(p);
+			e.setABonus(8);
+			g.setFollower(e);
+			p.setGeneral(g);
+			b.setDefender(p);
+			Treasure t{};
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			b.setTreasure(t);
+			b.treasureResults();
+			bool att = (b.getFoundByAttacker().getName() == "No Treasure");
+			bool def = (b.getFoundByDefender().getName() != "No Treasure");
+			Assert::IsTrue(att && def);
 
+		}
 		//Test treasureResults attacker negative, defender negative
+		TEST_METHOD(treasureResultsAttNegDefNeg) {
+			Equipment e{};
+			e.setABonus(-8);
+			General g{};
+			g.setFollower(e);
+			Player p{};
+			p.setGeneral(g);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.setAttacker(p);
+			e.setABonus(-8);
+			g.setFollower(e);
+			p.setGeneral(g);
+			b.setDefender(p);
+			Treasure t{};
+			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.initialize();
+			b.setTreasure(t);
+			b.treasureResults();
+			bool att = (b.getFoundByAttacker().getName() == "No Treasure");
+			bool def = (b.getFoundByDefender().getName() == "No Treasure");
+			Assert::IsTrue(att && def);
 
+		}
 		
+
+
+
+
+
+
+
 	};
 	//Unit tests for Normal Battle class ***MUST IMPORT FIRST***
 

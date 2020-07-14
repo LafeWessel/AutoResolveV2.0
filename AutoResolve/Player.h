@@ -34,69 +34,52 @@ public:
 	Player(vector<Unit> unitsI, General generalI, int ReinforceI, bool AdvCombatDeckI, faction FactI);
 
 	vector<Unit> getPlayerUnits() const{ 
-		if (debug) { cout << "player unit vector gotten, size: " << playerUnits.size() << endl; }
 		return playerUnits; };
 	int getMelee() const{ 
-		if (debug) { cout << "player melee autoresolve bonus gotten: " << Melee << endl; }
 		return Melee; };
 	int getCavalry() const{ 
-		if (debug) { cout << "player cavalry autoresolve bonus gotten: " << Cavalry << endl; }
 		return Cavalry; };
 	int getRanged() const{ 
-		if (debug) { cout << "player ranged autoresolve bonus gotten: " << Ranged << endl; }
 		return Ranged; };
 	int getReinforcements() const{
-		if (debug) { cout << "player reinforcements gotten: " << Reinforcements << endl; }
 		return Reinforcements; };
 	General getGeneral() const{ 
-		if (debug) { cout << "player general gotten, rank: " << general.getRank() << endl; }
 		return general; };
 	bool getAdvComDeck() const{ 
-		if (debug) { cout << "player advanced combat deck gotten: " << AdvCombatDeck << endl; }
 		return AdvCombatDeck; };
 	faction getFaction() const{
-		if (debug) { cout << "player faction gotten: " << EnumerationConversions::to_string(fact) << endl; }
 		return fact; };
 	Unit getUnitAtIndex(const int index) const{ 
-		if (debug) { cout << "player getting unit at index: "; }
 		if (index >= 0 && index < playerUnits.size()){
 			if (debug) { cout << playerUnits[index].getName() << endl; }
 			return playerUnits[index];
-		}
-		else{
+		}else{
 			cerr << "player invalid unit vector index selected: " << index << endl;
 			return Unit{};
 		}
 	};
 	int getNumberOfUnits() const{ 
-		if (debug) { cout << "player number of units gotten: " << playerUnits.size() << endl; }
 		return playerUnits.size(); };
 	int getTotalSoldiers() const{
-		if (debug) { cout << "player getTotalSoldiers called" << endl; }
 		int totalSoldiers = 0;
 		for (int i = 0; i < playerUnits.size(); i++) {
 			totalSoldiers += playerUnits[i].getCurrentSoldiers();
 		}
-		if (debug) { cout << "player total soldiers returning: " << totalSoldiers << endl; }
 		return totalSoldiers;
 	}
 
 	void setReinforcements(const int ReinforceI);
 	void setPlayerUnits(const vector<Unit> unitsI);
 	void setGeneral(const General generalI) { 
-		if (debug) { cout << "player general set to (rank): " << generalI.getRank() << endl; }
 		general = generalI;
 		general.setDebug(debug);};
 	void setAdvCombatDeck(const bool advComDeckI) { 
-		if (debug) { cout << "player advanced combat deck set to: " << advComDeckI << endl; }
 		AdvCombatDeck = advComDeckI; };
 	void setFaction(const faction factionI) { 
-		if (debug) { cout << "player faction set to: " << (int)factionI << endl; }
 		fact = factionI; };
 	
 	bool getDebug() const{ return debug; }
 	void setDebug(const bool debugI) {
-		if (debugI) { cout << "player setDebug called" << endl; }
 		debug = debugI;
 		general.setDebug(debug);
 		for (int i = 0; i < playerUnits.size(); i++) {

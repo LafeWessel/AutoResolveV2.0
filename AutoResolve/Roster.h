@@ -26,23 +26,17 @@ public:
 
 	vector<Unit> getUnitsOfType(const unitType type) const;
 	vector<Unit> getUnits() const{ 
-		if (debug) { cout << "roster unit vector gotten, size: " << factionUnits.size() << endl; }
 		return factionUnits; };
 	faction getFaction() const{ 
-		if (debug) { cout << "roster faction gotten: " << EnumerationConversions::to_string(fact) << endl; }
 		return fact; };
 	int getNumberOfUnits() const{ 
-		if (debug) { cout << "roster number of units gotten: " << factionUnits.size() << endl; }
 		return factionUnits.size(); };
 	Unit getUnitAtIndex(const int index) const{ 
-		if (debug) { cout << "roster unit at index gotten, name: " << factionUnits[index].getName() << endl; }
 		return factionUnits[index]; };
 
 	void setUnits(const vector<Unit> unitsI) { 
-		if (debug) { cout << "roster unit vector set, size: " << unitsI.size() << endl; }
 		factionUnits = unitsI; };
 	void setFaction(const faction factI) { 
-		if (debug) { cout << "roster faction set to: " << (int)factI << endl; }
 		fact = factI; };
 
 	bool getDebug() const { return debug; };

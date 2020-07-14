@@ -13,6 +13,7 @@ Treasure::Treasure()
 	follower = {};
 	dragon = {};
 	debug = false;
+	initialized = false;
 	equipmentFilePath = "equipment.txt";
 }
 
@@ -23,6 +24,7 @@ Treasure::Treasure(bool debugI) {
 	banner = {};
 	follower = {};
 	dragon = {};
+	initialized = false;
 	this->setDebug(debugI);
 	equipmentFilePath = "equipment.txt";
 }
@@ -37,6 +39,7 @@ Treasure::Treasure(vector<Equipment> armorI, vector<Equipment> weaponI, vector<E
 	follower = followerI;
 	dragon = dragonI;
 	debug = debugI;
+	initialized = false;
 	equipmentFilePath = "equipment.txt";
 }
 
@@ -121,6 +124,7 @@ void Treasure::initialize()
 
 	sortEquipment(allEquipment);
 	if (debug) { cout << " intitializeTreasure() finished" << endl; }
+	initialized = true;
 	return;
 }
 
