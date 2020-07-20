@@ -42,7 +42,7 @@ public:
 		name = nameI;};
 	void setARBonus(const int ARBonusI) { 
 		autoResBonus = ARBonusI;};
-	void setCurrentSoldiers(const int currentSoldiersI) {
+	void setCurrentSoldiers(int currentSoldiersI) {
 		ValueAssurance::inputCheck(currentSoldiersI, soldiersPerUnit, 0);
 		currentSoldiers = currentSoldiersI;};
 	void setSoldiersPerUnit(const int soldiersPerUI) { 

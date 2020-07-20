@@ -110,13 +110,14 @@ Battle::Battle(const string unitFile)
 	 if (debug) { cout << "Battle assigning casualties" << endl; }
 	 while (assignedSoldierCasualties < casualties[0]){
 		 if (debug) { cout << "Casualties to assign: " << casualties[0] - assignedSoldierCasualties << endl; }
+
 		 //This makes the iterator skip units that have already lost all their soldiers.
 		 while ( i < playerUnits.size()-1 && playerUnits[i].getCurrentSoldiers() == 0 ){
 			 i++;
 		 }
 
 		 //Determines the amount of soldiers lost
-		 //If the unit casualties is maxed out, it makes sure that the unit loses 1 less than it's total number of soldiers at max; 
+		 //If the unit casualties is maxed out, it makes sure that the unit loses 1 less than its total number of soldiers at max; 
 		 //0 if there is 1 soldier only
 		 if (assignedUnitCasualties >= casualties[1]){
 			 if (playerUnits[i].getCurrentSoldiers() == 1){
@@ -127,8 +128,13 @@ Battle::Battle(const string unitFile)
 			 }
 		 }
 		 else{
-			 cas = Random::randomNumberArray(playerUnits[i].getCurrentSoldiers());
+			 cas = Random::randomNumber(playerUnits[i].getCurrentSoldiers());
 		 }
+		 //Ensure that cas won't total to more than casualties[0]
+		 if (assignedSoldierCasualties + cas > casualties[0]) {
+			 cas = casualties[0] - assignedSoldierCasualties;
+		 }
+		 assignedSoldierCasualties += cas;
 
 		 //Subtracts the casualties from the amount of soldiers in the unit and declares if they have fully perished
 		 playerUnits[i].setCurrentSoldiers(playerUnits[i].getCurrentSoldiers() - cas);
@@ -138,28 +144,29 @@ Battle::Battle(const string unitFile)
 			 assignedUnitCasualties++;
 		 }
 		 else{
-			 if (debug) { cout << assignedSoldierCasualties + cas << " " << playerUnits[i].getName() << " lost " << cas << " soldiers." << endl; }
+			 if (debug) { cout << assignedSoldierCasualties << " " << playerUnits[i].getName() << " lost " << cas << " soldiers." << endl; }
 		 }
-		 assignedSoldierCasualties += cas;
+		 
 		 i++;
 
-		 //Wraps the index so it doesn't go off the end 
+		 //Wraps the index so it doesn't go off the end of the units array
 		 if (i > playerUnits.size() - 1){
 			 i = 0;
 			 if (debug) { cout << "Wrapped attacker casualty assignment loop" << endl; }
 			 bool soldiersAboveOne = false;
 
 			 //Checks to make sure that at least one unit can still have casualties assigned to it
-			 for (int j = 0; j < playerUnits.size(); j++) {
+			 for (Unit j : playerUnits) {
 
-				 if (playerUnits[j].getCurrentSoldiers() > 1) {
+				 if (j.getCurrentSoldiers() > 1) {
 					 soldiersAboveOne = true;
 					 if (debug) { cout << "soldiersAboveOne set to true" << endl; }
 				 }
 			 }
 
+			 //If there are no more casualties that can be assigned
 			 if (!soldiersAboveOne) {
-				 casualties[0] = assignedSoldierCasualties-1;
+				 casualties[0] = assignedSoldierCasualties;
 				 if (debug) { cout << "reassigned casualties[0] to assignedSoldierCasualties" << endl; }
 			 }
 
@@ -255,8 +262,8 @@ float Battle::battleCalculate() //contains the base calculations needed for batt
 	return finalTotal;
 }
 
-//calculates the casualties from a battle and returns in a specific format
-void Battle::CalculateCas(vector<vector<int>>& totalCasualties) 
+//calculates the number of casualties from a battle and returns in a specific format
+void Battle::calculateCas(vector<vector<int>>& totalCasualties) 
 {
 	if (debug) { cout << "CalculateCas called" << endl; }
 	int attSoldierCasualties = 0;

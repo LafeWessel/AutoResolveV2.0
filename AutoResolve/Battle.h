@@ -53,7 +53,7 @@ public:
 
 	Player getAttacker() const{ return attacker; };
 	Player getDefender() const{ return defender; };
-	outcome getOutcome() const{ if (debug) { cout << "battle outcome gotten: " << EnumerationConversions::to_string(result) << endl; }
+	outcome getOutcome() const{ 
 		return result; };
 	battleType getBattleType() const{ return type; };
 	bool getOutput()const { return output; };
@@ -67,13 +67,13 @@ public:
 		attacker.setDebug(debug); };
 	void setDefender(const Player defenderI) { defender = defenderI; 
 		defender.setDebug(debug); };
-	void setOutcome(const outcome resultI) { if (debug) { cout << "battle outcome set to: " << EnumerationConversions::to_string(resultI) << endl; }
+	void setOutcome(const outcome resultI) { 
 		result = resultI; };
 	void setBattleType(const battleType b) { type = b; };
 	void setOutput(const bool outputI) { output = outputI; };
 	void setFileOut(const bool fileOutI) { fileOut = fileOutI; };
 	void setFileName(const string fileName) { this->fileName = fileName; };
-	void setDebug(const bool debugI) { if (debugI) { cout << "battle setDebug called" << endl; }
+	void setDebug(const bool debugI) { 
 		debug = debugI;
 		if (treasure->isInitialized()) {
 			treasure->setDebug(debug);
@@ -89,7 +89,7 @@ public:
 	void printData() const;
 
 	void treasureResults(); //Determines whether or not loot is found at the end of a battle.
-	void CalculateCas(vector<vector<int>>& totalCasualties); //Determines the amount of casualties at the end of a battle
+	void calculateCas(vector<vector<int>>& totalCasualties); //Determines the amount of casualties at the end of a battle
 	void assignCasualties(vector<int>& casualties, Player& p); //assigns casualties to a player
 	void battleOutput(vector<vector<int>>& totalCasualties); //Output at end of battle, normally supplemented by other output in inherited classes
 	float battleCalculate(); //Calculates the battle, is almost always supplemented by other calculations in inherited classes

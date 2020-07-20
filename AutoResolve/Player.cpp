@@ -76,21 +76,21 @@ void Player::setupUnitAutoresolveBonuses()
 	Ranged = 0;
 
 	//Loops over the vector of player units, adding the autoresolve values.
-	for (int i = 0; i < playerUnits.size(); i++)
+	for (Unit u : playerUnits)
 	{
-		switch (playerUnits[i].getUnitType())
+		switch (u.getUnitType())
 		{
 		case unitType::Melee:
-			Melee += playerUnits[i].getARBonus();
-			if (debug) { cout << playerUnits[i].getARBonus() << " added to Melee = " << Melee << endl; }
+			Melee += u.getARBonus();
+			if (debug) { cout << u.getARBonus() << " added to Melee = " << Melee << endl; }
 			break;
 		case unitType::Cavalry:
-			Cavalry += playerUnits[i].getARBonus();
-			if (debug) { cout << playerUnits[i].getARBonus() << " added to Cavalry = " << Cavalry << endl; }
+			Cavalry += u.getARBonus();
+			if (debug) { cout << u.getARBonus() << " added to Cavalry = " << Cavalry << endl; }
 			break;
 		case unitType::Ranged:
-			Ranged += playerUnits[i].getARBonus();
-			if (debug) { cout << playerUnits[i].getARBonus() << " added to Ranged = " << Ranged << endl; }
+			Ranged += u.getARBonus();
+			if (debug) { cout << u.getARBonus() << " added to Ranged = " << Ranged << endl; }
 			break;
 		default:
 			cerr << "selected unit has no unitType." << endl;

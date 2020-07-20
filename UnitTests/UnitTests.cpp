@@ -1181,8 +1181,7 @@ namespace UnitTests
 		TEST_METHOD(getMelee) {
 			Player p{};
 			Unit u{};
-			u.setSoldiersPerUnit(4);
-			u.setCurrentSoldiers(4);
+			u.setARBonus(4);
 			u.setUnitType(unitType::Melee);
 			vector<Unit> v{ u,u,u };
 			p.setPlayerUnits(v);
@@ -1192,8 +1191,7 @@ namespace UnitTests
 		TEST_METHOD(getRanged) {
 			Player p{};
 			Unit u{};
-			u.setSoldiersPerUnit(4);
-			u.setCurrentSoldiers(4);
+			u.setARBonus(4);
 			u.setUnitType(unitType::Ranged);
 			vector<Unit> v{ u,u,u };
 			p.setPlayerUnits(v);
@@ -1203,8 +1201,7 @@ namespace UnitTests
 		TEST_METHOD(getCavalry) {
 			Player p{};
 			Unit u{};
-			u.setSoldiersPerUnit(4);
-			u.setCurrentSoldiers(4);
+			u.setARBonus(4);
 			u.setUnitType(unitType::Cavalry);
 			vector<Unit> v{ u,u,u };
 			p.setPlayerUnits(v);
@@ -1858,7 +1855,7 @@ namespace UnitTests
 		}
 	};
 
-	//Unit tests for Battle class ***MUST IMPORT FIRST***
+	//Unit tests for Battle class
 	TEST_CLASS(BattleTests) {
 		//Test accessors/mutators
 		//Test get/setAttacker
@@ -2010,12 +2007,38 @@ namespace UnitTests
 
 		}
 		
+		//Test assignCasualties
+		TEST_METHOD(assignCasualties) {
+			vector<int> cas{
+				10, //Soldier casualties
+				2,	//Unit casualties
+				0, }; //Upgrades 
 
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
 
+			vector<Unit> v  {u,u,u,u,u};
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
 
+			Assert::AreEqual(10, p.getTotalSoldiers());
+			
+		}
+		//Test assignCasualties with 0 soldier casualties
 
+		//Test assignCasualties with 0 unit casualties
 
+		//Test assignCasualties with fewer units than unit casualties
 
+		//Test assignCasualties with fewer soldiers than soldier casualties
+
+		//Test assignCasualties with 
+
+		//Test calculateCas
+		
 
 	};
 	//Unit tests for Normal Battle class ***MUST IMPORT FIRST***
