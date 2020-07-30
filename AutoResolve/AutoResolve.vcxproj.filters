@@ -102,6 +102,21 @@
     <ClCompile Include="Battle.cpp">
       <Filter>Source Files\Battles</Filter>
     </ClCompile>
+    <ClCompile Include="NormalBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="NavalBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="RaidBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="SiegeBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Random.h">
@@ -171,6 +186,21 @@
       <Filter>Header Files\Enumerations</Filter>
     </ClInclude>
     <ClInclude Include="Battle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="NavalBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="RaidBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="SiegeBattle.h">
       <Filter>Header Files\Battles</Filter>
     </ClInclude>
   </ItemGroup>

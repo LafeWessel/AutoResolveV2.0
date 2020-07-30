@@ -92,7 +92,8 @@ public:
 	void calculateCas(vector<vector<int>>& totalCasualties); //Determines the amount of casualties at the end of a battle
 	void assignCasualties(vector<int>& casualties, Player& p); //assigns casualties to a player
 	void battleOutput(vector<vector<int>>& totalCasualties); //Output at end of battle, normally supplemented by other output in inherited classes
-	float battleCalculate(); //Calculates the battle, is almost always supplemented by other calculations in inherited classes
+	float battleCalculate() const; //Calculates the battle, is almost always supplemented by other calculations in inherited classes
+	void determineOutcome(const float endingTotal);
 };
 
 

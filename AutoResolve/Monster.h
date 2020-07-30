@@ -27,7 +27,8 @@ public:
 	~Monster();
 	Monster();
 	Monster(const bool debugI);
-	Monster(const monsterType typeI, Treasure& treasureI);
+	Monster(const string filePath);
+	Monster(monsterType m, Treasure& treasureI);
 
 	int getCoinReward() const{ 
 		return coinReward; };
@@ -46,7 +47,7 @@ public:
 	bool getDebug() const{ return debug; }
 	void setDebug(const bool debugI) {
 		debug = debugI;
-		if (treasure) {
+		if (treasure->isInitialized()) {
 			treasure->setDebug(debug);
 		}
 	};

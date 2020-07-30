@@ -92,7 +92,7 @@ Battle::Battle(const string unitFile)
 }
 
 //casulaties vector values
-//[x][0] = # of soldiers that are casualties
+//[x][0] = # of soldiers casualties
 //[x][1] = # of units completely destroyed
 //[x][2] = # of Upgrades received
  void Battle::assignCasualties(vector<int>& casualties, Player& p) {
@@ -102,6 +102,13 @@ Battle::Battle(const string unitFile)
 	 playerUnits = p.getPlayerUnits();
 	 if (debug) { cout << "number of player units: " << playerUnits.size() << endl; }
 
+	 //Set Unit vector to empty if unit or soldier casualties are greater than what the Player possesses
+	 if (casualties[0] >= p.getTotalSoldiers() || casualties[1] >= p.getNumberOfUnits()) {
+		 vector<Unit> v = {};
+		 p.setPlayerUnits(v);
+		 return;
+	 }
+	 	 
 	 int assignedSoldierCasualties = 0;
 	 int assignedUnitCasualties = 0;
 	 int i = 0;
@@ -173,7 +180,6 @@ Battle::Battle(const string unitFile)
 		 }
 	 }
 
-
 	 //Reassigns attacker's unit vector
 	 vector<Unit> attackerUnitsAfterCasualties = {};
 	 for (int i = 0; i < playerUnits.size(); i++){
@@ -182,7 +188,7 @@ Battle::Battle(const string unitFile)
 		 }
 	 }
 	 p.setPlayerUnits(attackerUnitsAfterCasualties);
-
+	 return;
  }
 
 //totalCasualties vector values
@@ -215,7 +221,7 @@ void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-en
 	return;
 }
 
-float Battle::battleCalculate() //contains the base calculations needed for battles
+float Battle::battleCalculate() const //contains the base calculations needed for battles
 {
 
 	if (debug) { cout << "battleCalculate called" << endl; }
@@ -291,13 +297,13 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (debug) { cout << "defender upgrade total: " << defUpgr << " Battle::CalculateCas" << endl; }
 
 	//Calculates the max amount of units that are destroyed
-	int attUnitCasualties = abs((attSoldierCasualties / 7) - 1);
+	int attUnitCasualties = (attSoldierCasualties / 7) - 1;
 	if (attUnitCasualties <= 0)
 	{
 		attUnitCasualties = 0;
 	}
 	if (debug) { cout << "attacker unit casualty total: " << attUnitCasualties << " Battle::CalculateCas" << endl; }
-	int defUnitCasualties = abs((defSoldierCasualties / 7) - 1);
+	int defUnitCasualties = (defSoldierCasualties / 7) - 1;
 	if (defUnitCasualties <= 0)
 	{
 		defUnitCasualties = 0;
@@ -327,6 +333,7 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 		}
 	}
 	else { if (debug) { cout << "defender General unharmed" << endl; } }
+
 	//Creates the vectors that contain the casualty data
 	vector<int> attackerCasVec{ attSoldierCasualties, attUnitCasualties, attUpgr };
 	if (debug) { cout << "Attacker Casualty vector initialized Battle::CalculateCas" << endl; }
@@ -334,8 +341,8 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (debug) { cout << "Defender Casualty vector initialized Battle::CalculateCas" << endl; }
 
 	if (debug) { cout << "Moving on to casualty assignment Battle::CalculateCas" << endl; }
-	assignCasualties(attackerCasVec, defender);
-	assignCasualties(defenderCasVec, attacker);
+	assignCasualties(attackerCasVec, attacker);
+	assignCasualties(defenderCasVec, defender);
 
 	totalCasualties = { attackerCasVec,defenderCasVec };
 }
@@ -351,5 +358,35 @@ void Battle::printData() const
 	if (treasure->isInitialized()) { cout << "Battle Treasure Initialized" << endl; }
 }
 
-
+void Battle::determineOutcome(const float endingTotal) {
+	//All results are in relation to the attacker.
+	//Victory
+	if (endingTotal > 2) {
+		if (endingTotal >= 20) {
+			result = outcome::Decisive_Victory;
+		}
+		else if (endingTotal >= 10) {
+			result = outcome::Heroic_Victory;
+		}
+		else {
+			result = outcome::Close_Victory;
+		}
+	}
+	//Defeat
+	else if (endingTotal < -2) {
+		if (endingTotal <= -20){
+			result = outcome::Crushing_Defeat;
+		}
+		else if (endingTotal <= -10) {
+			result = outcome::Valiant_Defeat;
+		}
+		else {
+			result = outcome::Close_Defeat;
+		}
+	}
+	//Draw
+	else {
+		result = outcome::Draw;
+	}
+}
 

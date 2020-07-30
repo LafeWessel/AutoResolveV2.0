@@ -67,6 +67,8 @@ TODO-Make a db of results from numerous battles then analyze it with python
 
 TODO-Learn and implement Qt GUI
 
+TODO-Investigate if Monster Battle should inherit from Battle
+
 */
 
 

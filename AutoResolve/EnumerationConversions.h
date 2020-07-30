@@ -43,5 +43,6 @@ public:
 	 static string to_string(const generalState g);
 	
 	 static equipmentType stringToEquipType(const string nameI);
+
 };
 

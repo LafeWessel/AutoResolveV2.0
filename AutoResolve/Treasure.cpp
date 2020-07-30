@@ -228,23 +228,25 @@ void Treasure::setDebug(bool debugI) {
 	if (debugI) { cout << "treasure setDebug called" << endl; }
 	debug = debugI;
 
-	for (Equipment e : armor){
-		e.setDebug(debug);
-	}
-	for (Equipment e : weapon) {
-		e.setDebug(debug);
-	}
-	for (Equipment e : trinket) {
-		e.setDebug(debug);
-	}
-	for (Equipment e : banner) {
-		e.setDebug(debug);
-	}
-	for (Equipment e : follower) {
-		e.setDebug(debug);
-	}
-	for (Equipment e : dragon) {
-		e.setDebug(debug);
+	if (initialized) {
+		for (Equipment e : armor){
+			e.setDebug(debug);
+		}
+		for (Equipment e : weapon) {
+			e.setDebug(debug);
+		}
+		for (Equipment e : trinket) {
+			e.setDebug(debug);
+		}
+		for (Equipment e : banner) {
+			e.setDebug(debug);
+		}
+		for (Equipment e : follower) {
+			e.setDebug(debug);
+		}
+		for (Equipment e : dragon) {
+			e.setDebug(debug);
+		}
 	}
 
 	if (debug) { cout << "treasure setDebug finished, total" << endl; }

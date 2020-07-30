@@ -23,13 +23,25 @@ Monster::Monster(const bool debugI)
 	this->setDebug(debugI);
 }
 
-Monster::Monster(const monsterType typeI, Treasure& treasureI) //initializer
-{
-	type = typeI;
-	treasure = &treasureI;
-	setValuesFromMonsterType();
+Monster::Monster(const string filePath) {
 	debug = false;
+	treasure = &Treasure();
+	treasure->setFilePath(filePath);
+	type = monsterType::Empty;
+	coinReward = 0;
+	autoResValue = 0;
+	
 }
+
+Monster::Monster(monsterType m, Treasure& treasureI) {
+	treasure = &treasureI;
+	type = m;
+	debug = false;
+	coinReward = 0;
+	autoResValue = 0;
+	setValuesFromMonsterType();
+}
+
 //TODO-refactor this function
 vector<Equipment> Monster::getEquipRewards() const //This figures out the treasure gained for killing a monster, based on info elsewhere
 {

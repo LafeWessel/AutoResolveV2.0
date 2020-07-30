@@ -39,6 +39,16 @@
 #include "../AutoResolve/BattleData.cpp"
 #include "../AutoResolve/Battle.h"
 #include "../AutoResolve/Battle.cpp"
+#include "../AutoResolve/NavalBattle.h"
+#include "../AutoResolve/NavalBattle.cpp"
+#include "../AutoResolve/NormalBattle.h"
+#include "../AutoResolve/NormalBattle.cpp"
+#include "../AutoResolve/SiegeBattle.h"
+#include "../AutoResolve/SiegeBattle.cpp"
+#include "../AutoResolve/RaidBattle.h"
+#include "../AutoResolve/RaidBattle.cpp"
+#include "../AutoResolve/MonsterBattle.h"
+#include "../AutoResolve/MonsterBattle.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -776,7 +786,7 @@ namespace UnitTests
 		//Test accessors and mutators
 		//Test get/setDebug
 		TEST_METHOD(getSetDebug) {
-			Monster m{};
+			Monster m{(string)"../AutoResolve/equipment.txt"};
 			m.setDebug(true);
 			Assert::AreEqual(true, m.getDebug());
 		}
@@ -2017,37 +2027,222 @@ namespace UnitTests
 			Unit u{};
 			u.setSoldiersPerUnit(4);
 			u.setCurrentSoldiers(4);
-
 			vector<Unit> v  {u,u,u,u,u};
 			Player p{};
 			p.setPlayerUnits(v);
 			Battle b{ (string)"../AutoResolve/units.txt" };
 			b.assignCasualties(cas, p);
-
 			Assert::AreEqual(10, p.getTotalSoldiers());
 			
 		}
 		//Test assignCasualties with 0 soldier casualties
+		TEST_METHOD(assignCasualtiesZeroSoldierCas) {
+			vector<int> cas{
+				0, //Soldier casualties
+				2,	//Unit casualties
+				0, }; //Upgrades 
 
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u,u,u };
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
+			Assert::AreEqual(20, p.getTotalSoldiers());
+
+		}
 		//Test assignCasualties with 0 unit casualties
+		TEST_METHOD(assignCasualtiesZeroUnitCas) {
+			vector<int> cas{
+				10, //Soldier casualties
+				0,	//Unit casualties
+				0, }; //Upgrades 
 
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u,u,u };
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
+			Assert::AreEqual(10, p.getTotalSoldiers());
+			Assert::AreEqual(5, p.getNumberOfUnits());
+
+		}
 		//Test assignCasualties with fewer units than unit casualties
+		TEST_METHOD(assignCasualtiesFewerUnitCas) {
+			vector<int> cas{
+				20, //Soldier casualties
+				6,	//Unit casualties
+				0, }; //Upgrades 
 
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u,u,u };
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
+			Assert::AreEqual(0, p.getNumberOfUnits());
+
+		}
 		//Test assignCasualties with fewer soldiers than soldier casualties
+		TEST_METHOD(assignCasualtiesFewerSoldierCas) {
+			vector<int> cas{
+				25, //Soldier casualties
+				5,	//Unit casualties
+				0, }; //Upgrades 
 
-		//Test assignCasualties with 
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u,u,u };
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
+			Assert::AreEqual(0, p.getTotalSoldiers());
+			Assert::AreEqual(0, p.getNumberOfUnits());
 
-		//Test calculateCas
-		
+		}
+		//Test assignCasualties with more soldier cas than can be had considering unit cas
+		TEST_METHOD(assignCasualtiesFewerSoldierUnitCas) {
+			vector<int> cas{
+				21, //Soldier casualties
+				1,	//Unit casualties
+				0, }; //Upgrades 
+
+			Unit u{};
+			u.setSoldiersPerUnit(4);
+			u.setCurrentSoldiers(4);
+			vector<Unit> v{ u,u,u,u,u };
+			Player p{};
+			p.setPlayerUnits(v);
+			Battle b{ (string)"../AutoResolve/units.txt" };
+			b.assignCasualties(cas, p);
+			Assert::AreEqual(0, p.getNumberOfUnits());
+			Assert::AreEqual(0, p.getTotalSoldiers());
+		}
+
+		//Test determineOutcome
+		//Test determineOutcome decisive victory
+		TEST_METHOD(determineOutcomeDecisiveVictory) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(20);
+			Assert::AreEqual((int)outcome::Decisive_Victory, (int)b.getOutcome());
+		}
+		//Test determineOutcome heroic victory
+		TEST_METHOD(determineOutcomeHeroicVictory) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(10);
+			Assert::AreEqual((int)outcome::Heroic_Victory, (int)b.getOutcome());
+		}
+		//Test determineOutcome close victory
+		TEST_METHOD(determineOutcomeCloseVictory) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(3);
+			Assert::AreEqual((int)outcome::Close_Victory, (int)b.getOutcome());
+		}
+		//Test determineOutcome crushing defeat
+		TEST_METHOD(determineOutcomeCrushingDefeat) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(-20);
+			Assert::AreEqual((int)outcome::Crushing_Defeat, (int)b.getOutcome());
+		}
+		//Test determineOutcome valiant defeat
+		TEST_METHOD(determineOutcomeValiantDefeat) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(-10);
+			Assert::AreEqual((int)outcome::Valiant_Defeat, (int)b.getOutcome());
+		}
+		//Test determineOutcome close defeat
+		TEST_METHOD(determineOutcomeCloseDefeat) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(-3);
+			Assert::AreEqual((int)outcome::Close_Defeat, (int)b.getOutcome());
+		}
+		//Test determineOutcome draw
+		TEST_METHOD(determineOutcomeDraw) {
+			Battle b = new Battle((string)"../AutoResolve/units.txt");
+			b.determineOutcome(0);
+			Assert::AreEqual((int)outcome::Draw, (int)b.getOutcome());
+		}
+
+
 
 	};
-	//Unit tests for Normal Battle class ***MUST IMPORT FIRST***
-
-	//Unit tests for Naval Battle class ***MUST IMPORT FIRST***
-
-	//Unit tests for Siege Battle class ***MUST IMPORT FIRST***
-
-	//Unit tests for Raid Battle class ***MUST IMPORT FIRST***
-
-	//Unit tests for Monster Battle class ***MUST IMPORT FIRST***
+	//Unit tests for Normal Battle class
+	TEST_CLASS(NormalBattleTests) {
+		//None should be needed
+	};
+	//Unit tests for Naval Battle class
+	TEST_CLASS(NavalBattleTests) {
+		//Test get/setAttackerShips
+		TEST_METHOD(getSetAttackerShips) {
+			NavalBattle b = new NavalBattle((string)"../AutoResolve/units.txt");
+			b.setAttackerShips(5);
+			Assert::AreEqual(5, b.getAttackerShips());
+		}
+		//Test get/setDefenderShips
+		TEST_METHOD(getSetDefenderShips) {
+			NavalBattle b = new NavalBattle((string)"../AutoResolve/units.txt");
+			b.setDefenderShips(5);
+			Assert::AreEqual(5, b.getDefenderShips());
+		}
+	};
+	//Unit tests for Siege Battle class
+	TEST_CLASS(SiegeBattleTests) {
+		//Test get/setRams
+		TEST_METHOD(getSetRams) {
+			SiegeBattle b = new SiegeBattle((string)"../AutoResolve/units.txt");
+			b.setRams(5);
+			Assert::AreEqual(5, b.getRams());
+		}
+		//Test get/set Siege Towers
+		TEST_METHOD(getSetSiegeTowers) {
+			SiegeBattle b = new SiegeBattle((string)"../AutoResolve/units.txt");
+			b.setSiegeTowers(5);
+			Assert::AreEqual(5, b.getSiegeTowers());
+		}
+		//Test get/set Catapults
+		TEST_METHOD(getSetCatapults) {
+			SiegeBattle b = new SiegeBattle((string)"../AutoResolve/units.txt");
+			b.setCatapults(5);
+			Assert::AreEqual(5, b.getCatapults());
+		}
+		//Test get/set Town Stats
+		TEST_METHOD(getSetTownStats) {
+			SiegeBattle b = new SiegeBattle((string)"../AutoResolve/units.txt");
+			TownStats t{};
+			t.setSupplies(5);
+			b.setTownStats(t);
+			Assert::AreEqual(5, b.getTownStats().getSupplies());
+		}
+	};
+	//Unit tests for Raid Battle class
+	TEST_CLASS(RaidBattleTests) {
+		//Test get/set Town Stats
+		TEST_METHOD(getSetTownStats){
+			RaidBattle b = new RaidBattle((string)"../AutoResolve/units.txt");
+			TownStats t{};
+			t.setSupplies(5);
+			b.setTownStats(t);
+			Assert::AreEqual(5, b.getTownStats().getSupplies());
+		}
+	};
+	//Unit tests for Monster Battle class
+	TEST_CLASS(MonsterBattleTests) {
+		//Test get/set Monster
+		TEST_METHOD(getSetMonster) {
+			MonsterBattle b = new MonsterBattle((string)"../AutoResolve/units.txt");
+			Monster m{(string)"../AutoResolve/equipment.txt"};
+			m.setMonsterType(monsterType::Demon);
+			b.setMonster(m);
+			Assert::AreEqual((int)monsterType::Demon, (int)b.getMonster().getMonsterType());
+		}
+	};
 }
