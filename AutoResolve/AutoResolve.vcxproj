@@ -171,6 +171,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Roster.cpp" />
     <ClCompile Include="SiegeBattle.cpp" />
+    <ClCompile Include="TestBattle.cpp" />
     <ClCompile Include="TownStats.cpp" />
     <ClCompile Include="Treasure.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Roster.h" />
     <ClInclude Include="SiegeBattle.h" />
+    <ClInclude Include="TestBattle.h" />
     <ClInclude Include="TownStats.h" />
     <ClInclude Include="Treasure.h" />
     <ClInclude Include="Unit.h" />

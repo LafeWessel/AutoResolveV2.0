@@ -7,25 +7,16 @@
 #include "BattleData.h"
 #include "EnumerationConversions.h"
 #include "Random.h"
-#include <algorithm>
-#include <cmath>
-
-#include <array>
-#include <vector>
-#include <string>
-#include <chrono>
-#include <random>
 
 #include <iostream>
 
-//using namespace std;
 
 
 
 class Battle // siege, raid, normal and naval battles inherit from this class
 {
 
-public:
+protected:
 	Treasure *treasure;
 	BattleData data;
 	Player attacker;
@@ -40,16 +31,13 @@ public:
 	bool debug;
 	bool fileOut;
 
+
+
 public:
 	~Battle();
 	Battle();
 	Battle(const bool debugI);
 	Battle(const string unitFile);
-
-	//int randomNumberBattle(int range);
-	//int calculateBattleRandoms(int randomRolls, int randomRange);
-	//int randomNumberCas(int range);
-	//string outputGenState(int state);
 
 	Player getAttacker() const{ return attacker; };
 	Player getDefender() const{ return defender; };
@@ -62,6 +50,7 @@ public:
 	string getFileName() const { return fileName; };
 	Equipment getFoundByAttacker() const { return foundByAttacker; };
 	Equipment getFoundByDefender() const { return foundByDefender; };
+	Treasure* getTreasure() const { return treasure; }
 
 	void setAttacker(const Player attackerI) { attacker = attackerI;
 		attacker.setDebug(debug); };

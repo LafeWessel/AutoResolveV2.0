@@ -6,54 +6,23 @@
 */
 
 #pragma once
-#include <algorithm>
-#include <cmath>
-
 #include <vector>
 #include <string>
-
-#include <fstream>
 #include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <chrono>
 #include <random>
 
-#include "Random.h"
+#include "TestBattle.h"
 
 
-/*
-#include "Battle.h"
-#include "CSVRow.h"
-#include "defenses.h"
-#include "Equipment.h"
-#include "faction.h"
-#include "General.h"
-#include "Monster.h"
-#include "MonsterBattle.h"
-
-
-#include "monsterType.h"
-#include "NavalBattle.h"
-#include "NormalBattle.h"
-#include "outcome.h"
-#include "Player.h"
-#include "RaidBattle.h"
-#include "Roster.h"
-#include "SiegeBattle.h"
-#include "townStats.h"
-#include "Treasure.h"
-#include "Unit.h"
-#include "unitType.h"
-#include "BattleData.h"
-*/
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
 
 /*
 TODO-Make a way for the tests to use solely randomized values
 
 TODO-implement BattleData class
-
-TODO-Make sure that casualties are actually assigned in MonsterBattle
 
 TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
 
@@ -61,70 +30,33 @@ TODO-Change win-loss ratio in tests to be % wins
 
 TODO-Create an auto-balancing feature to determine what is an equal distribution of power -> AI
 
-TODO-Can use a model to determine what contributes most to success?
-
 TODO-Make a db of results from numerous battles then analyze it with python
 
 TODO-Learn and implement Qt GUI
 
-TODO-Investigate if Monster Battle should inherit from Battle
-
 */
 
-
-
-#include "Treasure.h"
-#include "Equipment.h"
-
-//Called on program start
-int main()
-{
-	bool cont = true;
-	/*
-
-	//Initialize BattleData.csv if it hasn't already been
-	string fileName = "BattleData.csv";
-	fstream file;
-	file.open(fileName);
-	if (!file) {
-		cerr << "Unable to open BattleData.csv" << endl;
+bool continueLoop(string loop) {
+	char toCont = 'a';
+	while (toCont != 'y' && toCont != 'n')
+	{
+		cout << loop << "(y/n)" << endl;
+		cin >> toCont;
+		cin.get();
+	}
+	if (toCont == 'y') {
+		return true;
 	}
 	else {
-		cout << "BattleData.csv opened and closed" << endl;
-		file.close();
+		return false;
 	}
+}
 
-	   	 
-	while(cont) {
-		bool debug = false;
-		bool fileOut = false;
-		char toDebug = 'a';//Placeholder character
 
-		//Check to see if user wants to debug application
-		while (toDebug != 'y' && toDebug != 'n')
-		{
-			cout << "Would you like to debug? (y/n)" << endl;
-			cin >> toDebug;
-			cin.get();
-		}
-		if (toDebug == 'y')
-		{
-			debug = true;
-		}
-
-		//Check to see if user wants to send results to BattleData.csv
-		toDebug = 'a';
-		while (toDebug != 'y' && toDebug != 'n')
-		{
-			cout << "Would you like to output results to a file? (y/n)" << endl;
-			cin >> toDebug;
-			cin.get();
-		}
-		if (toDebug == 'y')
-		{
-			fileOut = true;
-		}
-
+void runApp() {
+	do {
+		bool debug = continueLoop((string)"Would you like to debug?");
+		bool fileOut = continueLoop((string)"Would you like to output results to a file?");
 
 		if (debug) { cout << "Program started" << endl; }
 
@@ -135,48 +67,53 @@ int main()
 		cin.get();
 		tests = abs(tests);
 		if (debug) { cout << "Tests set to: " << tests << endl; }
-	
-		//Check to see if user wants to use randomized values
-		char randomTest = 'a';
-		while (randomTest != 'y' && randomTest != 'n')
-		{
-			cout << "Would you like to test with randomized values? (y/n)" << endl;
-			cin >> randomTest;
-			cin.get();
-			//	cout << toDebug <<  endl;
-		}
-		
 
-		//TODO uncomment 2 next comments
-		if (randomTest == 'y') {
-			//randomizedTests(tests, debug, fileOut, fileName);
-		}
-		else {
-			//standardTests(tests, debug, fileOut, fileName);
-		}
+		int type = 1;
+		cout << "What type (Normal:1, Siege:2, Raid:3, Naval:4, Monster:5)" << endl;
+		cin >> type;
+		cin.get();
+		type = ValueAssurance::inputCheck(tests,5,1);
+		if (debug) { cout << "Type set to: " << type << endl; }
 
-		if (debug) { cout << "Program finished, press Enter to continue" << endl; }
+		TestBattle t{};
+		t.setNumberOfTests(tests);
+		t.setBattleType(EnumerationConversions::intToBattleType(type));
+		t.initializeAndRun();
+
+		if (debug) { cout << "Calculations finished, press Enter to continue" << endl; }
 		cin.get();//This keeps the console window open
-		
-		//Check to see if the user would like to perform more tests
-		char toCont = 'a';
-		while (toCont != 'y' && toCont != 'n')
-		{
-			cout << "Would you like to make more calculations? (y/n)" << endl;
-			cin >> toCont;
-			cin.get();
-			//	cout << toDebug <<  endl;
-		}
-		if (toCont == 'y') {
-			cont = true;
-		}
-		else {
-			cont = false;
-		}
-	}
-	
 
-	*/
+	} while (continueLoop((string)"Would you like to make more calculations?"));
+
+
+
+
+}
+
+//Called on program start
+int main()
+{	
+
+	//Initialize BattleData.csv if it hasn't already been
+	//string fileName = "BattleData.csv";
+	//fstream file;
+	//file.open(fileName);
+	//if (!file) {
+	//	cerr << "Unable to open BattleData.csv" << endl;
+	//}
+	//else {
+	//	cout << "BattleData.csv opened and closed" << endl;
+	//	file.close();
+	//} 
+	
+	runApp();
+
+
+	TestBattle t{};
+	t.setBattleType(battleType::Siege);
+	t.setNumberOfTests(1);
+	t.initializeAndRun();
+
 
 	return 0;
 }

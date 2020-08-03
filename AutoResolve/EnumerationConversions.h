@@ -27,9 +27,11 @@ private:
 
 
 public:
-	 static faction intToFaction(int faction);
-	 static monsterType intToMonsterType(int monsterType);
-	 static unitType intToUnitType(int unitType);
+	 static faction intToFaction(const int faction);
+	 static monsterType intToMonsterType(const int monsterType);
+	 static unitType intToUnitType(const int unitType);
+	 static defenses intToDefenses(const int def);
+	 static battleType intToBattleType(const int type);
 
 	 static string outputIntAsOutcome(int outcome);
 

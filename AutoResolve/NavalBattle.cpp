@@ -18,7 +18,8 @@ NavalBattle::NavalBattle(bool debugI) : Battle(debugI)
 }
 
 NavalBattle::NavalBattle(const string unitFile) : Battle(unitFile) {
-
+	attackerShips = 0;
+	defenderShips = 0;
 }
 
 void NavalBattle::battleOutput(vector<vector<int>> totalCasualties) //uses base Battle output and adds naval outputs

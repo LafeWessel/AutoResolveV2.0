@@ -93,9 +93,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BattleData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="generalState.cpp">
       <Filter>Source Files\Enumerations</Filter>
     </ClCompile>
@@ -115,6 +112,12 @@
       <Filter>Source Files\Battles</Filter>
     </ClCompile>
     <ClCompile Include="SiegeBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="TestBattle.cpp">
+      <Filter>Source Files\Battles</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleData.cpp">
       <Filter>Source Files\Battles</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,9 +182,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BattleData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="generalState.h">
       <Filter>Header Files\Enumerations</Filter>
     </ClInclude>
@@ -201,6 +201,12 @@
       <Filter>Header Files\Battles</Filter>
     </ClInclude>
     <ClInclude Include="SiegeBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBattle.h">
+      <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleData.h">
       <Filter>Header Files\Battles</Filter>
     </ClInclude>
   </ItemGroup>

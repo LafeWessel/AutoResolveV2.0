@@ -2171,14 +2171,13 @@ namespace UnitTests
 			b.determineOutcome(0);
 			Assert::AreEqual((int)outcome::Draw, (int)b.getOutcome());
 		}
-
-
-
 	};
+
 	//Unit tests for Normal Battle class
 	TEST_CLASS(NormalBattleTests) {
 		//None should be needed
 	};
+
 	//Unit tests for Naval Battle class
 	TEST_CLASS(NavalBattleTests) {
 		//Test get/setAttackerShips
@@ -2194,6 +2193,7 @@ namespace UnitTests
 			Assert::AreEqual(5, b.getDefenderShips());
 		}
 	};
+
 	//Unit tests for Siege Battle class
 	TEST_CLASS(SiegeBattleTests) {
 		//Test get/setRams
@@ -2223,6 +2223,7 @@ namespace UnitTests
 			Assert::AreEqual(5, b.getTownStats().getSupplies());
 		}
 	};
+
 	//Unit tests for Raid Battle class
 	TEST_CLASS(RaidBattleTests) {
 		//Test get/set Town Stats
@@ -2234,6 +2235,7 @@ namespace UnitTests
 			Assert::AreEqual(5, b.getTownStats().getSupplies());
 		}
 	};
+
 	//Unit tests for Monster Battle class
 	TEST_CLASS(MonsterBattleTests) {
 		//Test get/set Monster
@@ -2244,5 +2246,10 @@ namespace UnitTests
 			b.setMonster(m);
 			Assert::AreEqual((int)monsterType::Demon, (int)b.getMonster().getMonsterType());
 		}
+	};
+
+	//Unit tests for TestBattle class
+	TEST_CLASS(TestBattleTests) {
+		
 	};
 }

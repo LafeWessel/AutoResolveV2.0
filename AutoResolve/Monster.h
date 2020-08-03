@@ -23,6 +23,7 @@ private:
 	int autoResValue; //(int)type*10 + 10
 	bool debug;
 
+	void setValuesFromMonsterType();
 public:
 	~Monster();
 	Monster();
@@ -53,6 +54,6 @@ public:
 	};
 	void printData() const;
 
-	void setValuesFromMonsterType();
+	
 	vector<Equipment> getEquipRewards() const; //This gets the rewards associated with the type of Monster
 };

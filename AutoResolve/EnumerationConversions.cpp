@@ -327,6 +327,54 @@ Returns the unitType that corresponds to the int passed
 	return unitType::Melee;
 }
 
+ /*
+ Returns the defenses that corresponds to the int passed
+ */
+ defenses EnumerationConversions::intToDefenses(const int def) {
+	 switch (def)
+	 {
+	 case 1:
+		 return defenses::None;
+		 break;
+	 case 2:
+		 return defenses::Wooden_Wall;
+		 break;
+	 case 3:
+		 return defenses::Wooden_Wall_W_Moat;
+		 break;
+	 case 4:
+		 return defenses::Stone_Wall;
+		 break;
+	 case 5:
+		 return defenses::Stone_Wall_W_Moat;
+		 break;
+	default:
+		 cerr << "Unknown integer input" << endl;
+		 
+	 }
+ }
+
+ /*
+ Returns the battle type corresponding to the int passed
+ */
+ battleType EnumerationConversions::intToBattleType(const int type) {
+	 switch (type)
+	 {
+	 case 1:
+		 return battleType::Normal;
+	 case 2:
+		 return battleType::Siege;
+	 case 3:
+		 return battleType::Raid;
+	 case 4:
+		 return battleType::Naval;
+	 case 5:
+		 return battleType::Monster;
+	 default:
+		 cerr << "Unkown integer input" << endl;
+	 }
+ }
+
 /*
 Returns an equipmentType that corresponds to the string passed
 */
