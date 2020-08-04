@@ -9,11 +9,6 @@ RaidBattle::RaidBattle() : Battle()
 	townLevel = TownStats();
 }
 
-RaidBattle::RaidBattle(bool debugI) : Battle(debugI)
-{
-	townLevel = TownStats();
-}
-
 RaidBattle::RaidBattle(const string unitFile) : Battle(unitFile) {
 	townLevel = TownStats();
 }

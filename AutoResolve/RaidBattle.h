@@ -13,7 +13,6 @@ private:
 public:
 	~RaidBattle();
 	RaidBattle();
-	RaidBattle(bool debugI);
 	RaidBattle(const string unitFile);
 
 	void battleOutput(vector<vector<int>> totalCasualties, int suppGained);

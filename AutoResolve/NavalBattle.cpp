@@ -11,12 +11,6 @@ NavalBattle::NavalBattle() : Battle()//void initializer
 	defenderShips = 0;
 }
 
-NavalBattle::NavalBattle(bool debugI) : Battle(debugI)
-{
-	attackerShips = 0;
-	defenderShips = 0;
-}
-
 NavalBattle::NavalBattle(const string unitFile) : Battle(unitFile) {
 	attackerShips = 0;
 	defenderShips = 0;

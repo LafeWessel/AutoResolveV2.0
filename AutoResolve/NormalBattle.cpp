@@ -8,9 +8,6 @@ NormalBattle::NormalBattle() : Battle() //void initializer
 {
 }
 
-NormalBattle::NormalBattle(bool debugI) : Battle(debugI)
-{
-}
 
 void NormalBattle::calculate() //Uses base battle calculations and output
 {

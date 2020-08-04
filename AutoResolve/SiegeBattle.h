@@ -17,7 +17,6 @@ private:
 public:
 
 	SiegeBattle();
-	SiegeBattle(const bool debugI);
 	SiegeBattle(const string unitFile);
 	~SiegeBattle();
 

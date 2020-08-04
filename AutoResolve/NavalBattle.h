@@ -11,7 +11,6 @@ private:
 public:
 	~NavalBattle();
 	NavalBattle();
-	NavalBattle(bool debugI);
 	NavalBattle(const string unitFile);
 
 	void battleOutput(vector<vector<int>> totalCasualties);

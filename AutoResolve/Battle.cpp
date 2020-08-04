@@ -20,21 +20,6 @@ Battle::Battle()
 	data = BattleData((string)"units.txt");
 }
 
-Battle::Battle(const bool debugI)
-{
-	attacker = Player();
-	defender = Player();
-	foundByAttacker = Equipment();
-	foundByDefender = Equipment();
-	treasure = nullptr;
-	result = outcome::Draw;
-	output = true;
-	this->setDebug(debugI);
-	fileOut = false;
-	fileName = "";
-	data = BattleData((string)"units.txt");
-}
-
 Battle::Battle(const string unitFile)
 {
 	attacker = Player();

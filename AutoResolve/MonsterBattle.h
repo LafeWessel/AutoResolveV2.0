@@ -13,7 +13,6 @@ private:
 public:
 	~MonsterBattle();
 	MonsterBattle();
-	MonsterBattle(const bool debugI);
 	MonsterBattle(const string unitFile);
 
 	void battleOutput(vector<int>& totalCasualties);

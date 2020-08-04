@@ -19,7 +19,6 @@ using std::endl;
 /*
 This class only contains static functions for converting to and from enumerations from various
 data types
-TODO possibly implement templates here?
 */
 class EnumerationConversions
 {

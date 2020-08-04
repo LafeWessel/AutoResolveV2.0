@@ -26,8 +26,6 @@ TODO-implement BattleData class
 
 TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
 
-TODO-Change win-loss ratio in tests to be % wins
-
 TODO-Create an auto-balancing feature to determine what is an equal distribution of power -> AI
 
 TODO-Make a db of results from numerous battles then analyze it with python

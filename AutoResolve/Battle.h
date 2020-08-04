@@ -36,7 +36,6 @@ protected:
 public:
 	~Battle();
 	Battle();
-	Battle(const bool debugI);
 	Battle(const string unitFile);
 
 	Player getAttacker() const{ return attacker; };
@@ -63,8 +62,10 @@ public:
 	void setFileName(const string fileName) { this->fileName = fileName; };
 	void setDebug(const bool debugI) { 
 		debug = debugI;
-		if (treasure->isInitialized()) {
-			treasure->setDebug(debug);
+		if (treasure) {
+			if (treasure->isInitialized()) {
+				treasure->setDebug(debug);
+			}
 		}
 		attacker.setDebug(debug);
 		defender.setDebug(debug);

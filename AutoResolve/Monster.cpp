@@ -50,97 +50,63 @@ vector<Equipment> Monster::getEquipRewards() const //This figures out the treasu
 	switch (type)
 	{
 	case(monsterType::Minotaur):
-		if (debug)
-		{
-			Equipment reward = treasure->findWeapon();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findWeapon());
-		}
+	{
+		Equipment reward = treasure->findWeapon();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
 		break;
+	}
 	case(monsterType::Hobgoblin):
-		if (debug)
-		{
-			Equipment reward = treasure->findWeapon();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-			reward = treasure->findArmor();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findWeapon());
-			rewards.push_back(treasure->findArmor());
-		}
+	{
+		Equipment reward = treasure->findWeapon();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+		reward = treasure->findArmor();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
 		break;
+	}
 	case(monsterType::Troll):
-		if (debug)
-		{
-			Equipment reward = treasure->findWeapon();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-			reward = treasure->findTrinket();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findWeapon());
-			rewards.push_back(treasure->findTrinket());
-		}
+	{
+		Equipment reward = treasure->findWeapon();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+		reward = treasure->findTrinket();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
 		break;
+	}
 	case(monsterType::Giant):
-		if (debug)
-		{
-			Equipment reward = treasure->findWeapon();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-			reward = treasure->findTrinket();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-			reward = treasure->findArmor();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findWeapon());
-			rewards.push_back(treasure->findTrinket());
-			rewards.push_back(treasure->findArmor());
-		}
+	{
+		Equipment reward = treasure->findWeapon();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+		reward = treasure->findTrinket();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+		reward = treasure->findArmor();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
 		break;
+	}
 	case(monsterType::Demon):
-		if (debug)
-		{
-			Equipment reward = treasure->findBanner();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-			reward = treasure->findArmor();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findArmor());
-			rewards.push_back(treasure->findBanner());
-		}
+	{
+		Equipment reward = treasure->findArmor();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+		reward = treasure->findBanner();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
+
 		break;
+	}
 	case(monsterType::Dragon):
-		if (debug)
-		{
-			Equipment reward = treasure->findDragonEq();
-			rewards.push_back(reward);
-			cout << "rewards pushed: " << reward.getName() << endl;
-		}
-		else
-		{
-			rewards.push_back(treasure->findDragonEq());
-		}
+	{
+		Equipment reward = treasure->findDragonEq();
+		rewards.push_back(reward);
+		if (debug) { cout << "rewards pushed: " << reward.getName() << endl; }
 		break;
+	}
 	default:
 		cerr << "Something went wrong" << endl;
 		rewards.push_back(Equipment{});

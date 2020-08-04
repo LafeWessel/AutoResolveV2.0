@@ -12,13 +12,6 @@ SiegeBattle::SiegeBattle() : Battle()//void initializer
 	townLevel = TownStats();
 }
 
-SiegeBattle::SiegeBattle(bool debugI) : Battle(debugI)
-{
-	rams = 0;
-	catapults = 0;
-	siegeTowers = 0;
-	townLevel = TownStats();
-}
 
 SiegeBattle::SiegeBattle(const string unitFile) : Battle(unitFile) {
 	rams = 0;

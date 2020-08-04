@@ -8,7 +8,6 @@ private:
 public:
 	~NormalBattle();
 	NormalBattle();
-	NormalBattle(bool debugI);
 
 	void battleOutput(vector<vector<int>> totalCasualties);
 	void calculate();

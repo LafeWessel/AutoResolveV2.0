@@ -9,10 +9,6 @@ MonsterBattle::MonsterBattle() : Battle()
 	monster = Monster();
 }
 
-MonsterBattle::MonsterBattle(const bool debugI) : Battle(debugI)
-{
-	monster = Monster();
-}
 
 MonsterBattle::MonsterBattle(const string unitFile) : Battle(unitFile) {
 	monster = Monster();
