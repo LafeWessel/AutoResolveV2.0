@@ -57,6 +57,7 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setTreasure(treasure);
 		b.setDebug(debug);
 		b.setOutput(debug);
+		b.setFileOut(outputToFile);
 		
 		initBattle(b);
 
@@ -71,6 +72,7 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setTreasure(treasure);
 		b.setDebug(debug);
 		b.setOutput(debug);
+		b.setFileOut(outputToFile);
 		
 		initBattle(b);
 
@@ -78,7 +80,7 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setSiegeTowers(Random::randomNumber(0, 5));
 		b.setCatapults(Random::randomNumber(0, 5));
 		TownStats t{};
-		t.setDefenses(EnumerationConversions::intToDefenses(Random::randomNumber(1, 5)));
+		t.setDefenses((defenses)(Random::randomNumber(1, 5)));
 		b.setTownStats(t);
 
 		b.calculate();
@@ -92,11 +94,14 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setFileOut(outputToFile);
 		b.setTreasure(treasure);
 		b.setDebug(debug);
-		initBattle(b);
 		b.setOutput(debug);
+		b.setFileOut(outputToFile);
+
+		initBattle(b);
+
 
 		TownStats t{};
-		t.setDefenses(EnumerationConversions::intToDefenses(Random::randomNumber(1, 5)));
+		t.setDefenses((defenses)(Random::randomNumber(1, 5)));
 		b.setTownStats(t);
 
 		b.calculate();
@@ -110,6 +115,8 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setTreasure(treasure);
 		b.setDebug(debug);
 		b.setOutput(debug);
+		b.setFileOut(outputToFile);
+
 		initBattle(b);
 
 		b.setAttackerShips(Random::randomNumber(1, 10));
@@ -126,10 +133,12 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		b.setTreasure(treasure);
 		b.setDebug(debug);
 		b.setOutput(debug);
+		b.setFileOut(outputToFile);
+
 		initBattle(b);
 
 		Monster m{};
-		m.setMonsterType(EnumerationConversions::intToMonsterType(Random::randomNumber(1, 6)));
+		m.setMonsterType((monsterType)(Random::randomNumber(1, 6)));
 		m.setTreasure(b.getTreasure());
 
 		b.calculate();
@@ -137,7 +146,7 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		break;
 	}
 	default:
-		cerr << "Unknown type" << endl;
+		cerr << "Unknown battleType: " << (int)type << endl;
 	}
 }
 
@@ -175,7 +184,7 @@ void TestBattle::initPlayer(Player& p, const Treasure* t) {
 
 	if (Random::randomNumber(0, 1) > 0) { p.setAdvCombatDeck(true); }
 
-	p.setFaction(EnumerationConversions::intToFaction(Random::randomNumber(1, 4)));
+	p.setFaction((faction)(Random::randomNumber(1, 4)));
 	p.setReinforcements(Random::randomNumber(0, 5));
 
 	int numUnits = Random::randomNumber(1, 20);

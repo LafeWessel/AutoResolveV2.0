@@ -85,92 +85,6 @@ namespace UnitTests
 	//Unit tests for EnumerationConversions class
 	TEST_CLASS(EnumerationConversionsTests) {
 
-		//intToFaction Unit Tests
-		//Tests to ensure that the correct output is returned when passing 1
-		TEST_METHOD(TestIntToFactionOne) {
-			Assert::AreEqual((int)faction::rebel, (int)EnumerationConversions::intToFaction(1));
-		}
-		//Tests to ensure that the correct output is returned when passing 2
-		TEST_METHOD(TestIntToFactionTwo) {
-			Assert::AreEqual((int)faction::beladimir, (int)EnumerationConversions::intToFaction(2));
-		}
-		//Tests to ensure that the correct output is returned when passing 3
-		TEST_METHOD(TestIntToFactionThree) {
-			Assert::AreEqual((int)faction::lerastir, (int)EnumerationConversions::intToFaction(3));
-		}
-		//Tests to ensure that the correct output is returned when passing 4
-		TEST_METHOD(TestIntToFactionFour) {
-			Assert::AreEqual((int)faction::menoriad, (int)EnumerationConversions::intToFaction(4));
-		}
-		//Tests to ensure that the correct output is returned when passing invalid value
-		TEST_METHOD(TestIntToFactionInvalidInput) {
-			Assert::AreEqual((int)faction::rebel, (int)EnumerationConversions::intToFaction(5));
-		}
-
-		//intToMonsterType Unit Tests
-		//Tests to ensure that the correct output is returned when passing 1
-		TEST_METHOD(TestIntToMonsterTypeOne) {
-			Assert::AreEqual((int)monsterType::Minotaur, (int)EnumerationConversions::intToMonsterType(1));
-		}
-		//Tests to ensure that the correct output is returned when passing 2
-		TEST_METHOD(TestIntToMonsterTypeTwo) {
-			Assert::AreEqual((int)monsterType::Hobgoblin, (int)EnumerationConversions::intToMonsterType(2));
-		}
-		//Tests to ensure that the correct output is returned when passing 3
-		TEST_METHOD(TestIntToMonsterTypeThree) {
-			Assert::AreEqual((int)monsterType::Troll, (int)EnumerationConversions::intToMonsterType(3));
-		}
-		//Tests to ensure that the correct output is returned when passing 4
-		TEST_METHOD(TestIntToMonsterTypeFour) {
-			Assert::AreEqual((int)monsterType::Giant, (int)EnumerationConversions::intToMonsterType(4));
-		}
-		//Tests to ensure that the correct output is returned when passing 5
-		TEST_METHOD(TestIntToMonsterTypeFive) {
-			Assert::AreEqual((int)monsterType::Demon, (int)EnumerationConversions::intToMonsterType(5));
-		}
-		//Tests to ensure that the correct output is returned when passing 6
-		TEST_METHOD(TestIntToMonsterTypeSix) {
-			Assert::AreEqual((int)monsterType::Dragon, (int)EnumerationConversions::intToMonsterType(6));
-		}
-		//Tests to ensure that the correct output is returned when passing invalid value
-		TEST_METHOD(TestIntToMonsterTypeInvalidInput) {
-			Assert::AreEqual((int)monsterType::Empty, (int)EnumerationConversions::intToMonsterType(7));
-		}
-
-		//outputIntAsOutcome Unit Tests
-		//Tests to ensure that the correct output is returned when passing 1
-		TEST_METHOD(outputIntAsOutcomeOne) {
-			Assert::AreEqual((string)"Decisive Victory", EnumerationConversions::outputIntAsOutcome(1));
-		}
-		//Tests to ensure that the correct output is returned when passing 2
-		TEST_METHOD(outputIntAsOutcomeTwo) {
-			Assert::AreEqual((string)"Heroic Victory", EnumerationConversions::outputIntAsOutcome(2));
-		}
-		//Tests to ensure that the correct output is returned when passing 3
-		TEST_METHOD(outputIntAsOutcomeThree) {
-			Assert::AreEqual((string)"Close Victory", EnumerationConversions::outputIntAsOutcome(3));
-		}
-		//Tests to ensure that the correct output is returned when passing 4
-		TEST_METHOD(outputIntAsOutcomeFour) {
-			Assert::AreEqual((string)"Draw", EnumerationConversions::outputIntAsOutcome(4));
-		}
-		//Tests to ensure that the correct output is returned when passing 5
-		TEST_METHOD(outputIntAsOutcomeFive) {
-			Assert::AreEqual((string)"Close Defeat", EnumerationConversions::outputIntAsOutcome(5));
-		}
-		//Tests to ensure that the correct output is returned when passing 6
-		TEST_METHOD(outputIntAsOutcomeSix) {
-			Assert::AreEqual((string)"Valiant Defeat", EnumerationConversions::outputIntAsOutcome(6));
-		}
-		//Tests to ensure that the correct output is returned when passing 7
-		TEST_METHOD(outputIntAsOutcomeSeven) {
-			Assert::AreEqual((string)"Crushing Defeat", EnumerationConversions::outputIntAsOutcome(7));
-		}
-		//Tests to ensure that the correct output is returned when passing invalid value
-		TEST_METHOD(outputIntAsOutcomeInvalidInput) {
-			Assert::AreEqual((string)"", EnumerationConversions::outputIntAsOutcome(8));
-		}
-
 		//to_string method tests
 		//to_string(equipmentType) tests
 		//Tests to ensure that the correct output is returned when passing null
@@ -334,23 +248,7 @@ namespace UnitTests
 			Assert::AreEqual((string)"Ranged", EnumerationConversions::to_string(unitType::Ranged));
 		}
 
-		//intToUnitType Unit Tests
-		//Tests to ensure that the correct output is returned when passing 1
-		TEST_METHOD(TestIntToUnitTypeOne) {
-			Assert::AreEqual((int)unitType::Melee, (int)EnumerationConversions::intToUnitType(1));
-		}
-		//Tests to ensure that the correct output is returned when passing 2
-		TEST_METHOD(TestIntToUnitTypeTwo) {
-			Assert::AreEqual((int)unitType::Cavalry, (int)EnumerationConversions::intToUnitType(2));
-		}
-		//Tests to ensure that the correct output is returned when passing 3
-		TEST_METHOD(TestIntToUnitTypeThree) {
-			Assert::AreEqual((int)unitType::Ranged, (int)EnumerationConversions::intToUnitType(3));
-		}
-		//Tests to ensure that the correct output is returned when passing invalid value
-		TEST_METHOD(TestIntToUnitTypeInvalidValue) {
-			Assert::AreEqual((int)unitType::Melee, (int)EnumerationConversions::intToUnitType(4));
-		}
+
 
 		//stringToEquipType Unit Tests
 		//Tests to ensure that the correct output is returned when passing "Null"

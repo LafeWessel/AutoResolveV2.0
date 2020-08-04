@@ -41,8 +41,7 @@ public:
 
 	Player getAttacker() const{ return attacker; };
 	Player getDefender() const{ return defender; };
-	outcome getOutcome() const{ 
-		return result; };
+	outcome getOutcome() const{ return result; };
 	battleType getBattleType() const{ return type; };
 	bool getOutput()const { return output; };
 	bool getDebug()const { return debug; };

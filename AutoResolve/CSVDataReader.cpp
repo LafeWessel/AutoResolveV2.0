@@ -76,7 +76,7 @@ vector<Equipment> CSVDataReader::readEquipment(const string path)
 vector<Unit> CSVDataReader::readUnits(const faction fact, const string path)
 {
 		
-	if (debug) { cout << "Faction selected: " << EnumerationConversions::to_string(fact) << endl; }
+	//if (debug) { cout << "Faction selected: " << EnumerationConversions::to_string(fact) << endl; }
 
 	ifstream file (path);
 	if (debug) { cout << path << " tried" << endl; }
@@ -95,29 +95,20 @@ vector<Unit> CSVDataReader::readUnits(const faction fact, const string path)
 	unitType UnitType;
 	Unit unitRead{};
 	unitRead.setDebug(debug);
-	if (debug) { cout << "Beginning to read from file." << endl; }
 
 	//Reads the equipment file and puts equipment in the correct vectors then initializes the treasure
 	while (file >> row)
 	{
 
-		Faction = EnumerationConversions::intToFaction(stoi(row[0]));
-		if (debug) { cout << "intToFaction(stoi(row[0])) : " << EnumerationConversions::to_string(Faction) << endl; }
-		UnitType = EnumerationConversions::intToUnitType(stoi(row[2]));
-		if (debug) { cout << "intToUnitType(stoi(row[2])) : " << EnumerationConversions::to_string(UnitType) << endl; }
+		Faction = (faction)(stoi(row[0]));
+		UnitType = (unitType)(stoi(row[2]));
 
 		unitRead.setName(row[1]);
-		if (debug) { cout << "unitRead Name set to : " << row[1] << endl; }
 		unitRead.setARBonus(stoi(row[3]));
-		if (debug) { cout << "unitRead ARBonus set to : " << stoi(row[3]) << endl; }
 		unitRead.setSoldiersPerUnit(stoi(row[4]));
-		if (debug) { cout << "unitRead soldiersPerUnit set to : " << stoi(row[4]) << endl; }
 		unitRead.setCurrentSoldiers(stoi(row[4]));
-		if (debug) { cout << "unitRead currentSoldiers set to : " << stoi(row[4]) << endl; }
 		unitRead.setFaction(Faction);
-		if (debug) { cout << "unitRead Faction set to : " << EnumerationConversions::to_string(Faction) << endl; }
 		unitRead.setUnitType(UnitType);
-		if (debug) { cout << "unitRead UnitType set to : " << EnumerationConversions::to_string(UnitType) << endl; }
 
 
 		if (unitRead.getFaction() == fact)

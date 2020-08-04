@@ -1,117 +1,31 @@
 #include "EnumerationConversions.h"
 
-/*
-Returns the faction corresponding to the integer passed
-*/
- faction EnumerationConversions::intToFaction(const int faction){
-
-	switch (faction) {
-		case 1:
-			return faction::rebel;
-			break;
-		case 2:
-			return faction::beladimir;
-			break;
-		case 3:
-			return faction::lerastir;
-			break;
-		case 4:
-			return faction::menoriad;
-			break;
-		default:
-			cerr << "Invalid integer passed to intToFaction: " << faction << endl;
-	}
-	return faction::rebel;
-}
-
-/*
-Returns the monsterType corresponding to the integer passed
-*/
- monsterType EnumerationConversions::intToMonsterType(const int monsterType){
-	switch (monsterType) {
-		case 1:
-			return monsterType::Minotaur;
-			break;
-		case 2:
-			return monsterType::Hobgoblin;
-			break;
-		case 3:
-			return monsterType::Troll;
-			break;
-		case 4:
-			return monsterType::Giant;
-			break;
-		case 5:
-			return monsterType::Demon;
-			break;
-		case 6:
-			return monsterType::Dragon;
-			break;
-		default:
-			cerr << "Invalid integer passed to intToMonsterType: " << monsterType << endl;
-	}
-	return monsterType::Empty;
-}
-
-/*
-Outputs an integer as its corresponding outcome enum class name.
-TODO replace references to this with to_string(outcome)
-*/
- string EnumerationConversions::outputIntAsOutcome(const int outcome){
-	switch (outcome)
-	{
-	case(1):
-		return "Decisive Victory";
-		break;
-	case(2):
-		return "Heroic Victory";
-		break;
-	case(3):
-		return "Close Victory";
-		break;
-	case(4):
-		return "Draw";
-		break;
-	case(5):
-		return "Close Defeat";
-		break;
-	case(6):
-		return "Valiant Defeat";
-		break;
-	case(7):
-		return "Crushing Defeat";
-		break;
-	default:
-		cerr << " No valid outcome chosen: " << outcome << endl;	
-	}
-	return "";
-}
 
 /*
 Returns a string that corresponds to the equipmentType passed based on its name
 */
  string EnumerationConversions::to_string(const equipmentType e){
-	switch ((int)e)
+	switch (e)
 	{
-	case(1):
+	case equipmentType::null:
 		return "null";
 		break;
-	case(2):
+	case equipmentType::armor:
 		return "Armor";
 		break;
-	case(3):
+	case equipmentType::weapon:
 		return "Weapon";
 		break;
-	case(4):
+	case equipmentType::trinket:
 		return "Trinket";
 		break;
-	case(5):
+	case equipmentType::banner:
 		return "Banner";
 		break;
-	case(6):
+	case equipmentType::dragon:
 		return "Dragon";
 		break;
-	case(7):
+	case equipmentType::follower:
 		return "Follower";
 		break;
 	default:
@@ -124,27 +38,27 @@ Returns a string that corresponds to the equipmentType passed based on its name
 Returns a string that corresponds to the outcome passed based on its name
 */
  string EnumerationConversions::to_string(const outcome o){
-	switch ((int)o)
+	switch (o)
 	{
-	case(1):
+	case outcome::Decisive_Victory:
 		return "Decisive Victory";
 		break;
-	case(2):
+	case outcome::Heroic_Victory:
 		return "Heroic Victory";
 		break;
-	case(3):
+	case outcome::Close_Victory:
 		return "Close Victory";
 		break;
-	case(4):
+	case outcome::Draw:
 		return "Draw";
 		break;
-	case(5):
+	case outcome::Close_Defeat:
 		return "Close Defeat";
 		break;
-	case(6):
+	case outcome::Valiant_Defeat:
 		return "Valiant Defeat";
 		break;
-	case(7):
+	case outcome::Crushing_Defeat:
 		return "Crushing Defeat";
 		break;
 	default:
@@ -157,18 +71,18 @@ Returns a string that corresponds to the outcome passed based on its name
 Returns a string that corresponds to the faction passed based on its name
 */
  string EnumerationConversions::to_string(const faction f){
-	switch ((int)f)
+	switch (f)
 	{
-	case(1):
+	case faction::rebel:
 		return "Rebel";
 		break;
-	case(2):
+	case faction::beladimir:
 		return "Beladimir";
 		break;
-	case(3):
+	case faction::lerastir:
 		return "Lerastir";
 		break;
-	case(4):
+	case faction::menoriad:
 		return "Menoriad";
 		break;
 	default:
@@ -181,27 +95,27 @@ Returns a string that corresponds to the faction passed based on its name
 Returns a string that corresponds to the outcome passed based on its name
 */
  string EnumerationConversions::to_string(const monsterType m){
-	switch ((int)m)
+	switch (m)
 	{
-	case(1):
+	case monsterType::Minotaur:
 		return "Minotaur";
 		break;
-	case(2):
+	case monsterType::Hobgoblin:
 		return "Hobgoblin";
 		break;
-	case(3):
+	case monsterType::Troll:
 		return "Troll";
 		break;
-	case(4):
+	case monsterType::Giant:
 		return "Giant";
 		break;
-	case(5):
+	case monsterType::Demon:
 		return "Demon";
 		break;
-	case(6):
+	case monsterType::Dragon:
 		return "Dragon";
 		break;
-	case(7):
+	case monsterType::Empty:
 		return "Empty";
 		break;
 	default:
@@ -214,21 +128,21 @@ Returns a string that corresponds to the outcome passed based on its name
 Returns a string that corresponds to the defenses passed based on its name
 */
  string EnumerationConversions::to_string(const defenses d) {
-	switch ((int)d)
+	switch (d)
 	{
-	case(1):
+	case defenses::None:
 		return "None";
 		break;
-	case(2):
+	case defenses::Wooden_Wall:
 		return "Wooden Wall";
 		break;
-	case(3):
+	case defenses::Wooden_Wall_W_Moat:
 		return "Wooden Wall w/ Moat";
 		break;
-	case(4):
+	case defenses::Stone_Wall:
 		return "Stone Wall";
 		break;
-	case(5):
+	case defenses::Stone_Wall_W_Moat:
 		return "Stone Wall w/ Moat";
 		break;
 	default:
@@ -241,21 +155,21 @@ Returns a string that corresponds to the defenses passed based on its name
 Returns a string that corresponds to the battleType passed based on its name
 */
  string EnumerationConversions::to_string(const battleType b){
-	switch ((int)b)
+	switch (b)
 	{
-	case(1):
+	case battleType::Normal:
 		return "Normal";
 		break;
-	case(2):
+	case battleType::Siege:
 		return "Siege";
 		break;
-	case(3):
+	case battleType::Raid:
 		return "Raid";
 		break;
-	case(4):
+	case battleType::Naval:
 		return "Naval";
 		break;
-	case(5):
+	case battleType::Monster:
 		return "Monster";
 		break;
 	default:
@@ -268,15 +182,15 @@ Returns a string that corresponds to the battleType passed based on its name
 Returns a string that corresponds to the unitType passed based on its name
 */
  string EnumerationConversions::to_string(const unitType u){
-	switch ((int)u)
+	switch (u)
 	{
-	case(1):
+	case unitType::Melee:
 		return "Melee";
 		break;
-	case(2):
+	case unitType::Cavalry:
 		return "Cavalry";
 		break;
-	case(3):
+	case unitType::Ranged:
 		return "Ranged";
 		break;
 	default:
@@ -303,76 +217,6 @@ Returns a string that corresponds to the unitType passed based on its name
 		 cerr << " No valid generalState chosen: "<< (int)g << endl;
 	 }
 	 return "";
- }
-
-
-/*
-Returns the unitType that corresponds to the int passed
-*/
- unitType EnumerationConversions::intToUnitType(const int unitType){
-	switch (unitType)
-	{
-	case 1:
-		return unitType::Melee;
-		break;
-	case 2:
-		return unitType::Cavalry;
-		break;
-	case 3:
-		return unitType::Ranged;
-		break;
-	default:
-		cerr << "invalid integer -> unitType input: " << unitType << endl;
-	}
-	return unitType::Melee;
-}
-
- /*
- Returns the defenses that corresponds to the int passed
- */
- defenses EnumerationConversions::intToDefenses(const int def) {
-	 switch (def)
-	 {
-	 case 1:
-		 return defenses::None;
-		 break;
-	 case 2:
-		 return defenses::Wooden_Wall;
-		 break;
-	 case 3:
-		 return defenses::Wooden_Wall_W_Moat;
-		 break;
-	 case 4:
-		 return defenses::Stone_Wall;
-		 break;
-	 case 5:
-		 return defenses::Stone_Wall_W_Moat;
-		 break;
-	default:
-		 cerr << "Invalid integer -> defenses input: " << def << endl;
-		 
-	 }
- }
-
- /*
- Returns the battle type corresponding to the int passed
- */
- battleType EnumerationConversions::intToBattleType(const int type) {
-	 switch (type)
-	 {
-	 case 1:
-		 return battleType::Normal;
-	 case 2:
-		 return battleType::Siege;
-	 case 3:
-		 return battleType::Raid;
-	 case 4:
-		 return battleType::Naval;
-	 case 5:
-		 return battleType::Monster;
-	 default:
-		 cerr << "Invalid integer -> battleType input: " << type << endl;
-	 }
  }
 
 /*

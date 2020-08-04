@@ -20,7 +20,7 @@ using std::endl;
 using std::string;
 
 /*
-TODO-Make a way for the tests to use solely randomized values
+
 
 TODO-implement BattleData class
 
@@ -56,7 +56,7 @@ bool continueLoop(string loop) {
 void runApp() {
 	do {
 		bool debug = continueLoop((string)"Would you like to debug?");
-
+		bool output = continueLoop((string)"Would you like to output results to a file?");
 		//Get the number of tests the user would like to perform
 		int tests = 1;
 		cout << "How many tests:" << endl;
@@ -77,8 +77,9 @@ void runApp() {
 		TestBattle t{};
 		t.setTreasure(&treasure);
 		t.setNumberOfTests(tests);
-		t.setBattleType(EnumerationConversions::intToBattleType(type));
+		t.setBattleType((battleType)(type));
 		t.setDebug(debug);
+		t.setOutputToFile(output);
 		t.initializeAndRun();
 
 
@@ -105,6 +106,7 @@ int main()
 	//	file.close();
 	//} 
 	
+
 	runApp();
 
 
