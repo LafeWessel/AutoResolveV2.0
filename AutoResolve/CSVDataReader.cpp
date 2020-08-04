@@ -28,8 +28,7 @@ vector<Equipment> CSVDataReader::readEquipment(const string path)
 	if (debug) { cout << "readEquipment() called." << endl; }
 
 	vector<Equipment> readEquip{};
-	if (debug) { cout << "empty equipment vector initialized" << endl; }
-
+	
 	ifstream file(path);
 	if (debug) { cout << path <<" tried" << endl; }
 	if (!file)
@@ -50,22 +49,15 @@ vector<Equipment> CSVDataReader::readEquipment(const string path)
 	//Reads the equipment file and puts equipment's values in the correct vectors then initializes the treasure
 	while (file >> row)
 	{
-		if (debug) { cout << "Starting to read." << endl; }
+		//if (debug) { cout << "CSVDataReader Starting to read." << endl; }
 
 		theEquipType = row[0];
-		if (debug) { cout << "Equipment Type set to: " << row[0] << endl; }
 		theName = row[1];
-		if (debug) { cout << "Name set to: " << row[1] << endl; }
 		theEffect = row[2];
-		if (debug) { cout << "Effect set to: " << row[2] << endl; }
 		theCoinValue = row[3];
-		if (debug) { cout << "Coin Value set to: " << row[3] << endl; }
 		theIndexNumber = row[4];
-		if (debug) { cout << "Index Number set to: " << row[4] << endl; }
 		theAutoBonus = row[5];
-		if (debug) { cout << "AutoRBonus set to: " << row[5] << endl; }
 		theRange = row[6];
-		if (debug) { cout << "Range set to: " << row[6] << endl; }
 
 		Equipment inputEquip(theName, stoi(theAutoBonus), stoi(theIndexNumber), stoi(theRange), EnumerationConversions::stringToEquipType(theEquipType), theEffect, stoi(theCoinValue));
 		readEquip.push_back(inputEquip);

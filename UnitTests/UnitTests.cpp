@@ -910,7 +910,7 @@ namespace UnitTests
 			t.setFilePath("../AutoResolve/equipment.txt");
 			t.initialize();
 			Monster m{};
-			m.setTreasure(t);
+			m.setTreasure(&t);
 			vector<Equipment> e = m.getEquipRewards();
 			Assert::AreEqual((string)"", e[0].getName());
 		}
@@ -1937,7 +1937,7 @@ namespace UnitTests
 			Treasure t{};
 			t.setFilePath((string)"../AutoResolve/equipment.txt");
 			t.initialize();
-			b.setTreasure(t);
+			b.setTreasure(&t);
 			b.treasureResults();
 			bool att = (b.getFoundByAttacker().getName() != "No Treasure");
 			bool def = (b.getFoundByDefender().getName() != "No Treasure");
@@ -1961,7 +1961,7 @@ namespace UnitTests
 			Treasure t{};
 			t.setFilePath((string)"../AutoResolve/equipment.txt");
 			t.initialize();
-			b.setTreasure(t);
+			b.setTreasure(&t);
 			b.treasureResults();
 			bool att = (b.getFoundByAttacker().getName() != "No Treasure");
 			bool def = (b.getFoundByDefender().getName() == "No Treasure");
@@ -1985,7 +1985,7 @@ namespace UnitTests
 			Treasure t{};
 			t.setFilePath((string)"../AutoResolve/equipment.txt");
 			t.initialize();
-			b.setTreasure(t);
+			b.setTreasure(&t);
 			b.treasureResults();
 			bool att = (b.getFoundByAttacker().getName() == "No Treasure");
 			bool def = (b.getFoundByDefender().getName() != "No Treasure");
@@ -2009,7 +2009,7 @@ namespace UnitTests
 			Treasure t{};
 			t.setFilePath((string)"../AutoResolve/equipment.txt");
 			t.initialize();
-			b.setTreasure(t);
+			b.setTreasure(&t);
 			b.treasureResults();
 			bool att = (b.getFoundByAttacker().getName() == "No Treasure");
 			bool def = (b.getFoundByDefender().getName() == "No Treasure");

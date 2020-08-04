@@ -124,6 +124,7 @@ void Treasure::initialize()
 
 	sortEquipment(allEquipment);
 	if (debug) { cout << " intitializeTreasure() finished" << endl; }
+
 	initialized = true;
 	return;
 }
@@ -135,29 +136,29 @@ Returns an Equipment object if a random int in range 1-8 + bonus is >= 5
 {
 	if (debug) { cout << " findTreasure() called" << endl; }
 	int total = Random::randomNumber(1,8) + bonus;
-	if (debug) { cout << "random + bonus = " << total << endl; }
+	//if (debug) { cout << "random + bonus = " << total << endl; }
 	if ( total >= 5)
 	{
 		switch (Random::randomNumber(1,5))
 		{
 		case(1):
-			if (debug) { cout << " findArmor() returned" << endl; }
+			//if (debug) { cout << " findArmor() returned" << endl; }
 			return this->findArmor();
 			break;
 		case(2):
-			if (debug) { cout << " findWeapon() returned" << endl; }
+			//if (debug) { cout << " findWeapon() returned" << endl; }
 			return this->findWeapon();
 			break;
 		case(3):
-			if (debug) { cout << " findTrinket() returned" << endl; }
+			//if (debug) { cout << " findTrinket() returned" << endl; }
 			return this->findTrinket();
 			break;
 		case(4):
-			if (debug) { cout << " findBanner() returned" << endl; }
+			//if (debug) { cout << " findBanner() returned" << endl; }
 			return this->findBanner();
 			break;
 		case(5):
-			if (debug) { cout << " findFollower() returned" << endl; }
+			//if (debug) { cout << " findFollower() returned" << endl; }
 			return this->findFollower();
 			break;
 		default:
@@ -170,57 +171,41 @@ Returns an Equipment object if a random int in range 1-8 + bonus is >= 5
 		if (debug) { cout << " noTreasure() returned" << endl; }
 		return this->noTreasure();
 	}
-	if (debug) { cout << " findTreasure() finished" << endl; }
+	//if (debug) { cout << " findTreasure() finished" << endl; }
 }
 
 /*
 Sorts equipment in passed vector into appropriate equipment type vectors
 */
-void Treasure::sortEquipment(vector<Equipment>& toSort)
+void Treasure::sortEquipment(vector<Equipment> toSort)
 {
 	if (debug) { cout << "sortEquipment called" << endl; }
-	if (debug) { cout << "sorting " << toSort.size() << " elements" << endl; }
 	for (int i = 0; i < toSort.size(); i++)
 	{
 		switch (toSort[i].getEqType())
 		{
 		case (equipmentType::armor):
-			if (debug) { cout << toSort[i].getName() << " added to the armor vector" << endl; }
 			armor.push_back(toSort[i]);
 			break;
 		case (equipmentType::weapon):
-			if (debug) { cout << toSort[i].getName() << " added to the weapon vector" << endl; }
 			weapon.push_back(toSort[i]);
 			break;
 		case (equipmentType::trinket):
-			if (debug) { cout << toSort[i].getName() << " added to the trinket vector" << endl; }
 			trinket.push_back(toSort[i]);
 			break;
 		case (equipmentType::banner):
-			if (debug) { cout << toSort[i].getName() << " added to the banner vector" << endl; }
 			banner.push_back(toSort[i]);
 			break;
 		case (equipmentType::follower):
-			if (debug) { cout << toSort[i].getName() << " added to the follower vector" << endl; }
 			follower.push_back(toSort[i]);
 			break;
 		case (equipmentType::dragon):
-			if (debug) { cout << toSort[i].getName() << " added to the dragon vector" << endl; }
 			dragon.push_back(toSort[i]);
 			break;
 		default:
 			cerr << "no armor type found, " << endl;
 			break;
 		}
-	}
-	if(debug)
-	{ 
-		cout << "Armor size: " << armor.size() << endl
-			<< "Weapon size: " << weapon.size() << endl
-			<< "Trinket size: " << trinket.size() << endl
-			<< "Banner size: " << banner.size() << endl
-			<< "Follower size: " << follower.size() << endl
-			<< "Dragon size: " << dragon.size() << endl;
 	}
 }
 

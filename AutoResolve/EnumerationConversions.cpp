@@ -19,7 +19,7 @@ Returns the faction corresponding to the integer passed
 			return faction::menoriad;
 			break;
 		default:
-			cerr << "Invalid integer passed to intToFaction" << endl;
+			cerr << "Invalid integer passed to intToFaction: " << faction << endl;
 	}
 	return faction::rebel;
 }
@@ -48,7 +48,7 @@ Returns the monsterType corresponding to the integer passed
 			return monsterType::Dragon;
 			break;
 		default:
-			cerr << "Invalid integer passed to intToMonsterType" << endl;
+			cerr << "Invalid integer passed to intToMonsterType: " << monsterType << endl;
 	}
 	return monsterType::Empty;
 }
@@ -82,7 +82,7 @@ TODO replace references to this with to_string(outcome)
 		return "Crushing Defeat";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;	
+		cerr << " No valid outcome chosen: " << outcome << endl;	
 	}
 	return "";
 }
@@ -115,7 +115,7 @@ Returns a string that corresponds to the equipmentType passed based on its name
 		return "Follower";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid equipmentType chosen: "<< (int)e << endl;
 	}
 	return "";
 }
@@ -148,7 +148,7 @@ Returns a string that corresponds to the outcome passed based on its name
 		return "Crushing Defeat";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid outcome chosen: " << (int)o << endl;
 	}
 	return "";
 }
@@ -172,7 +172,7 @@ Returns a string that corresponds to the faction passed based on its name
 		return "Menoriad";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid faction chosen: " << (int)f << endl;
 	}
 	return "";
 }
@@ -205,7 +205,7 @@ Returns a string that corresponds to the outcome passed based on its name
 		return "Empty";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid monsterType chosen: "  << (int)m << endl;
 	}
 	return "";
 }
@@ -232,7 +232,7 @@ Returns a string that corresponds to the defenses passed based on its name
 		return "Stone Wall w/ Moat";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid defenses chosen: " << (int)d << endl;
 	}
 	return "";
 }
@@ -259,7 +259,7 @@ Returns a string that corresponds to the battleType passed based on its name
 		return "Monster";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid battleType chosen: " << (int)b << endl;
 	}
 	return "";
 }
@@ -280,7 +280,7 @@ Returns a string that corresponds to the unitType passed based on its name
 		return "Ranged";
 		break;
 	default:
-		cerr << " No valid outcome chosen " << endl;
+		cerr << " No valid unitType chosen: "<< (int)u << endl;
 	}
 	return "";
 }
@@ -289,18 +289,18 @@ Returns a string that corresponds to the unitType passed based on its name
  Returns a string that corresponds to the generalState passed based on its name
  */
  string EnumerationConversions::to_string(const generalState g) {
-	 switch ((int)g) {
-	 case(1):
+	 switch (g) {
+	 case generalState::Unharmed:
 		 return "Unharmed";
 		 break;
-	 case(2):
+	 case generalState::Wounded:
 		 return "Wounded";
 		 break;
-	 case(3):
+	 case generalState::Slain:
 		 return "Slain";
 		 break;
 	 default:
-		 cerr << " No valid generalState chosen" << endl;
+		 cerr << " No valid generalState chosen: "<< (int)g << endl;
 	 }
 	 return "";
  }
@@ -322,7 +322,7 @@ Returns the unitType that corresponds to the int passed
 		return unitType::Ranged;
 		break;
 	default:
-		cerr << "invalid integer input." << endl;
+		cerr << "invalid integer -> unitType input: " << unitType << endl;
 	}
 	return unitType::Melee;
 }
@@ -349,7 +349,7 @@ Returns the unitType that corresponds to the int passed
 		 return defenses::Stone_Wall_W_Moat;
 		 break;
 	default:
-		 cerr << "Unknown integer input" << endl;
+		 cerr << "Invalid integer -> defenses input: " << def << endl;
 		 
 	 }
  }
@@ -371,7 +371,7 @@ Returns the unitType that corresponds to the int passed
 	 case 5:
 		 return battleType::Monster;
 	 default:
-		 cerr << "Unkown integer input" << endl;
+		 cerr << "Invalid integer -> battleType input: " << type << endl;
 	 }
  }
 

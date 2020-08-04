@@ -23,9 +23,9 @@ private:
 	vector<Equipment> dragon;
 	bool debug;
 	bool initialized;
-	string equipmentFilePath;
+	string equipmentFilePath = "equipment.txt";
 
-	void sortEquipment(vector<Equipment>& toSort);
+	void sortEquipment(vector<Equipment> toSort);
 
 public:
 	~Treasure();
@@ -61,42 +61,36 @@ public:
 
 	void setArmorVector(const vector<Equipment> equipVectorI) { 
 		armor = equipVectorI; 
-		if (debug) { cout << "armor vector set, size: " << armor.size() << endl; }
 		for (int i = 0; i < armor.size(); i++) {
 			armor[i].setDebug(debug);
 		}
 	};
 	void setWeaponVector(const vector<Equipment> equipVectorI) {
 		weapon = equipVectorI;
-		if (debug) { cout << "weapon vector set, size: " << weapon.size() << endl; }
 		for (int i = 0; i < weapon.size(); i++) {
 			weapon[i].setDebug(debug);
 		}
 	};
 	void setTrinketVector(const vector<Equipment> equipVectorI) {
 		trinket = equipVectorI;
-		if (debug) { cout << "trinket vector set, size: " << trinket.size() << endl; }
 		for (int i = 0; i < trinket.size(); i++) {
 			trinket[i].setDebug(debug);
 		}
 	};
 	void setBannerVector(const vector<Equipment> equipVectorI) {
 		banner = equipVectorI;
-		if (debug) { cout << "banner vector set, size: " << banner.size() << endl; }
 		for (int i = 0; i < banner.size(); i++) {
 			banner[i].setDebug(debug);
 		}
 	};
 	void setFollowerVector(const vector<Equipment> equipVectorI) {
 		follower = equipVectorI;
-		if (debug) { cout << "follower vector set, size: " << follower.size() << endl; }
 		for (int i = 0; i < follower.size(); i++) {
 			follower[i].setDebug(debug);
 		}
 	};
 	void setDragonVector(const vector<Equipment> equipVectorI) {
 		dragon = equipVectorI;
-		if (debug) { cout << "dragon vector set, size: " << dragon.size() << endl; }
 		for (int i = 0; i < dragon.size(); i++) {
 			dragon[i].setDebug(debug);
 		}

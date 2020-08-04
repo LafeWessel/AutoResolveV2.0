@@ -56,32 +56,31 @@ bool continueLoop(string loop) {
 void runApp() {
 	do {
 		bool debug = continueLoop((string)"Would you like to debug?");
-		bool fileOut = continueLoop((string)"Would you like to output results to a file?");
-
-		if (debug) { cout << "Program started" << endl; }
 
 		//Get the number of tests the user would like to perform
 		int tests = 1;
 		cout << "How many tests:" << endl;
 		cin >> tests;
 		cin.get();
-		tests = abs(tests);
 		if (debug) { cout << "Tests set to: " << tests << endl; }
 
 		int type = 1;
 		cout << "What type (Normal:1, Siege:2, Raid:3, Naval:4, Monster:5)" << endl;
 		cin >> type;
-		cin.get();
-		type = ValueAssurance::inputCheck(tests,5,1);
+		type = ValueAssurance::inputCheck(type,5,1);
 		if (debug) { cout << "Type set to: " << type << endl; }
 
+		Treasure treasure = new Treasure();
+		treasure.setDebug(debug);
+		treasure.initialize();
+
 		TestBattle t{};
+		t.setTreasure(&treasure);
 		t.setNumberOfTests(tests);
 		t.setBattleType(EnumerationConversions::intToBattleType(type));
+		t.setDebug(debug);
 		t.initializeAndRun();
 
-		if (debug) { cout << "Calculations finished, press Enter to continue" << endl; }
-		cin.get();//This keeps the console window open
 
 	} while (continueLoop((string)"Would you like to make more calculations?"));
 
@@ -108,11 +107,6 @@ int main()
 	
 	runApp();
 
-
-	TestBattle t{};
-	t.setBattleType(battleType::Siege);
-	t.setNumberOfTests(1);
-	t.initializeAndRun();
 
 
 	return 0;

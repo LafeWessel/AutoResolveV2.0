@@ -11,7 +11,7 @@ Battle::Battle()
 	defender = Player();
 	foundByAttacker = Equipment();
 	foundByDefender = Equipment();
-	treasure = &Treasure();
+	treasure = nullptr;
 	result = outcome::Draw;
 	output = true;
 	debug = false;
@@ -26,7 +26,7 @@ Battle::Battle(const bool debugI)
 	defender = Player();
 	foundByAttacker = Equipment();
 	foundByDefender = Equipment();
-	treasure = &Treasure();
+	treasure = nullptr;
 	result = outcome::Draw;
 	output = true;
 	this->setDebug(debugI);
@@ -41,7 +41,7 @@ Battle::Battle(const string unitFile)
 	defender = Player();
 	foundByAttacker = Equipment();
 	foundByDefender = Equipment();
-	treasure = &Treasure();
+	treasure = nullptr;
 	result = outcome::Draw;
 	output = true;
 	debug = false;
@@ -311,6 +311,7 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (debug) { cout << "defender unit casualty total: " << defUnitCasualties << " Battle::CalculateCas" << endl; }
 
 	//Determines whether or not either of the generals are wounded/killed
+	attacker.getGeneral().setState(generalState::Unharmed);
 	if (Random::randomNumber(10) < 2)
 	{
 		attacker.getGeneral().setState(generalState::Wounded);
@@ -322,6 +323,7 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 		}
 	}
 	else { if (debug) { cout << "attacker General unharmed" << endl; } }
+	defender.getGeneral().setState(generalState::Unharmed);
 	if (Random::randomNumber(10) < 2)
 	{
 		defender.getGeneral().setState(generalState::Wounded);

@@ -41,8 +41,8 @@ public:
 	void setMonsterType(const monsterType monTypeI) { 
 		type = monTypeI; 
 		setValuesFromMonsterType();}; 
-	void setTreasure(Treasure& treasureI) {
-		treasure = &treasureI;
+	void setTreasure(Treasure* treasureI) {
+		treasure = treasureI;
 		treasure->setDebug(debug);};
 
 	bool getDebug() const{ return debug; }

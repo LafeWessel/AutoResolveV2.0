@@ -29,6 +29,7 @@ public:
 	void setDebug(bool debugI) {
 		debug = debugI;
 		monster.setDebug(debug);
+		Battle::setDebug(debugI);
 	};
 
 	void printData() const;

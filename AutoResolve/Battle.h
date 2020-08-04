@@ -70,9 +70,9 @@ public:
 		attacker.setDebug(debug);
 		defender.setDebug(debug);
 	};
-	void setTreasure(Treasure& treasureI) {
-		treasure = &treasureI;
-		treasure->setDebug(treasureI.getDebug());
+	void setTreasure(Treasure* treasureI) {
+		treasure = treasureI;
+		treasure->setDebug(treasureI->getDebug());
 	};
 
 	void printData() const;

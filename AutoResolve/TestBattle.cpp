@@ -9,18 +9,21 @@ TestBattle::TestBattle() {
 	numberOfTests = 0;
 	type = battleType::Normal;
 	outputFile = "";
+	treasure = nullptr;
 	setFileString();
 }
 
 void TestBattle::initializeAndRun() {
-	
-	vector<int> outcomes{};
+	if (debug) { cout << "initializeAndRun called" << endl; }
+	vector<int> outcomes{0,0,0,0,0,0,0};
 	for (int i = 0; i < numberOfTests; i++) {
+
 		runTest(outcomes);
+		cout << "Test " << i+1 << " run" << endl;
 	}
 
 	//Output results
-	cout << "Test results: " << endl <<
+	cout << "\n\n\nTest results: " << endl <<
 		"Number of tests: " << numberOfTests << endl <<
 		"Output file: " << outputFile << endl <<
 		"Battle type: " << EnumerationConversions::to_string(type) << endl <<
@@ -30,7 +33,7 @@ void TestBattle::initializeAndRun() {
 		"Draws: " << outcomes[3] << endl <<
 		"Close Defeats: " << outcomes[4] << endl <<
 		"Valiant Defeats: " << outcomes[5] << endl <<
-		"Decisive Defeats: " << outcomes[6] << endl;
+		"Decisive Defeats: " << outcomes[6] << endl << endl;
 
 	float total = 0.0;
 	for (int i : outcomes) {
@@ -42,6 +45,7 @@ void TestBattle::initializeAndRun() {
 }
 
 void TestBattle::runTest(vector<int>& outcomes) {
+	if (debug) { cout << "runTest called, type:" << EnumerationConversions::to_string(type) << endl; }
 	
 	//Finish initialization of each battle class within these cases
 	switch (type) {
@@ -50,17 +54,24 @@ void TestBattle::runTest(vector<int>& outcomes) {
 	{
 		NormalBattle b{};
 		b.setFileOut(outputToFile);
+		b.setTreasure(treasure);
 		b.setDebug(debug);
+		b.setOutput(debug);
+		
 		initBattle(b);
 
 		b.calculate();
+		outcomes[(int)b.getOutcome() - 1]++;
 		break;
 	}
 	case battleType::Siege:
 	{
 		SiegeBattle b{};
 		b.setFileOut(outputToFile);
+		b.setTreasure(treasure);
 		b.setDebug(debug);
+		b.setOutput(debug);
+		
 		initBattle(b);
 
 		b.setRams(Random::randomNumber(0, 5));
@@ -79,8 +90,11 @@ void TestBattle::runTest(vector<int>& outcomes) {
 	{
 		RaidBattle b{};
 		b.setFileOut(outputToFile);
+		b.setTreasure(treasure);
 		b.setDebug(debug);
 		initBattle(b);
+		b.setOutput(debug);
+
 		TownStats t{};
 		t.setDefenses(EnumerationConversions::intToDefenses(Random::randomNumber(1, 5)));
 		b.setTownStats(t);
@@ -93,8 +107,11 @@ void TestBattle::runTest(vector<int>& outcomes) {
 	{
 		NavalBattle b{};
 		b.setFileOut(outputToFile);
+		b.setTreasure(treasure);
 		b.setDebug(debug);
+		b.setOutput(debug);
 		initBattle(b);
+
 		b.setAttackerShips(Random::randomNumber(1, 10));
 		b.setDefenderShips(Random::randomNumber(1, 10));
 
@@ -106,12 +123,14 @@ void TestBattle::runTest(vector<int>& outcomes) {
 	{
 		MonsterBattle b{};
 		b.setFileOut(outputToFile);
+		b.setTreasure(treasure);
 		b.setDebug(debug);
+		b.setOutput(debug);
 		initBattle(b);
 
 		Monster m{};
 		m.setMonsterType(EnumerationConversions::intToMonsterType(Random::randomNumber(1, 6)));
-		m.setTreasure(*b.getTreasure());
+		m.setTreasure(b.getTreasure());
 
 		b.calculate();
 		outcomes[(int)b.getOutcome() - 1]++;
@@ -127,6 +146,7 @@ Initializes the basic data types in the Battle parent class
 */
 void TestBattle::initBattle(Battle& b)
 {
+	if (debug) { cout << "initBattle called" << endl; }
 	Player att{};
 	Player def{};
 	
@@ -142,6 +162,7 @@ void TestBattle::initBattle(Battle& b)
 Initializes random values for a Player
 */
 void TestBattle::initPlayer(Player& p, const Treasure* t) {
+	if (debug) { cout << "initPlayer called" << endl; }
 	General g{};
 	g.setRank(Random::randomNumber(1, 10));
 	g.setDebug(debug);

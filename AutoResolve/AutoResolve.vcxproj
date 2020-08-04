@@ -158,7 +158,6 @@
     <ClCompile Include="faction.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="generalState.cpp" />
-    <ClCompile Include="intermediateOrDisplacedSource.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterBattle.cpp" />
@@ -224,6 +223,11 @@
     <Text Include="IODescr.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>
+    <Text Include="MonsterData.txt" />
+    <Text Include="NavalData.txt" />
+    <Text Include="NormalData.txt" />
+    <Text Include="RaidData.txt" />
+    <Text Include="SiegeData.txt" />
     <Text Include="units.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>

@@ -52,12 +52,14 @@ Returns a sum of iterations random numbers between min and max bound-inclusive
 */
 int Random::randomNumberGroup(const int iterations, const int min, const int max) {
 	typedef std::chrono::high_resolution_clock myclock;
-	std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
-	std::uniform_int_distribution<int> dRange(abs(min), abs(max));
+
 	if (max == 0 || iterations == 0)
 	{
 		return 0;
 	}
+
+	std::default_random_engine generator(std::chrono::system_clock::now().time_since_epoch().count());
+	std::uniform_int_distribution<int> dRange(abs(min), abs(max));
 	int total = 0;
 	for (int i = 0; i < iterations; i++) {
 		total += dRange(generator);

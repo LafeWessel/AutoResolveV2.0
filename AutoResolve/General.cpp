@@ -13,6 +13,7 @@ General::General()
 	trinket = Equipment();
 	banner = Equipment();
 	follower = Equipment();
+	currentState = generalState::Unharmed;
 	debug = false;
 	updateARBonus();
 }
@@ -26,6 +27,7 @@ General::General(const bool debugI)
 	trinket = Equipment();
 	banner = Equipment();
 	follower = Equipment();
+	currentState = generalState::Unharmed;
 	this->setDebug(debugI);
 	updateARBonus();
 }
@@ -39,6 +41,7 @@ General::General(const int rankI, const Equipment armorI, const Equipment weapon
 	trinket = trinketI;
 	banner = bannerI;
 	follower = followerI;
+	currentState = generalState::Unharmed;
 	debug = false;
 	updateARBonus();
 }

@@ -1,5 +1,5 @@
 
-/*
+
 
 //This outputs the results from a vector of battle results and also some statistics about them
 void predictionOutput(vector<int> rawResults)
@@ -26,6 +26,7 @@ void predictionOutput(vector<int> rawResults)
 	//Makes some floats that are used in statistics output below
 	float success = (processedResults[0] + processedResults[1] + processedResults[2]);
 	float total = 0.0;
+
 	for (int i = 0; i < 7; i++)
 	{
 		total += processedResults[i];
@@ -633,4 +634,3 @@ void randomizedTests(int tests, bool debug, bool fileOut, string fileName) {
 	return;
 }
 
-*/

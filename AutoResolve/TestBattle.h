@@ -4,6 +4,7 @@
 #include "SiegeBattle.h"
 #include "RaidBattle.h"
 #include "MonsterBattle.h"
+#include "Treasure.h"
 
 /*
 Requirements:
@@ -28,6 +29,7 @@ private:
 	int numberOfTests;
 	string outputFile;
 	battleType type;
+	Treasure* treasure;
 
 	void initBattle(Battle& b);
 	void runTest(vector<int>& outcomes);
@@ -52,7 +54,8 @@ public:
 	void setBattleType(const battleType type) {
 		this->type = type;
 		setFileString(); };
-
+	void setTreasure(Treasure* t) {
+		treasure = t; }
 
 	bool getDebug() const {
 		return debug; };
@@ -62,7 +65,8 @@ public:
 		return outputFile; };
 	battleType getBattleType() const {
 		return type; };
-
+	Treasure* getTreasure() const {
+		return treasure; }
 
 };
 
