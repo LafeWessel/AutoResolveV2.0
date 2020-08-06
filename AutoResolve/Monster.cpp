@@ -42,7 +42,7 @@ Monster::Monster(monsterType m, Treasure& treasureI) {
 	setValuesFromMonsterType();
 }
 
-//TODO-refactor this function
+
 vector<Equipment> Monster::getEquipRewards() const //This figures out the treasure gained for killing a monster, based on info elsewhere
 {
 	if (debug) { cout << "getEquipRewards called" << endl; }

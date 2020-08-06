@@ -48,7 +48,6 @@ int Random::randomNumberArray(const int range)
 
 /*
 Returns a sum of iterations random numbers between min and max bound-inclusive
-//TODO Unit test
 */
 int Random::randomNumberGroup(const int iterations, const int min, const int max) {
 	typedef std::chrono::high_resolution_clock myclock;
