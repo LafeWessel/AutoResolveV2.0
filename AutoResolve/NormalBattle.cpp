@@ -6,7 +6,8 @@ NormalBattle::~NormalBattle()
 
 NormalBattle::NormalBattle() : Battle() //void initializer
 {
-	Battle::type = battleType::Normal;
+	type = battleType::Normal;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 

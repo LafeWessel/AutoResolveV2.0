@@ -58,7 +58,7 @@ public:
 		result = resultI; };
 	void setBattleType(const battleType b) { type = b; };
 	void setOutput(const bool outputI) { output = outputI; };
-	void setFileOut(const bool fileOutI) { fileOut = fileOutI; };
+	void setFileOut(const bool fileOutI) { fileOut = fileOutI;  };
 	void setFileName(const string fileName) { this->fileName = fileName; };
 	void setDebug(const bool debugI) { 
 		debug = debugI;
@@ -69,6 +69,7 @@ public:
 		}
 		attacker.setDebug(debug);
 		defender.setDebug(debug);
+		data.setDebug(debug);
 	};
 	void setTreasure(Treasure* treasureI) {
 		treasure = treasureI;

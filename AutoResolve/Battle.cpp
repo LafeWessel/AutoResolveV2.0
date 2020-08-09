@@ -206,7 +206,9 @@ void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-en
 
 	if (debug) { cout << "Battle::battleOutput finished" << endl; }
 	if (fileOut) {
+		if (debug) { cout << "writing to file: " << fileName << endl; }
 		data.writeToFile(fileName);
+		if (debug) { cout << "Out of writing to file" << endl; }
 	}
 	return;
 }

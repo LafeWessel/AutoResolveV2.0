@@ -9,13 +9,15 @@ NavalBattle::NavalBattle() : Battle()//void initializer
 {
 	attackerShips = 0;
 	defenderShips = 0;
-	Battle::type = battleType::Naval;
+	type = battleType::Naval;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 NavalBattle::NavalBattle(const string unitFile) : Battle(unitFile) {
 	attackerShips = 0;
 	defenderShips = 0;
-	Battle::type = battleType::Naval;
+	type = battleType::Naval;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 void NavalBattle::battleOutput(vector<vector<int>> totalCasualties) //uses base Battle output and adds naval outputs

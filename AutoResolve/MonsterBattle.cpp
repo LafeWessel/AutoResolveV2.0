@@ -7,13 +7,15 @@ MonsterBattle::~MonsterBattle()
 MonsterBattle::MonsterBattle() : Battle()
 {
 	monster = Monster();
-	Battle::type = battleType::Monster;
+	type = battleType::Monster;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 
 MonsterBattle::MonsterBattle(const string unitFile) : Battle(unitFile) {
 	monster = Monster();
-	Battle::type = battleType::Monster;
+	type = battleType::Monster;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 void MonsterBattle::battleOutput(vector<int>& totalCasualties) //Outputs information at the end of the Monster battle

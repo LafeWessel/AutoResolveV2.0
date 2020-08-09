@@ -10,7 +10,8 @@ SiegeBattle::SiegeBattle() : Battle()//void initializer
 	catapults = 0;
 	siegeTowers = 0;
 	townLevel = TownStats();
-	Battle::type = battleType::Siege;
+	type = battleType::Siege;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 
@@ -19,7 +20,8 @@ SiegeBattle::SiegeBattle(const string unitFile) : Battle(unitFile) {
 	catapults = 0;
 	siegeTowers = 0;
 	townLevel = TownStats();
-	Battle::type = battleType::Siege;
+	type = battleType::Siege;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 void SiegeBattle::calculate() //combines base Battle calculation with the extras needed for Siege Battles, then calls output

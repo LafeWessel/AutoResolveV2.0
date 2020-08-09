@@ -7,12 +7,14 @@ RaidBattle::~RaidBattle()
 RaidBattle::RaidBattle() : Battle()
 {
 	townLevel = TownStats();
-	Battle::type = battleType::Raid;
+	type = battleType::Raid;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 RaidBattle::RaidBattle(const string unitFile) : Battle(unitFile) {
 	townLevel = TownStats();
-	Battle::type = battleType::Raid;
+	type = battleType::Raid;
+	fileName = EnumerationConversions::to_string(type) + "Data.txt";
 }
 
 void RaidBattle::calculate() //combines base Battle calculation with the extras needed for Raid Battles, then calls output

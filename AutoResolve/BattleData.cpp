@@ -198,19 +198,29 @@ void BattleData::printData() const
 //Writes the data to a given file
 void BattleData::writeToFile(const string fileName) const
 {
+	if (debug) { cout << endl << "Attempting to write to file: " << fileName << endl; }
 	fstream file;
 	file.open(fileName);
+
 	if (file) {
 		if (debug) { cout << "File successfully opened" << endl; }
+
+		string out = "";
 		for (string s : data)
 		{
-			file << s << ",";
-			if (debug) { cout << s << " written to file" << endl; }
+			for (char c : s) {
+				file.write(&c, 1);
+			}
+
+			file.write(",", 1);
 		}
-		file << endl;
+		file.write("\n",1);
+
+		
+		file.close();
 	}
 	else {
-		cerr << "Unable to open file!" << endl;
+		cerr << "Unable to open file: " << fileName << endl;
 	}
 }
 
@@ -222,6 +232,9 @@ string BattleData::getDataAtIndex(const int index) const
 
 //Returns a vector of the names of all the units in units.txt
 void BattleData::getUnitNames()  { 
+
+	unitNames = {};
+
 	//Create 4 rosters, one for each faction, then read in their units and add them to the data column
 	Roster rebel = Roster();
 	rebel.setFaction(faction::rebel);
