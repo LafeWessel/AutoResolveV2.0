@@ -7,7 +7,7 @@
 class MonsterBattle : public Battle
 {
 private:
-	battleType type = battleType::Monster;
+	
 	Monster monster;
 
 public:

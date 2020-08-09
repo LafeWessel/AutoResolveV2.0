@@ -7,14 +7,19 @@ RaidBattle::~RaidBattle()
 RaidBattle::RaidBattle() : Battle()
 {
 	townLevel = TownStats();
+	Battle::type = battleType::Raid;
 }
 
 RaidBattle::RaidBattle(const string unitFile) : Battle(unitFile) {
 	townLevel = TownStats();
+	Battle::type = battleType::Raid;
 }
 
 void RaidBattle::calculate() //combines base Battle calculation with the extras needed for Raid Battles, then calls output
 {
+	data.setTownStats(townLevel);
+	data.setSupplies(townLevel.getSupplies());
+
 	float overallTot = battleCalculate();
 	if (debug) { cout << "Overall total returned from battleCalculate RaidBattle::calculateRaid" << endl; }
 	overallTot -= (((int)townLevel.getDefenses() * 10) - 10);

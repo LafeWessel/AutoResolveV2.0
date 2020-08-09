@@ -8,7 +8,7 @@ class RaidBattle : public Battle
 {
 private:
 	TownStats townLevel;
-	battleType type = battleType::Raid;
+	
 
 public:
 	~RaidBattle();

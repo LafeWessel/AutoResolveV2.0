@@ -6,6 +6,7 @@ NormalBattle::~NormalBattle()
 
 NormalBattle::NormalBattle() : Battle() //void initializer
 {
+	Battle::type = battleType::Normal;
 }
 
 

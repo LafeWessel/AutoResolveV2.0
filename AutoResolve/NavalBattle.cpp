@@ -9,11 +9,13 @@ NavalBattle::NavalBattle() : Battle()//void initializer
 {
 	attackerShips = 0;
 	defenderShips = 0;
+	Battle::type = battleType::Naval;
 }
 
 NavalBattle::NavalBattle(const string unitFile) : Battle(unitFile) {
 	attackerShips = 0;
 	defenderShips = 0;
+	Battle::type = battleType::Naval;
 }
 
 void NavalBattle::battleOutput(vector<vector<int>> totalCasualties) //uses base Battle output and adds naval outputs
@@ -31,6 +33,9 @@ void NavalBattle::battleOutput(vector<vector<int>> totalCasualties) //uses base 
 
 void NavalBattle::calculate() //combines base Battle calculation with the extras needed for Naval Battles, then calls output
 {
+	data.setAttackerShips(attackerShips);
+	data.setDefenderShips(defenderShips);
+
 	if (debug) { cout << "Calling battleCalculate, NavalBattle::calculateNaval" << endl; }
 	//Uses base calculations and adds Naval Battle calculations
 	float overallTot = battleCalculate();

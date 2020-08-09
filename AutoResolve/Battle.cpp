@@ -55,6 +55,7 @@ Battle::Battle(const string unitFile)
 			cout << foundByAttacker.to_string() << endl;
 		}
 	}
+	data.setAttackerTreasureRec(foundByAttacker.getName() != treasure->noTreasure().getName());
 
 	if (debug) { cout << "treasureResults for defender" << endl; }
 	//Then does the same as above for the defending Player.
@@ -72,6 +73,7 @@ Battle::Battle(const string unitFile)
 			cout << foundByDefender.to_string() << endl;
 		}
 	}
+	data.setDefenderTreasureRec(foundByDefender.getName() != treasure->noTreasure().getName());
 	if (debug) { cout << "Battle::treasureResults finished" << endl; }
 	return;
 }
@@ -203,11 +205,17 @@ void Battle::battleOutput(vector<vector<int>>& totalCasualties) //Base battle-en
 	}
 
 	if (debug) { cout << "Battle::battleOutput finished" << endl; }
+	if (fileOut) {
+		data.writeToFile(fileName);
+	}
 	return;
 }
 
-float Battle::battleCalculate() const //contains the base calculations needed for battles
+float Battle::battleCalculate() //contains the base calculations needed for battles
 {
+	data.setAttacker(attacker);
+	data.setDefender(defender);
+	data.setBattleType(type);
 
 	if (debug) { cout << "battleCalculate called" << endl; }
 	//Comparing these at the end will determine victory/draw/defeat in relation to the attacker
@@ -222,10 +230,14 @@ float Battle::battleCalculate() const //contains the base calculations needed fo
 	if (debug) { cout << "defender unit sum:" << defTotal << " Battle::battleCalculate" << endl; }
 
 	//Adds random values to randomize the battle outcome more
-	attTotal += Random::randomNumberGroup(10, 1, 10);
+	int attRand = Random::randomNumberGroup(10, 1, 10);
+	data.setAttackerRandoms(attRand);
+	attTotal += attRand;
 	attTotal /= 6;
 	if (debug) { cout << "attacker sum with randoms:" << attTotal << " Battle::battleCalculate" << endl; }
-	defTotal += Random::randomNumberGroup(10, 1, 10);
+	int defRand = Random::randomNumberGroup(10, 1, 10);
+	data.setDefenderRandoms(defRand);
+	defTotal += defRand;
 	defTotal /= 6;
 	if (debug) { cout << "defender sum with randoms:" << defTotal << " Battle::battleCalculate" << endl; }
 
@@ -256,6 +268,7 @@ float Battle::battleCalculate() const //contains the base calculations needed fo
 //calculates the number of casualties from a battle and returns in a specific format
 void Battle::calculateCas(vector<vector<int>>& totalCasualties) 
 {
+
 	if (debug) { cout << "CalculateCas called" << endl; }
 	int attSoldierCasualties = 0;
 	int defSoldierCasualties = 0;
@@ -277,8 +290,10 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 
 	//Calculates the amounts of upgrades received; they are used in the campaign
 	int attUpgr = defSoldierCasualties / 6;
+	data.setAttackerUpgrades(attUpgr);
 	if (debug) { cout << "attacker upgrade total: " << attUpgr << " Battle::CalculateCas" << endl; }
 	int defUpgr = attSoldierCasualties / 6;
+	data.setDefenderUpgrades(defUpgr);
 	if (debug) { cout << "defender upgrade total: " << defUpgr << " Battle::CalculateCas" << endl; }
 
 	//Calculates the max amount of units that are destroyed
@@ -320,6 +335,9 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 		}
 	}
 	else { if (debug) { cout << "defender General unharmed" << endl; } }
+	
+	data.setAttackerGeneralState(attacker.getGeneral().getState());
+	data.setDefenderGeneralState(attacker.getGeneral().getState());
 
 	//Creates the vectors that contain the casualty data
 	vector<int> attackerCasVec{ attSoldierCasualties, attUnitCasualties, attUpgr };
@@ -330,6 +348,12 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (debug) { cout << "Moving on to casualty assignment Battle::CalculateCas" << endl; }
 	assignCasualties(attackerCasVec, attacker);
 	assignCasualties(defenderCasVec, defender);
+
+	data.setAttackerCasualties(attackerCasVec);
+	data.setDefenderCasualties(defenderCasVec);
+
+	data.setAttackerEnd(attacker);
+	data.setDefenderEnd(defender);
 
 	totalCasualties = { attackerCasVec,defenderCasVec };
 }
@@ -375,5 +399,8 @@ void Battle::determineOutcome(const float endingTotal) {
 	else {
 		result = outcome::Draw;
 	}
+
+	data.setAttackerWon((int)result < 4);
+	data.setOutcome(result);
 }
 

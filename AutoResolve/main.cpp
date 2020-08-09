@@ -21,8 +21,7 @@ using std::string;
 
 /*
 
-
-TODO-implement BattleData class
+TODO-implement Monster and MonsterBattle for BattleData
 
 TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
 

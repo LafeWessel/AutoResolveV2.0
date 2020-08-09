@@ -7,11 +7,13 @@ MonsterBattle::~MonsterBattle()
 MonsterBattle::MonsterBattle() : Battle()
 {
 	monster = Monster();
+	Battle::type = battleType::Monster;
 }
 
 
 MonsterBattle::MonsterBattle(const string unitFile) : Battle(unitFile) {
 	monster = Monster();
+	Battle::type = battleType::Monster;
 }
 
 void MonsterBattle::battleOutput(vector<int>& totalCasualties) //Outputs information at the end of the Monster battle
@@ -57,10 +59,12 @@ void MonsterBattle::monsterCasualties(vector<int>& attackerCasVec) //Calculates 
 			if (debug) { cout << "General State set to Slain MonsterBattle::monsterCasualties" << endl; }
 		}
 	}
-
+	//data.setAttackerGeneralState(attacker.getGeneral().getState());
 
 	attackerCasVec = { attSoldierCasualties, attUnitCasualties};
 	assignCasualties(attackerCasVec, attacker);
+
+	//data.setAttackerCasualties(attackerCasVec);
 
 	if (debug) { cout << "MonsterBattle::monsterCasualties finished" << endl; }
 	return;
@@ -74,13 +78,18 @@ void MonsterBattle::calculate()
 	float attTotal = 0;
 	float monTotal = 0;
 
+	//data.setAttacker(attacker);
+	//data.setBattleType(type);
+
 	//Adds units + portions of reinforcements
 	attTotal += attacker.getCavalry() + attacker.getMelee() + attacker.getRanged();
 	if (debug) { cout << "attacker unit sum:" << attTotal << " MonsterBattle::calculateMonster" << endl; }
 
 
 	//Adds random values to randomize the battle outcome more
-	attTotal += Random::randomNumberGroup(10, 1, 10);
+	int attRand = Random::randomNumberGroup(10, 1, 10);
+	attTotal += attRand;
+	//data.setAttackerRandoms(attRand);
 	if (debug) { cout << "attacker sum with randoms:" << attTotal << " MonsterBattle::calculateMonster" << endl; }
 	monTotal += Random::randomNumberGroup(10, 1, 10);
 	if (debug) { cout << "monster sum with randoms:" << monTotal << " MonsterBattle::calculateMonster" << endl; }

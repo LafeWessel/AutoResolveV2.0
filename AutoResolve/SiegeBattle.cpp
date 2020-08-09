@@ -10,6 +10,7 @@ SiegeBattle::SiegeBattle() : Battle()//void initializer
 	catapults = 0;
 	siegeTowers = 0;
 	townLevel = TownStats();
+	Battle::type = battleType::Siege;
 }
 
 
@@ -18,12 +19,19 @@ SiegeBattle::SiegeBattle(const string unitFile) : Battle(unitFile) {
 	catapults = 0;
 	siegeTowers = 0;
 	townLevel = TownStats();
+	Battle::type = battleType::Siege;
 }
 
 void SiegeBattle::calculate() //combines base Battle calculation with the extras needed for Siege Battles, then calls output
 {
 	float overallTot = battleCalculate();
 	if (debug) { cout << "Overall total returned from battleCalculate SiegeBattle::calculateSiege" << endl; }
+
+	data.setRams(rams);
+	data.setSiegeTowers(siegeTowers);
+	data.setCatapults(catapults);
+	data.setTownStats(townLevel);
+	data.setSupplies(townLevel.getSupplies());
 
 	//Siege Battle-specific calculations
 	overallTot -= ((int)townLevel.getDefenses() * 10) - 10;
