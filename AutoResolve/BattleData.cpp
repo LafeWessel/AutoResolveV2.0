@@ -211,13 +211,15 @@ void BattleData::writeToFile(const string fileName) const
 		if (debug) { cout << "File successfully opened" << endl; }
 
 		string out = "";
-		for (string s : data)
+		for (int i = 0; i < data.size(); i++)
 		{
-			for (char c : s) {
+			for (char c : data[i]) {
 				file.write(&c, 1);
 			}
-
-			file.write(",", 1);
+			if (i < data.size() - 1) {
+				file.write(",", 1);
+			}
+			
 		}
 		file.write("\n",1);
 
