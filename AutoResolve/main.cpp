@@ -23,8 +23,6 @@ using std::string;
 
 TODO-implement Monster and MonsterBattle for BattleData
 
-TODO-Make each battle write to a certain file and each have boolean for whether or not they write to the file
-
 TODO-Make a db of results from tests then analyze
 
 TODO-Learn and implement Qt GUI

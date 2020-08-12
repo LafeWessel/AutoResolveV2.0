@@ -200,7 +200,12 @@ void BattleData::writeToFile(const string fileName) const
 {
 	if (debug) { cout << endl << "Attempting to write to file: " << fileName << endl; }
 	fstream file;
-	file.open(fileName);
+	file.open(fileName, ios::app);
+
+	while (!file) {
+		//Wait for file to be opened
+	}
+
 
 	if (file) {
 		if (debug) { cout << "File successfully opened" << endl; }

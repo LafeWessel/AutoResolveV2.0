@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "battleType.h"
 #include "TownStats.h"
 #include "outcome.h"
@@ -14,7 +15,6 @@
 #include "ValueAssurance.h"
 
 using std::string;
-
 
 class BattleData
 {
