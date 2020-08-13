@@ -36,8 +36,8 @@ public:
 	BattleData(const string unitFilePath);
 
 	void setBattleType(const battleType type);
-	void setAttacker(const Player& p);
-	void setDefender(const Player& p);
+	void setAttacker(Player& p);
+	void setDefender(Player& p);
 	void setAttackerRandoms(const int rand);
 	void setDefenderRandoms(const int rand);
 	void setAttackerGeneralState(const generalState state);
@@ -58,8 +58,8 @@ public:
 	void setSiegeTowers(const int siege);
 	void setCatapults(const int cat);
 	void setTownStats(const TownStats& ts);
-	void setAttackerEnd(const Player& p);
-	void setDefenderEnd(const Player& p);
+	void setAttackerEnd(Player& p);
+	void setDefenderEnd(Player& p);
 
 	void printData() const;
 	void writeToFile(const string fileName) const;

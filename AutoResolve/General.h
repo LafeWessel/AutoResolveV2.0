@@ -52,9 +52,8 @@ public:
 	generalState getState() const {
 		return currentState; };
 
-	void setRank(int rankI) { 
-		rank = rankI; 
-	};
+	void setRank(const int rankI) { 
+		rank = rankI; };
 	void setArmor(const Equipment equipI) { 
 		armor = equipI;
 		armor.setDebug(debug);

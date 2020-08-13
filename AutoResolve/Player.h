@@ -43,7 +43,7 @@ public:
 		return Ranged; };
 	int getReinforcements() const{
 		return Reinforcements; };
-	General getGeneral() const{ 
+	General& getGeneral() { 
 		return general; };
 	bool getAdvComDeck() const{ 
 		return AdvCombatDeck; };

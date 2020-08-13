@@ -33,7 +33,7 @@ void BattleData::setBattleType(const battleType type) {
 }
 
 //Sets values for the attacker at the start of the battle
-void BattleData::setAttacker(const Player& p) {
+void BattleData::setAttacker(Player& p) {
 	data[7] = to_string(p.getGeneral().getRank()); //General Rank
 	data[8] = to_string(p.getGeneral().getARBonus()); //General AutoResolve Bonus
 	data[9] = to_string(p.getGeneral().getArmor().getABonus()); //General Armor Bonus
@@ -55,7 +55,7 @@ void BattleData::setAttacker(const Player& p) {
 }
 
 //Sets values for the defender at the start of the battle
-void BattleData::setDefender(const Player& p) {
+void BattleData::setDefender(Player& p) {
 	data[75] = to_string(p.getGeneral().getRank()); //General rank
 	data[76] = to_string(p.getGeneral().getARBonus()); //General AutoResolve Bonus
 	data[77] = to_string(p.getGeneral().getArmor().getABonus()); //General armor bonus
@@ -178,7 +178,7 @@ void BattleData::setTownStats(const TownStats& ts) {
 }
 
 //Sets attacker ending values
-void BattleData::setAttackerEnd(const Player& p) {
+void BattleData::setAttackerEnd(Player& p) {
 	data[20] = to_string(p.getMelee() + p.getRanged() + p.getCavalry()); //Total ending unit bonus
 	data[21] = to_string(p.getMelee()); //Total ending melee bonus
 	data[22] = to_string(p.getRanged()); //Total ending ranged bonus
@@ -187,7 +187,7 @@ void BattleData::setAttackerEnd(const Player& p) {
 }
 
 //Sets defender ending values
-void BattleData::setDefenderEnd(const Player& p) {
+void BattleData::setDefenderEnd(Player& p) {
 	data[88] = to_string(p.getMelee() + p.getRanged() + p.getCavalry()); //Total ending unit bonus
 	data[89] = to_string(p.getMelee()); //Total ending melee bonus
 	data[90] = to_string(p.getRanged()); //Total ending ranged bonus

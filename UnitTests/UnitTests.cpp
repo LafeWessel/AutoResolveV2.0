@@ -2,7 +2,7 @@
 #include <string>
 
 #include "CppUnitTest.h"
-//#include "pch.h"
+#include "pch.h"
 #include "../AutoResolve/Random.h"
 #include "../AutoResolve/Random.cpp"
 #include "../AutoResolve/EnumerationConversions.h"

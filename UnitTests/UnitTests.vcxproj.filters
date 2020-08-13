@@ -27,4 +27,9 @@
     <Text Include="..\AutoResolve\equipment.txt" />
     <Text Include="..\AutoResolve\units.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

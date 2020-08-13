@@ -38,16 +38,16 @@ public:
 	Battle();
 	Battle(const string unitFile);
 
-	Player getAttacker() const{ return attacker; };
-	Player getDefender() const{ return defender; };
+	Player& getAttacker() { return attacker; };
+	Player& getDefender() { return defender; };
 	outcome getOutcome() const{ return result; };
 	battleType getBattleType() const{ return type; };
 	bool getOutput()const { return output; };
 	bool getDebug()const { return debug; };
 	bool getFileOutBool()const { return fileOut; };
 	string getFileName() const { return fileName; };
-	Equipment getFoundByAttacker() const { return foundByAttacker; };
-	Equipment getFoundByDefender() const { return foundByDefender; };
+	Equipment& getFoundByAttacker() { return foundByAttacker; };
+	Equipment& getFoundByDefender() { return foundByDefender; };
 	Treasure* getTreasure() const { return treasure; }
 
 	void setAttacker(const Player attackerI) { attacker = attackerI;
