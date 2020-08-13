@@ -318,10 +318,8 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	{
 		attacker.getGeneral().setState(generalState::Wounded);
 		if (debug) { cout << "attacker General state set to Wounded Battle::CalculateCas" << endl; }
-		cout << "Att gen wounded" << endl;
 		if (Random::randomNumber(10) < 2)
 		{
-			cout << "Att gen slain" << endl;
 			attacker.getGeneral().setState(generalState::Slain);
 			if (debug) { cout << "attacker General state set to Slain Battle::CalculateCas" << endl; }
 		}
@@ -332,18 +330,14 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (Random::randomNumber(10) < 2)
 	{
 		defender.getGeneral().setState(generalState::Wounded);
-		cout << "def gen wounded" << endl;
 		if (debug) { cout << "defender General state set to Wounded Battle::CalculateCas" << endl; }
 		if (Random::randomNumber(10) < 2)
 		{
-			cout << "Def gen slain" << endl;
 			defender.getGeneral().setState(generalState::Slain);
 			if (debug) { cout << "defender General state set to Slain Battle::CalculateCas" << endl; }
 		}
 	}
 	else { if (debug) { cout << "defender General unharmed" << endl; } }
-	cout << "Att Gen state: " << EnumerationConversions::to_string(attacker.getGeneral().getState()) << endl;
-	cout << "Def Gen state: " << EnumerationConversions::to_string(defender.getGeneral().getState()) << endl;
 	
 	
 	data.setAttackerGeneralState(attacker.getGeneral().getState());

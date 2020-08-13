@@ -211,9 +211,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BattleData.csv" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="units.txt">
       <Filter>Text Files</Filter>
     </Text>

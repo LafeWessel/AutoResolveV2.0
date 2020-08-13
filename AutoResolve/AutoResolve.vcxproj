@@ -209,11 +209,6 @@
     <ClInclude Include="ValueAssurance.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BattleData.csv">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="DataCapture.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </Text>

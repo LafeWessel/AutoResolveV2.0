@@ -21,11 +21,7 @@ using std::string;
 
 /*
 
-TODO-General will always end up unharmed, fix
-
 TODO-implement Monster and MonsterBattle for BattleData
-
-TODO-Make a db of results from tests then analyze
 
 TODO-Learn and implement Qt GUI
 
@@ -89,18 +85,6 @@ void runApp() {
 int main()
 {	
 
-	//Initialize BattleData.csv if it hasn't already been
-	//string fileName = "BattleData.csv";
-	//fstream file;
-	//file.open(fileName);
-	//if (!file) {
-	//	cerr << "Unable to open BattleData.csv" << endl;
-	//}
-	//else {
-	//	cout << "BattleData.csv opened and closed" << endl;
-	//	file.close();
-	//} 
-	
 
 	runApp();
 
