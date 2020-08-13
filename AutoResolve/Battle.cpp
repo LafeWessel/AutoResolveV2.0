@@ -313,7 +313,7 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	if (debug) { cout << "defender unit casualty total: " << defUnitCasualties << " Battle::CalculateCas" << endl; }
 
 	//Determines whether or not either of the generals are wounded/killed
-	attacker.getGeneral().setState(generalState::Unharmed);
+	//attacker.getGeneral().setState(generalState::Unharmed);
 	if (Random::randomNumber(10) < 2)
 	{
 		attacker.getGeneral().setState(generalState::Wounded);
@@ -325,7 +325,8 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 		}
 	}
 	else { if (debug) { cout << "attacker General unharmed" << endl; } }
-	defender.getGeneral().setState(generalState::Unharmed);
+
+	//defender.getGeneral().setState(generalState::Unharmed);
 	if (Random::randomNumber(10) < 2)
 	{
 		defender.getGeneral().setState(generalState::Wounded);
@@ -339,7 +340,7 @@ void Battle::calculateCas(vector<vector<int>>& totalCasualties)
 	else { if (debug) { cout << "defender General unharmed" << endl; } }
 	
 	data.setAttackerGeneralState(attacker.getGeneral().getState());
-	data.setDefenderGeneralState(attacker.getGeneral().getState());
+	data.setDefenderGeneralState(defender.getGeneral().getState());
 
 	//Creates the vectors that contain the casualty data
 	vector<int> attackerCasVec{ attSoldierCasualties, attUnitCasualties, attUpgr };

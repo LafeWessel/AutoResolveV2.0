@@ -1,10 +1,10 @@
 Columns in Read out from 4 regular battle types:
 
-0	Battle Type - battleType(int)
+0	Battle Type - string
 1	Battle Randoms Attacker Total - int
 2	Battle Randoms Defender Total - int
 3	Ending Total - double
-4	Outcome - outcome(int)
+4	Outcome - string
 5	Attacker Won - bool(int)
 6	Supplies - int
 Attacker:
@@ -32,9 +32,9 @@ Attacker:
 65	Total Upgrades Received - int
 66	Total Unit Casualties - int
 67	Total Soldier Casualties - int
-68	End General State - int
+68	End General State - string
 69	Treasure Received - bool(int)	
-70	Faction - faction(int)
+70	Faction - string
 	
 71	Ships - int
 72	Rams - int
@@ -68,7 +68,7 @@ Defender:
 135	Total Soldier Casualties - int
 136	End General State - int
 137	Treasure Received - bool(int)	
-138	Faction - faction(int)
+138	Faction - string
 	
 139	Ships - int
 140	TownStat Level - int

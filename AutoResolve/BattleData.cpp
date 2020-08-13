@@ -47,8 +47,10 @@ void BattleData::setAttacker(const Player& p) {
 	data[17] = to_string(p.getRanged()); //Total beginning ranged bonus
 	data[18] = to_string(p.getCavalry()); //Total beginning cavalry bonus
 	data[19] = to_string(p.getTotalSoldiers()); //Total beginning soldiers
+
 	data[63] = to_string(p.getNumberOfUnits()); //Total beginning units
 	data[64] = to_string(p.getReinforcements()); //Total reinforcements
+	data[70] = EnumerationConversions::to_string(p.getFaction());
 	setAttackerUnitTotals(p.getPlayerUnits());
 }
 
@@ -67,8 +69,10 @@ void BattleData::setDefender(const Player& p) {
 	data[85] = to_string(p.getRanged()); //Total beginning ranged bonus
 	data[86] = to_string(p.getCavalry()); //Total beginning cavalry bonus
 	data[87] = to_string(p.getTotalSoldiers()); //Total beginning soldiers
+
 	data[131] = to_string(p.getNumberOfUnits()); //Total beginning units
 	data[132] = to_string(p.getReinforcements()); //Total reinforcements
+	data[138] = EnumerationConversions::to_string(p.getFaction());
 	setDefenderUnitTotals(p.getPlayerUnits());
 
 }
@@ -81,6 +85,11 @@ void BattleData::setAttackerRandoms(const int rand) {
 //Sets the RNG defender bonus
 void BattleData::setDefenderRandoms(const int rand) {
 	data[2] = to_string(rand);
+}
+
+//Set the ending total
+void BattleData::setEndingTotal(const int end) {
+	data[3] = to_string(end);
 }
 
 //Sets general state after battle

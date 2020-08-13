@@ -44,6 +44,7 @@ public:
 	void setDefenderGeneralState(const generalState state);
 	void setSupplies(const int supp);
 	void setOutcome(const outcome o);
+	void setEndingTotal(const int end);
 	void setAttackerWon(const bool won);
 	void setAttackerCasualties(const vector<int> cas);
 	void setDefenderCasualties(const vector<int> cas);

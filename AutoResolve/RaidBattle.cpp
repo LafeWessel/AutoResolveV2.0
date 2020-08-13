@@ -29,6 +29,7 @@ void RaidBattle::calculate() //combines base Battle calculation with the extras 
 
 	//Finds outcome and gets casualties
 	determineOutcome(overallTot);
+	data.setEndingTotal(overallTot);
 	if (debug) { cout << "Outcome returned from determineOutcome:" << (int)result << " RaidBattle::calculateRaid" << endl; }
 	vector<vector<int>> totalCasualties = {};
 	calculateCas(totalCasualties);

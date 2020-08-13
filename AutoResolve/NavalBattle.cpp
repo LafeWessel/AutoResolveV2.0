@@ -49,6 +49,7 @@ void NavalBattle::calculate() //combines base Battle calculation with the extras
 
 	//Gets the outcome and calculates the casualties
 	determineOutcome(overallTot);
+	data.setEndingTotal(overallTot);
 	if (debug) { cout << "Outcome returned from determineOutcome:" << (int)result << " NavalBattle::calculateNaval" << endl; }
 	vector<vector<int>> totalCasualties = {};
 	calculateCas(totalCasualties);

@@ -19,6 +19,7 @@ void NormalBattle::calculate() //Uses base battle calculations and output
 
 	//Finds result and determines casualties
 	determineOutcome(overallTot);
+	data.setEndingTotal(overallTot);
 	if (debug) { cout << "Outcome returned from determineOutcome:" << (int)result << " NormalBattle::calculateNormal" << endl; }
 	vector<vector<int>> totalCasualties = {};
 	calculateCas(totalCasualties);

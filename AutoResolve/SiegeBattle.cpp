@@ -47,6 +47,7 @@ void SiegeBattle::calculate() //combines base Battle calculation with the extras
 
 	//Determines the outcome and calculates the casualties
 	determineOutcome(overallTot);
+	data.setEndingTotal(overallTot);
 	if (debug) { cout << "Outcome returned from determineOutcome:" << (int)result << " SiegeBattle::calculateSiege" << endl; }
 	vector<vector<int>> totalCasualties = {};
 	calculateCas(totalCasualties);

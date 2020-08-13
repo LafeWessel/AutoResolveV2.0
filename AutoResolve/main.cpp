@@ -21,6 +21,8 @@ using std::string;
 
 /*
 
+TODO-General will always end up unharmed, fix
+
 TODO-implement Monster and MonsterBattle for BattleData
 
 TODO-Make a db of results from tests then analyze
