@@ -51,6 +51,12 @@
 #include "../AutoResolve/MonsterBattle.h"
 #include "../AutoResolve/MonsterBattle.cpp"
 
+#define equipmentFile "../../AutoResolve/equipment.txt"
+#define unitFile "../../AutoResolve/units.txt"
+
+//#define equipmentFile "equipment.txt"
+//#define unitFile "units.txt"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
@@ -614,7 +620,7 @@ namespace UnitTests
 		//Test armor vector initialization
 		TEST_METHOD(initializeArmor) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			bool correctLength = false;
 			Assert::AreEqual(9, (int)t.getArmorVector().size());
@@ -622,35 +628,35 @@ namespace UnitTests
 		//Test weapon vector initialization
 		TEST_METHOD(initializeWeapon) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			Assert::AreEqual(9, (int)t.getWeaponVector().size());
 		}
 		//Test trinket vector initialization
 		TEST_METHOD(initializeTrinket) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			Assert::AreEqual(9, (int)t.getTrinketVector().size());
 		}
 		//Test banner vector initialization
 		TEST_METHOD(initializeBanner) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			Assert::AreEqual(9, (int)t.getBannerVector().size());
 		}
 		//Test follower vector initialization
 		TEST_METHOD(initializeFollower) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			Assert::AreEqual(8, (int)t.getFollowerVector().size());
 		}
 		//Test dragon vector initialization
 		TEST_METHOD(initializeDragon) {
 			Treasure t{ true };
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			Assert::AreEqual(4, (int)t.getDragonVector().size());
 		}
@@ -685,7 +691,10 @@ namespace UnitTests
 		//Test accessors and mutators
 		//Test get/setDebug
 		TEST_METHOD(getSetDebug) {
-			Monster m{(string)"../AutoResolve/equipment.txt"};
+			Treasure t{};
+			t.setFilePath((string)equipmentFile);
+			t.initialize();
+			Monster m{monsterType::Empty,t};
 			m.setDebug(true);
 			Assert::AreEqual(true, m.getDebug());
 		}
@@ -712,7 +721,7 @@ namespace UnitTests
 		//Test for Minotaur
 		TEST_METHOD(getEquipRewardsMinotaur) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Minotaur, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -721,7 +730,7 @@ namespace UnitTests
 		//Test for Hobgoblin
 		TEST_METHOD(getEquipRewardsHobgoblinWeapon) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Hobgoblin, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -729,7 +738,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(getEquipRewardsHobgoblinArmor) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Hobgoblin, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -738,7 +747,7 @@ namespace UnitTests
 		//Test for Troll
 		TEST_METHOD(getEquipRewardsTrollWeapon) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Troll, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -746,7 +755,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(getEquipRewardsTrollTrinket) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Troll, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -755,7 +764,7 @@ namespace UnitTests
 		//Test for Giant
 		TEST_METHOD(getEquipRewardsGiantWeapon) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Giant, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -763,7 +772,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(getEquipRewardsGiantTrinket) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Giant, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -771,7 +780,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(getEquipRewardsGiantArmor) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Giant, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -780,7 +789,7 @@ namespace UnitTests
 		//Test for Demon
 		TEST_METHOD(getEquipRewardsDemonArmor) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Demon, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -788,7 +797,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(getEquipRewardsDemonBanner) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Demon, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -797,7 +806,7 @@ namespace UnitTests
 		//Test for Empty
 		TEST_METHOD(getEquipRewardsEmpty) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{ monsterType::Empty, t };
 			vector<Equipment> e = m.getEquipRewards();
@@ -806,7 +815,7 @@ namespace UnitTests
 		//Test for Invalid
 		TEST_METHOD(getEquipRewardsInvalid) {
 			Treasure t{};
-			t.setFilePath("../AutoResolve/equipment.txt");
+			t.setFilePath(equipmentFile);
 			t.initialize();
 			Monster m{};
 			m.setTreasure(&t);
@@ -1020,7 +1029,7 @@ namespace UnitTests
 		//Test Rebel reading
 		TEST_METHOD(buildRosterRebel) {
 			Roster r{};
-			r.setFilePath("../AutoResolve/units.txt");
+			r.setFilePath(unitFile);
 			r.setFaction(faction::rebel);
 			r.buildRoster();
 			Assert::AreEqual(9, r.getNumberOfUnits());
@@ -1028,7 +1037,7 @@ namespace UnitTests
 		//Test Lerastir reading
 		TEST_METHOD(buildRosterLerastir) {
 			Roster r{};
-			r.setFilePath("../AutoResolve/units.txt");
+			r.setFilePath(unitFile);
 			r.setFaction(faction::lerastir);
 			r.buildRoster();
 			Assert::AreEqual(10, r.getNumberOfUnits());
@@ -1036,7 +1045,7 @@ namespace UnitTests
 		//Test Beladimir reading
 		TEST_METHOD(buildRosterBeladimir) {
 			Roster r{};
-			r.setFilePath("../AutoResolve/units.txt");
+			r.setFilePath(unitFile);
 			r.setFaction(faction::beladimir);
 			r.buildRoster();
 			Assert::AreEqual(9, r.getNumberOfUnits());
@@ -1044,7 +1053,7 @@ namespace UnitTests
 		//Test Menoriad reading
 		TEST_METHOD(buildRosterMenoriad) {
 			Roster r{};
-			r.setFilePath("../AutoResolve/units.txt");
+			r.setFilePath(unitFile);
 			r.setFaction(faction::menoriad);
 			r.buildRoster();
 			Assert::AreEqual(10, r.getNumberOfUnits());
@@ -1162,20 +1171,20 @@ namespace UnitTests
 		//Test accessors/mutators
 		//Test get/setDebug
 		TEST_METHOD(getSetDebug) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			b.setDebug(true);
 			Assert::AreEqual(true, b.getDebug());
 		}
 
 		//Test setBattleType
 		TEST_METHOD(setBattleType) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			b.setBattleType(battleType::Naval);
 			Assert::AreEqual(EnumerationConversions::to_string(battleType::Naval), b.getDataAtIndex(0));
 		}
 		//Test setAttacker general rank
 		TEST_METHOD(setAttackerGeneralRank) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Player p{};
 			g.setRank(5);
@@ -1185,7 +1194,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general AR bonus
 		TEST_METHOD(setAttackerGeneralARBonus) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1198,7 +1207,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general armor bonus
 		TEST_METHOD(setAttackerGeneralArmor) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1210,7 +1219,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general weapon bonus
 		TEST_METHOD(setAttackerGeneralWeapon) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1222,7 +1231,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general follower bonus
 		TEST_METHOD(setAttackerGeneralFollower) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1234,7 +1243,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general banner bonus
 		TEST_METHOD(setAttackerGeneralBanner) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1246,7 +1255,7 @@ namespace UnitTests
 		}
 		//Test setAttacker general trinket bonus
 		TEST_METHOD(setAttackerGeneralTrinket) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1258,7 +1267,7 @@ namespace UnitTests
 		}
 		//Test setAttacker Adv Combat Deck
 		TEST_METHOD(setAttackerAdvCombatDeck) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			p.setAdvCombatDeck(true);
 			b.setAttacker(p);
@@ -1266,7 +1275,7 @@ namespace UnitTests
 		}
 		//Test setAttacker Unit bonus
 		TEST_METHOD(setAttackerUnitBonus) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1277,7 +1286,7 @@ namespace UnitTests
 		}
 		//Test setAttacker melee
 		TEST_METHOD(setAttackerMelee) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1289,7 +1298,7 @@ namespace UnitTests
 		}
 		//Test setAttacker ranged
 		TEST_METHOD(setAttackerRanged) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1301,7 +1310,7 @@ namespace UnitTests
 		}
 		//Test setAttacker cavalry
 		TEST_METHOD(setAttackerCavalry) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1313,7 +1322,7 @@ namespace UnitTests
 		}
 		//Test setAttacker total soldiers
 		TEST_METHOD(setAttackerTotalSoldiers) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setCurrentSoldiers(4);
@@ -1325,7 +1334,7 @@ namespace UnitTests
 		}
 		//Test setAttacker number of units
 		TEST_METHOD(setAttackerTotalUnits) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			vector<Unit> v = { u,u,u,u };
@@ -1335,7 +1344,7 @@ namespace UnitTests
 		}
 		//Test setAttacker reinforcements
 		TEST_METHOD(setAttackerReinforcements) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			p.setReinforcements(5);
 			b.setAttacker(p);
@@ -1343,7 +1352,7 @@ namespace UnitTests
 		}
 		//Test setDefender general rank
 		TEST_METHOD(setDefenderGeneralRank) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Player p{};
 			g.setRank(5);
@@ -1353,7 +1362,7 @@ namespace UnitTests
 		}
 		//Test setDefender general AR bonus
 		TEST_METHOD(setDefenderGeneralARBonus) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1366,7 +1375,7 @@ namespace UnitTests
 		}
 		//Test setDefender general armor bonus
 		TEST_METHOD(setDefenderGeneralArmor) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1378,7 +1387,7 @@ namespace UnitTests
 		}
 		//Test setDefender general weapon bonus
 		TEST_METHOD(setDefenderGeneralWeapon) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1390,7 +1399,7 @@ namespace UnitTests
 		}
 		//Test setDefender general follower bonus
 		TEST_METHOD(setDefenderGeneralFollower) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1402,7 +1411,7 @@ namespace UnitTests
 		}
 		//Test setDefender general banner bonus
 		TEST_METHOD(setDefenderGeneralBanner) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1414,7 +1423,7 @@ namespace UnitTests
 		}
 		//Test setDefender general trinket bonus
 		TEST_METHOD(setDefenderGeneralTrinket) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			General g{};
 			Equipment e{};
 			e.setABonus(5);
@@ -1426,7 +1435,7 @@ namespace UnitTests
 		}
 		//Test setDefender Adv Combat Deck
 		TEST_METHOD(setDefenderAdvCombatDeck) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			p.setAdvCombatDeck(true);
 			b.setDefender(p);
@@ -1434,7 +1443,7 @@ namespace UnitTests
 		}
 		//Test setDefender Unit bonus
 		TEST_METHOD(setDefenderUnitBonus) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1445,7 +1454,7 @@ namespace UnitTests
 		}
 		//Test setDefender melee
 		TEST_METHOD(setDefenderMelee) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1457,7 +1466,7 @@ namespace UnitTests
 		}
 		//Test setDefender ranged
 		TEST_METHOD(setDefenderRanged) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1469,7 +1478,7 @@ namespace UnitTests
 		}
 		//Test setDefender cavalry
 		TEST_METHOD(setDefenderCavalry) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1481,7 +1490,7 @@ namespace UnitTests
 		}
 		//Test setDefender total soldiers
 		TEST_METHOD(setDefenderTotalSoldiers) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			u.setCurrentSoldiers(4);
@@ -1493,7 +1502,7 @@ namespace UnitTests
 		}
 		//Test setDefender number of units
 		TEST_METHOD(setDefenderTotalUnits) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			Unit u{};
 			vector<Unit> v = { u,u,u,u };
@@ -1503,7 +1512,7 @@ namespace UnitTests
 		}
 		//Test setDefender reinforcements
 		TEST_METHOD(setDefenderReinforcements) {
-			BattleData b{(string)"../AutoResolve/units.txt"};
+			BattleData b{(string)unitFile};
 			Player p{};
 			p.setReinforcements(5);
 			b.setDefender(p);
@@ -1512,133 +1521,133 @@ namespace UnitTests
 
 		//Test setAttackerRandoms
 		TEST_METHOD(setAttackerRandoms) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			int r = Random::randomNumberGroup(10, 1, 10);
 			b.setAttackerRandoms(r);
 			Assert::AreEqual(to_string(r), b.getDataAtIndex(1));
 		}
 		//Test setDefenderRandoms
 		TEST_METHOD(setDefenderRandoms) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			int r = Random::randomNumberGroup(10, 1, 10);
 			b.setDefenderRandoms(r);
 			Assert::AreEqual(to_string(r), b.getDataAtIndex(2));
 		}
 		//Test setAttackerGeneralState
 		TEST_METHOD(setAttGenState) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setAttackerGeneralState(generalState::Slain);
 			Assert::AreEqual(EnumerationConversions::to_string(generalState::Slain),b.getDataAtIndex(68));
 		}
 		//Test setDefenderGeneralState
 		TEST_METHOD(setDefGenState) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setDefenderGeneralState(generalState::Slain);
 			Assert::AreEqual(EnumerationConversions::to_string(generalState::Slain), b.getDataAtIndex(136));
 		}
 		//Test setSupplies
 		TEST_METHOD(setSupplies) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setSupplies(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(6));
 		}
 		//Test setOutcome
 		TEST_METHOD(setOutcome) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setOutcome(outcome::Decisive_Victory);
 			Assert::AreEqual(EnumerationConversions::to_string(outcome::Decisive_Victory), b.getDataAtIndex(4));
 		}
 		//Test setAttackerWon
 		TEST_METHOD(setAttackerWon) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setAttackerWon(true);
 			Assert::AreEqual((string)"1", b.getDataAtIndex(5));
 		}
 		//Test setAttackerCasualties unit
 		TEST_METHOD(setAttackerCasualtiesUnit) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			vector<int> v = { 0,5 };
 			b.setAttackerCasualties(v);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(66));
 		}
 		//Test setAttackerCasualties soldier
 		TEST_METHOD(setAttackerCasualtiesSoldier) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			vector<int> v = { 5,0 };
 			b.setAttackerCasualties(v); 
 			Assert::AreEqual((string)"5", b.getDataAtIndex(67));
 		}
 		//Test setDefenderCasualties unit
 		TEST_METHOD(setDefenderCasualtiesUnit) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			vector<int> v = { 0,5 };
 			b.setDefenderCasualties(v);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(134));
 		}
 		//Test setDefenderCasualties soldier
 		TEST_METHOD(setDefenderCasualtiesSoldier) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			vector<int> v = { 5,0 };
 			b.setDefenderCasualties(v);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(135));
 		}
 		//Test setAttackerTreasureRec
 		TEST_METHOD(setAttackerTreasureRec) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setAttackerTreasureRec(true);
 			Assert::AreEqual((string)"1", b.getDataAtIndex(69));
 		}
 		//Test setDefenderTreasureRec
 		TEST_METHOD(setDefenderTreasureRec) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setDefenderTreasureRec(true);
 			Assert::AreEqual((string)"1", b.getDataAtIndex(137));
 		}
 		//Test setAttackerShips
 		TEST_METHOD(setAttackerShips) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setAttackerShips(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(71));
 		}
 		//Test setDefenderShips
 		TEST_METHOD(setDefenderShips) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setDefenderShips(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(139));
 		}
 		//Test setAttackerUpgrades
 		TEST_METHOD(setAttackerUpgrades) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setAttackerUpgrades(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(65));
 		}
 		//Test setDefenderUpgrades
 		TEST_METHOD(setDefenderUpgrades) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setDefenderUpgrades(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(133));
 		}
 		//Test setRams
 		TEST_METHOD(setRams) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setRams(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(72));
 		}
 		//Test setSiegeTowers
 		TEST_METHOD(setSiegeTowers) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setSiegeTowers(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(73));
 		}
 		//Test setCatapults
 		TEST_METHOD(setCatapults) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			b.setCatapults(5);
 			Assert::AreEqual((string)"5", b.getDataAtIndex(74));
 		}
 		//Test setTownStats
 		TEST_METHOD(setTownStats) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			TownStats t{};
 			t.setDefenses(defenses::Stone_Wall_W_Moat);
 			b.setTownStats(t);
@@ -1646,7 +1655,7 @@ namespace UnitTests
 		}
 		//Test setAttackerEnd unit bonus
 		TEST_METHOD(setAttackerEndUnitBonus) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1657,7 +1666,7 @@ namespace UnitTests
 		}
 		//Test setAttackerEnd melee
 		TEST_METHOD(setAttackerEndMelee) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1669,7 +1678,7 @@ namespace UnitTests
 		}
 		//Test setAttackerEnd ranged
 		TEST_METHOD(setAttackerEndRanged) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1681,7 +1690,7 @@ namespace UnitTests
 		}
 		//Test setAttackerEnd cavalry
 		TEST_METHOD(setAttackerEndCavalry) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1693,7 +1702,7 @@ namespace UnitTests
 		}
 		//Test setAttackerEnd total soldiers
 		TEST_METHOD(setAttackerEndTotalSoldiers) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setSoldiersPerUnit(4);
@@ -1705,7 +1714,7 @@ namespace UnitTests
 		}
 		//Test setDefenderEnd unit bonus
 		TEST_METHOD(setDefenderEndUnitBonus) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1716,7 +1725,7 @@ namespace UnitTests
 		}
 		//Test setDefenderEnd melee
 		TEST_METHOD(setDefenderEndMelee) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1728,7 +1737,7 @@ namespace UnitTests
 		}
 		//Test setDefenderEnd ranged
 		TEST_METHOD(setDefenderEndRanged) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1740,7 +1749,7 @@ namespace UnitTests
 		}
 		//Test setDefenderEnd cavalry
 		TEST_METHOD(setDefenderEndCavalry) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setARBonus(4);
@@ -1752,7 +1761,7 @@ namespace UnitTests
 		}
 		//Test setDefenderEnd total soldiers
 		TEST_METHOD(setDefenderEndTotalSoldiers) {
-			BattleData b{ (string)"../AutoResolve/units.txt" };
+			BattleData b{ (string)unitFile };
 			Player p{};
 			Unit u{};
 			u.setSoldiersPerUnit(4);
@@ -1771,7 +1780,7 @@ namespace UnitTests
 		TEST_METHOD(getSetAttacker) {
 			Player p{};
 			p.setAdvCombatDeck(true);
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setAttacker(p);
 			Assert::AreEqual(true, b.getAttacker().getAdvComDeck());
 		}
@@ -1779,43 +1788,43 @@ namespace UnitTests
 		TEST_METHOD(getSetDefender) {
 			Player p{};
 			p.setAdvCombatDeck(true);
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setDefender(p);
 			Assert::AreEqual(true, b.getDefender().getAdvComDeck());
 		}
 		//Test get/setOutcome
 		TEST_METHOD(getSetOutcome) {
-			Battle b ((string)"../AutoResolve/units.txt");
+			Battle b ((string)unitFile);
 			b.setOutcome(outcome::Decisive_Victory);
 			Assert::AreEqual((int)outcome::Decisive_Victory, (int)b.getOutcome());
 		}
 		//Test get/setBattleType
 		TEST_METHOD(getSetBattleType) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setBattleType(battleType::Monster);
 			Assert::AreEqual((int)battleType::Monster, (int)b.getBattleType());
 		}
 		//Test get/setDebug
 		TEST_METHOD(getSetDebug) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setDebug(true);
 			Assert::AreEqual(true, b.getDebug());
 		}
 		//Test get/setOutput
 		TEST_METHOD(getSetOutput) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setOutput(false);
 			Assert::AreEqual(false, b.getOutput());
 		}
 		//Test get/setFileOut
 		TEST_METHOD(getSetFileOut) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setFileOut(true);
 			Assert::AreEqual(true, b.getFileOutBool());
 		}
 		//Test get/setFileName
 		TEST_METHOD(getSetFileName) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setFileName("Test Name");
 			Assert::AreEqual((string)"Test Name", b.getFileName());
 		}
@@ -1827,14 +1836,14 @@ namespace UnitTests
 			g.setFollower(e);
 			Player p{};
 			p.setGeneral(g);
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.setAttacker(p);
 			e.setABonus(8);
 			g.setFollower(e);
 			p.setGeneral(g);
 			b.setDefender(p);
 			Treasure t{};
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			b.setTreasure(&t);
 			b.treasureResults();
@@ -1851,14 +1860,14 @@ namespace UnitTests
 			g.setFollower(e);
 			Player p{};
 			p.setGeneral(g);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.setAttacker(p);
 			e.setABonus(-8);
 			g.setFollower(e);
 			p.setGeneral(g);
 			b.setDefender(p);
 			Treasure t{};
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			b.setTreasure(&t);
 			b.treasureResults();
@@ -1875,14 +1884,14 @@ namespace UnitTests
 			g.setFollower(e);
 			Player p{};
 			p.setGeneral(g);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.setAttacker(p);
 			e.setABonus(8);
 			g.setFollower(e);
 			p.setGeneral(g);
 			b.setDefender(p);
 			Treasure t{};
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			b.setTreasure(&t);
 			b.treasureResults();
@@ -1899,14 +1908,14 @@ namespace UnitTests
 			g.setFollower(e);
 			Player p{};
 			p.setGeneral(g);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.setAttacker(p);
 			e.setABonus(-8);
 			g.setFollower(e);
 			p.setGeneral(g);
 			b.setDefender(p);
 			Treasure t{};
-			t.setFilePath((string)"../AutoResolve/equipment.txt");
+			t.setFilePath((string)equipmentFile);
 			t.initialize();
 			b.setTreasure(&t);
 			b.treasureResults();
@@ -1929,7 +1938,7 @@ namespace UnitTests
 			vector<Unit> v  {u,u,u,u,u};
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(10, p.getTotalSoldiers());
 			
@@ -1947,7 +1956,7 @@ namespace UnitTests
 			vector<Unit> v{ u,u,u,u,u };
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(20, p.getTotalSoldiers());
 
@@ -1965,7 +1974,7 @@ namespace UnitTests
 			vector<Unit> v{ u,u,u,u,u };
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(10, p.getTotalSoldiers());
 			Assert::AreEqual(5, p.getNumberOfUnits());
@@ -1984,7 +1993,7 @@ namespace UnitTests
 			vector<Unit> v{ u,u,u,u,u };
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(0, p.getNumberOfUnits());
 
@@ -2002,7 +2011,7 @@ namespace UnitTests
 			vector<Unit> v{ u,u,u,u,u };
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(0, p.getTotalSoldiers());
 			Assert::AreEqual(0, p.getNumberOfUnits());
@@ -2021,7 +2030,7 @@ namespace UnitTests
 			vector<Unit> v{ u,u,u,u,u };
 			Player p{};
 			p.setPlayerUnits(v);
-			Battle b{ (string)"../AutoResolve/units.txt" };
+			Battle b{ (string)unitFile };
 			b.assignCasualties(cas, p);
 			Assert::AreEqual(0, p.getNumberOfUnits());
 			Assert::AreEqual(0, p.getTotalSoldiers());
@@ -2030,43 +2039,43 @@ namespace UnitTests
 		//Test determineOutcome
 		//Test determineOutcome decisive victory
 		TEST_METHOD(determineOutcomeDecisiveVictory) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(20);
 			Assert::AreEqual((int)outcome::Decisive_Victory, (int)b.getOutcome());
 		}
 		//Test determineOutcome heroic victory
 		TEST_METHOD(determineOutcomeHeroicVictory) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(10);
 			Assert::AreEqual((int)outcome::Heroic_Victory, (int)b.getOutcome());
 		}
 		//Test determineOutcome close victory
 		TEST_METHOD(determineOutcomeCloseVictory) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(3);
 			Assert::AreEqual((int)outcome::Close_Victory, (int)b.getOutcome());
 		}
 		//Test determineOutcome crushing defeat
 		TEST_METHOD(determineOutcomeCrushingDefeat) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(-20);
 			Assert::AreEqual((int)outcome::Crushing_Defeat, (int)b.getOutcome());
 		}
 		//Test determineOutcome valiant defeat
 		TEST_METHOD(determineOutcomeValiantDefeat) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(-10);
 			Assert::AreEqual((int)outcome::Valiant_Defeat, (int)b.getOutcome());
 		}
 		//Test determineOutcome close defeat
 		TEST_METHOD(determineOutcomeCloseDefeat) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(-3);
 			Assert::AreEqual((int)outcome::Close_Defeat, (int)b.getOutcome());
 		}
 		//Test determineOutcome draw
 		TEST_METHOD(determineOutcomeDraw) {
-			Battle b((string)"../AutoResolve/units.txt");
+			Battle b((string)unitFile);
 			b.determineOutcome(0);
 			Assert::AreEqual((int)outcome::Draw, (int)b.getOutcome());
 		}
@@ -2081,13 +2090,13 @@ namespace UnitTests
 	TEST_CLASS(NavalBattleTests) {
 		//Test get/setAttackerShips
 		TEST_METHOD(getSetAttackerShips) {
-			NavalBattle b ((string)"../AutoResolve/units.txt");
+			NavalBattle b ((string)unitFile);
 			b.setAttackerShips(5);
 			Assert::AreEqual(5, b.getAttackerShips());
 		}
 		//Test get/setDefenderShips
 		TEST_METHOD(getSetDefenderShips) {
-			NavalBattle b ((string)"../AutoResolve/units.txt");
+			NavalBattle b ((string)unitFile);
 			b.setDefenderShips(5);
 			Assert::AreEqual(5, b.getDefenderShips());
 		}
@@ -2097,25 +2106,25 @@ namespace UnitTests
 	TEST_CLASS(SiegeBattleTests) {
 		//Test get/setRams
 		TEST_METHOD(getSetRams) {
-			SiegeBattle b ((string)"../AutoResolve/units.txt");
+			SiegeBattle b ((string)unitFile);
 			b.setRams(5);
 			Assert::AreEqual(5, b.getRams());
 		}
 		//Test get/set Siege Towers
 		TEST_METHOD(getSetSiegeTowers) {
-			SiegeBattle b((string)"../AutoResolve/units.txt");
+			SiegeBattle b((string)unitFile);
 			b.setSiegeTowers(5);
 			Assert::AreEqual(5, b.getSiegeTowers());
 		}
 		//Test get/set Catapults
 		TEST_METHOD(getSetCatapults) {
-			SiegeBattle b ((string)"../AutoResolve/units.txt");
+			SiegeBattle b ((string)unitFile);
 			b.setCatapults(5);
 			Assert::AreEqual(5, b.getCatapults());
 		}
 		//Test get/set Town Stats
 		TEST_METHOD(getSetTownStats) {
-			SiegeBattle b ((string)"../AutoResolve/units.txt");
+			SiegeBattle b ((string)unitFile);
 			TownStats t{};
 			t.setSupplies(5);
 			b.setTownStats(t);
@@ -2127,7 +2136,7 @@ namespace UnitTests
 	TEST_CLASS(RaidBattleTests) {
 		//Test get/set Town Stats
 		TEST_METHOD(getSetTownStats){
-			RaidBattle b ((string)"../AutoResolve/units.txt");
+			RaidBattle b ((string)unitFile);
 			TownStats t{};
 			t.setSupplies(5);
 			b.setTownStats(t);
@@ -2139,8 +2148,11 @@ namespace UnitTests
 	TEST_CLASS(MonsterBattleTests) {
 		//Test get/set Monster
 		TEST_METHOD(getSetMonster) {
-			MonsterBattle b ((string)"../AutoResolve/units.txt");
-			Monster m{(string)"../AutoResolve/equipment.txt"};
+			Treasure t{};
+			t.setFilePath((string)equipmentFile);
+			t.initialize();
+			MonsterBattle b ((string)unitFile);
+			Monster m{monsterType::Empty,t};
 			m.setMonsterType(monsterType::Demon);
 			b.setMonster(m);
 			Assert::AreEqual((int)monsterType::Demon, (int)b.getMonster().getMonsterType());

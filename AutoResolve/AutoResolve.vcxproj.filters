@@ -146,9 +146,6 @@
     <ClInclude Include="unitType.h">
       <Filter>Header Files\Enumerations</Filter>
     </ClInclude>
-    <ClInclude Include="EnumerationConversions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ValueAssurance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="BattleData.h">
       <Filter>Header Files\Battles</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumerationConversions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
