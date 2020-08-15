@@ -138,9 +138,12 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		initBattle(b);
 
 		Monster m{};
-		m.setMonsterType((monsterType)(Random::randomNumber(1, 6)));
+		int mon = Random::randomNumber(1, 6);
+		monsterType type = (monsterType)mon;
+		m.setMonsterType(type);
 		m.setTreasure(b.getTreasure());
 
+		b.setMonster(m);
 		b.calculate();
 		outcomes[(int)b.getOutcome() - 1]++;
 		break;

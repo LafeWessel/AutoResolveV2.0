@@ -32,6 +32,15 @@ void MonsterBattle::battleOutput(vector<int>& totalCasualties) //Outputs informa
 			cout << "Coins gained: " << monster.getCoinReward() << endl;
 		}
 	}
+
+	if (fileOut) {
+		if (debug) { cout << "writing to file: " << fileName << endl; }
+		data.shorten();
+		data.writeToFile(fileName);
+		if (debug) { cout << "Out of writing to file" << endl; }
+	}
+
+
 	if (debug) { cout << "MonsterBattle::monsterOutput finished" << endl; }
 	return;
 }
@@ -52,21 +61,21 @@ void MonsterBattle::monsterCasualties(vector<int>& attackerCasVec) //Calculates 
 	if (debug) { cout << "Attacking unit casualties:" << attUnitCasualties << " MonsterBattle::monsterCasualties" << endl; }
 
 	//Determines if the general is wounded or killed
-	if (debug) { cout << "Attacking soldier total:" << attSoldierTotal << " MonsterBattle::monsterCasualties" << endl; }
 	if (Random::randomNumber(10) < 2){
 		attacker.getGeneral().setState(generalState::Wounded);
-		if (debug) { cout << "General State set to Wounded MonsterBattle::monsterCasualties" << endl; }
+		if (debug) { cout << "attacker General state set to Wounded Battle::CalculateCas" << endl; }
 		if (Random::randomNumber(10) < 2){
 			attacker.getGeneral().setState(generalState::Slain);
-			if (debug) { cout << "General State set to Slain MonsterBattle::monsterCasualties" << endl; }
+			if (debug) { cout << "attacker General state set to Slain Battle::CalculateCas" << endl; }
 		}
 	}
-	//data.setAttackerGeneralState(attacker.getGeneral().getState());
+	else { if (debug) { cout << "attacker General unharmed" << endl; } }
+	data.setAttackerGeneralState(attacker.getGeneral().getState());
 
 	attackerCasVec = { attSoldierCasualties, attUnitCasualties};
 	assignCasualties(attackerCasVec, attacker);
 
-	//data.setAttackerCasualties(attackerCasVec);
+	data.setAttackerCasualties(attackerCasVec);
 
 	if (debug) { cout << "MonsterBattle::monsterCasualties finished" << endl; }
 	return;
@@ -80,8 +89,9 @@ void MonsterBattle::calculate()
 	float attTotal = 0;
 	float monTotal = 0;
 
-	//data.setAttacker(attacker);
-	//data.setBattleType(type);
+	data.setAttacker(attacker);
+	data.setBattleType(type);
+	data.setMonster(monster);
 
 	//Adds units + portions of reinforcements
 	attTotal += attacker.getCavalry() + attacker.getMelee() + attacker.getRanged();
@@ -91,9 +101,11 @@ void MonsterBattle::calculate()
 	//Adds random values to randomize the battle outcome more
 	int attRand = Random::randomNumberGroup(10, 1, 10);
 	attTotal += attRand;
-	//data.setAttackerRandoms(attRand);
+	data.setAttackerRandoms(attRand);
 	if (debug) { cout << "attacker sum with randoms:" << attTotal << " MonsterBattle::calculateMonster" << endl; }
-	monTotal += Random::randomNumberGroup(10, 1, 10);
+	int monRand = Random::randomNumberGroup(10, 1, 10);
+	monTotal += monRand;
+	data.setDefenderRandoms(monRand);
 	if (debug) { cout << "monster sum with randoms:" << monTotal << " MonsterBattle::calculateMonster" << endl; }
 
 	//Adds rank and autoresolve bonuses from general and monster
@@ -106,11 +118,15 @@ void MonsterBattle::calculate()
 
 	//Determines outcome and casualties then calls output function
 	determineOutcome(attTotal - monTotal);
+	data.setEndingTotal(attTotal - monTotal);
 	if (debug) { cout << "Outcome returned from determineOutcome:" << (int)result << " MonsterBattle::calculateMonster" << endl; }
 	vector<int> casualty{};
 	monsterCasualties(casualty);
 	if (debug) { cout << "monsterCasualties called MonsterBattle::calculateMonster" << endl; }
+	data.setAttackerEnd(attacker);
 	battleOutput(casualty);
+
+
 	if (debug) { cout << "MonsterBattle::calculateMonster finished" << endl; }
 	return;
 }

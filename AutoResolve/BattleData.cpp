@@ -195,6 +195,13 @@ void BattleData::setDefenderEnd(Player& p) {
 	data[92] = to_string(p.getTotalSoldiers()); //Total ending soldiers
 }
 
+void BattleData::setMonster(Monster& m) {
+	data[75] = EnumerationConversions::to_string(m.getMonsterType());
+	data[76] = to_string(m.getCoinReward());
+	data[77] = to_string(m.getARValue());
+
+}
+
 //Prints the data from the data vector
 void BattleData::printData() const
 {
@@ -325,4 +332,11 @@ void BattleData::setDefenderUnitTotals(vector<Unit> u) {
 		data[i + 93] = to_string(totalUnits[i]);
 	}
 
+}
+
+//Removes all the end elements of the data vector that are uninitialized
+void BattleData::shorten() {
+	while (data[data.size() - 1] == "None") {
+		data.resize(data.size() - 1);
+	}
 }

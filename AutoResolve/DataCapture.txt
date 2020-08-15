@@ -1,4 +1,5 @@
 Columns in Read out from 4 regular battle types:
+Scroll down for read out of locations for Monster battle type
 
 0	Battle Type - string
 1	Battle Randoms Attacker Total - int
@@ -72,3 +73,11 @@ Defender:
 	
 139	Ships - int
 140	TownStat Level - int
+
+
+Monster Battle:
+All are same as above unless listed otherwise
+
+75	Monster type - string
+76	Monster Coin Reward
+77	Monster Total AR Value

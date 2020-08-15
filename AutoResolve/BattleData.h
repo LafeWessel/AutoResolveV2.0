@@ -13,6 +13,7 @@
 #include "Unit.h"
 #include "EnumerationConversions.h"
 #include "ValueAssurance.h"
+#include "Monster.h"
 
 using std::string;
 
@@ -60,6 +61,9 @@ public:
 	void setTownStats(const TownStats& ts);
 	void setAttackerEnd(Player& p);
 	void setDefenderEnd(Player& p);
+	
+	void setMonster(Monster& m);
+	void shorten();
 
 	void printData() const;
 	void writeToFile(const string fileName) const;

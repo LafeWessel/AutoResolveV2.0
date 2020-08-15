@@ -21,8 +21,6 @@ using std::string;
 
 /*
 
-TODO-implement Monster and MonsterBattle for BattleData
-
 TODO-Learn and implement Qt GUI
 
 */
