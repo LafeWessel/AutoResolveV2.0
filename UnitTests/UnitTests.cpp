@@ -51,11 +51,10 @@
 #include "../AutoResolve/MonsterBattle.h"
 #include "../AutoResolve/MonsterBattle.cpp"
 
-#define equipmentFile "../../AutoResolve/equipment.txt"
-#define unitFile "../../AutoResolve/units.txt"
 
-//#define equipmentFile "equipment.txt"
-//#define unitFile "units.txt"
+//If these files are not being found by the unit tests, try prepending ../ to the file names
+#define equipmentFile "../AutoResolve/equipment.txt"
+#define unitFile "../AutoResolve/units.txt"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

@@ -47,6 +47,7 @@ void TestBattle::initializeAndRun() {
 void TestBattle::runTest(vector<int>& outcomes) {
 	if (debug) { cout << "runTest called, type:" << EnumerationConversions::to_string(type) << endl; }
 	
+
 	//Finish initialization of each battle class within these cases
 	switch (type) {
 
@@ -131,7 +132,6 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		MonsterBattle b{};
 		b.setFileOut(outputToFile);
 		b.setTreasure(treasure);
-		b.setDebug(debug);
 		b.setOutput(debug);
 		b.setFileOut(outputToFile);
 
@@ -144,6 +144,7 @@ void TestBattle::runTest(vector<int>& outcomes) {
 		m.setTreasure(b.getTreasure());
 
 		b.setMonster(m);
+		b.setDebug(debug);
 		b.calculate();
 		outcomes[(int)b.getOutcome() - 1]++;
 		break;
