@@ -226,13 +226,13 @@
     <Text Include="MonsterData.txt">
       <Filter>Text Files</Filter>
     </Text>
-    <Text Include="NavalData.txt">
+    <Text Include="RaidData.txt">
       <Filter>Text Files</Filter>
     </Text>
     <Text Include="NormalData.txt">
       <Filter>Text Files</Filter>
     </Text>
-    <Text Include="RaidData.txt">
+    <Text Include="NavalData.txt">
       <Filter>Text Files</Filter>
     </Text>
     <Text Include="SiegeData.txt">

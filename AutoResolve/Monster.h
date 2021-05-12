@@ -38,9 +38,9 @@ public:
 	monsterType getMonsterType() const{ 
 		return type; };
 
-	void setMonsterType(const monsterType monTypeI) { 
+	void setMonsterType(const monsterType monTypeI) {
 		type = monTypeI; 
-		setValuesFromMonsterType();}; 
+		setValuesFromMonsterType();};
 	void setTreasure(Treasure* treasureI) {
 		treasure = treasureI;
 		treasure->setDebug(debug);};
